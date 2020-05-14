@@ -1,5 +1,6 @@
 @use 'partials/nav';
 @use 'partials/root';
+@use 'partials/order';
 
 .title {
   font: var(--title);
@@ -24,4 +25,15 @@
 }
 .paragraph {
   font: var(--paragraph);
+}
+
+.hide {
+  display: none;
+}
+
+::placeholder {
+  font: var(--head4);
+}
+form .explain {
+  font: 0.8rem "proxima_novaregular", sans-serif;
 }

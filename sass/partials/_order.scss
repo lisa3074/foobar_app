@@ -1,0 +1,33 @@
+details[open] summary ~ * {
+  animation: swoop_down 0.4s ease-in-out;
+}
+
+@keyframes swoop_down {
+  0% {
+    opacity: 0;
+    margin-top: -300px;
+  }
+  80% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+
+//Selve details lukker så hurtigt at man ikke kan nå at se animationen, måske det kan fikses i js?
+details:not([open]) summary ~ * {
+  animation: swoop_up 1.5s ease-in-out;
+}
+
+@keyframes swoop_up {
+  0% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+  100% {
+    opacity: 0;
+    margin-top: -20px;
+  }
+}
