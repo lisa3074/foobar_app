@@ -4,16 +4,73 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="sass/style.scss" />
-    <title>FooBar</title>
+    <title>FooBar - Home</title>
   </head>
   <body>
-    <p class="title">TITLE</p>
-    <p class="head1">HEADING 1</p>
-    <p class="head2">HEADING 2</p>
-    <p class="head3">Heading 3</p>
-    <p class="head4">HEADING 4</p>
-    <p class="head5">HEADING 5</p>
-    <p class="label">LABEL</p>
-    <p class="paragraph">Paragraph</p>
+    <nav class="grid desk_nav">
+      <div class="menu_item0"><img src="" alt="" class="arrow" /></div>
+      <div class="menu_item1">
+        <h2 class="head4">FOOBAR</h2>
+        <img src="" alt="" class="icon home_icon" />
+      </div>
+      <div class="menu_item2">
+        <h2 class="head4">BUY</h2>
+        <img src="" alt="" class="icon buy_icon" />
+      </div>
+      <div class="menu_item3">
+        <h2 class="head4">BEER</h2>
+        <img src="" alt="" class="icon beer_icon" />
+      </div>
+      <div class="menu_item4">
+        <h2 class="head4">WIN</h2>
+        <img src="" alt="" class="icon win_ico" />
+      </div>
+      <div class="menu_item5">
+        <h2 class="head4">LOG IN</h2>
+        <img src="" alt="" class="log_in_icon" />
+      </div>
+    </nav>
+    <main class="home_container grid">
+      <article class="infobox">
+        <div class="queue">
+          <div class="wrap">
+            <p class="head5">UPDATED</p>
+            <p class="title time">19:52</p>
+          </div>
+          <div class="wrap">
+            <p class="head5">IN QUEUE</p>
+            <p class="title queue_num">7</p>
+          </div>
+          <div class="wrap">
+            <p class="head5">SERVED TODAY</p>
+            <p class="title">123</p>
+          </div>
+          <div class="wrap">
+            <p class="head5">WINNERS</p>
+            <p class="title">2</p>
+          </div>
+          <article class="queue_box"></article>
+        </div>
+      </article>
+      <section class="flex">
+        <article class="big_icon buy">
+          <h3 class="head4">BUY BEER</h3>
+        </article>
+        <article class="big_icon beer">
+          <h3 class="head4">BROWSE BEER</h3>
+        </article>
+        <article class="big_icon win">
+          <p class="win_txt"><span class="beernumber">XX</span> beers sold left until new winner!</p>
+          <div class="progress_container">
+            <div class="track"></div>
+            <div class="bar"></div>
+            <p class="num head2">55<span class="percent paragraph">%</span></p>
+          </div>
+        </article>
+        <article class="big_icon">
+          <h3 class="head4">LOG IN</h3>
+        </article>
+      </section>
+    </main>
   </body>
 </html>
