@@ -1,0 +1,44 @@
+:root {
+  --purple: #9175bc;
+  --yellow: #e7cb79;
+  --white: #ffffff;
+  --dark: #3a2058;
+  --soft-pink: #fbf5fb;
+  --soft-yellow: #ece0c9;
+  --soft-purple: #bdacd7;
+  --soft-blue: #c0cdf2;
+
+  --reg: "proxima_novaregular", sans-serif;
+  --bold: "proxima_novabold", sans-serif;
+
+  --title: 1.95rem "proxima_novabold", sans-serif;
+  --head1: 1.55rem "proxima_novabold", sans-serif;
+  --head2: 1.25rem "proxima_novabold", sans-serif;
+  --head3: 1.25rem "proxima_novaregular", sans-serif;
+  --head4: 1.07rem "proxima_novabold", sans-serif;
+  --head5: 0.8rem "proxima_novabold", sans-serif;
+  --label: 0.95rem "proxima_novabold", sans-serif;
+  --paragraph: 0.95rem "proxima_novaregular", sans-serif;
+}
+
+/* 
+WIN SITE FONT SIZES
+Overskrift: 2.5rem
+Procenttal: 5.3rem
+procent: 3.4rem
+Sub-overskrifter og brødtekst: 1.25rem
+tal: 3.125rem
+ */
+
+@font-face {
+  font-family: "proxima_novabold";
+  src: url("/static/fonts/proxima_nova_bold-webfont.woff2") format("woff2"), url("/static/fonts/proxima_nova_bold-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "proxima_novaregular";
+  src: url("/static/fonts/proximanova-regular-webfont.woff2") format("woff2"), url("/static/fonts/proximanova-regular-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
