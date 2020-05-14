@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/lisa3074/foobar_app/issues"
   },
-  "homepage": "https://github.com/lisa3074/foobar_app#readme"
+  "homepage": "https://github.com/lisa3074/foobar_app#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
 }
