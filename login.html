@@ -7,6 +7,46 @@
     <link rel="stylesheet" href="sass/style.scss" />
   </head>
   <body>
+    <h1 class="title login_heading">LOG IN</h1>
+    <section class="log_in_container grid">
+      <article class="grid_item1">
+        <form action="" class="login">
+          <fieldset class="log_in">
+            <div>
+              <label for="order_number" class="labels">ORDER NUMBER</label>
+              <input type="number" class="order_number" id="order_number" name="login" placeholder="6" required />
+              <p class="invalid_text">Sorry didn't work</p>
+            </div>
+            <div>
+              <label for="digits" class="labels">4 DIGIT PIN CODE</label>
+              <input type="number" class="digits" id="digits" name="login" placeholder="1234" required />
+              <p class="invalid_text">Sorry didn't work</p>
+            </div>
+          </fieldset>
+        </form>
+      </article>
+      <article class="grid_item2 lock"></article>
+      <article class="grid_item3">
+        <button class="log_into_account">LOG IN<img src="" alt="" /></button>
+      </article>
+    </section>
+    <section class="account_container grid">
+      <article class="grid_item1">
+        <h2 class="title">ORDER STATUS</h2>
+        <p class="head2">STILL IN THE MAKING...</p>
+        <p class="head4">ORDER NUMBER</p>
+        <div class="number_bg">
+          <p class="title your_order">6</p>
+        </div>
+      </article>
+      <article class="grid_item2">
+        <h4 class="head4">RECEIPTS</h4>
+      </article>
+      <article class="grid_item3">
+        <h4 class="head4">LOG OUT</h4>
+      </article>
+    </section>
+
     <script src="script.js"></script>
   </body>
 </html>

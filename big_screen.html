@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FOO BAR</title>
+    <link rel="stylesheet" href="sass/style.scss" />
+  </head>
+  <body class="grid">
+    <article class="queue_big">
+      <div class="infobox">
+        <div class="wrap">
+          <p class="header5">UPDATED</p>
+          <p class="big_title">19:25</p>
+        </div>
+        <div class="wrap">
+          <p class="header5">IN QUEUE</p>
+          <p class="big_title">12</p>
+        </div>
+        <div class="wrap">
+          <p class="header5">SERVED TODAY</p>
+          <p class="big_title">123</p>
+        </div>
+        <div class="wrap">
+          <p class="header5">WINNERS</p>
+          <p class="big_title">2</p>
+        </div>
+      </div>
+      <div class="queue_right">
+        <h2 class="big_title">QUEUE</h2>
+        <div class="queue_box_big"></div>
+      </div>
+    </article>
+    <article class="winner_big">
+      <div class="infobox">
+        <img src="" alt="" class="logo" />
+        <p class="info_text">Beers left until new winner:</p>
+        <p class="beers_left">49</p>
+      </div>
+      <div class="win_big">
+        <div class="progress_container_big">
+          <div class="track"></div>
+          <div class="bar"></div>
+          <p class="percent"><span class="num">51</span>%</p>
+        </div>
+        <p class="progress_num_big">51 / 100</p>
+      </div>
+    </article>
+
+    <article class="line">
+      <h2 class="title_big">BEING POURED</h2>
+      <div class="in_line grid">
+        <!-- APPEND LINE NUMBERS -->
+        <template class="line_temp">
+          <div class="line_item">
+            <p class="line_number"></p>
+          </div>
+        </template>
+        <div class="line_item">
+          <p class="line_number">5</p>
+        </div>
+      </div>
+      <div class="newest">
+        <p class="heading_new">NEWEST</p>
+        <div class="new_bg">
+          <p class="newest_num">22</p>
+        </div>
+      </div>
+    </article>
+    <article class="pickup">
+      <h2 class="title_big">COME PICK ME UP</h2>
+      <div class="in_line grid">
+        <!-- APPEND PICKUP NUMBERS -->
+        <template class="pickup_temp">
+          <div class="pickup_item">
+            <p class="pickup_number"></p>
+          </div>
+        </template>
+        <div class="pickup_item">
+          <p class="pickup_number">3</p>
+        </div>
+      </div>
+      <div class="newest">
+        <p class="heading_new">NEWEST</p>
+        <div class="new_bg">
+          <p class="newest_num">11</p>
+        </div>
+      </div>
+    </article>
+
+    <script src="script.js"></script>
+  </body>
+</html>
