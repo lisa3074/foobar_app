@@ -6,7 +6,7 @@
     <title>Log in and follow your order</title>
     <link rel="stylesheet" href="sass/style.scss" />
   </head>
-  <body>
+  <body class="loginBody">
     <h1 class="title login_heading">LOG IN</h1>
     <section class="log_in_container grid">
       <article class="grid_item1">
@@ -27,17 +27,19 @@
       </article>
       <article class="grid_item2 lock"></article>
       <article class="grid_item3">
-        <button class="log_into_account">LOG IN<img src="" alt="" /></button>
+        <button class="log_into_account head2">LOG IN<img src="" alt="" /></button>
       </article>
     </section>
     <section class="account_container grid">
       <article class="grid_item1">
         <h2 class="title">ORDER STATUS</h2>
-        <p class="head2">STILL IN THE MAKING...</p>
-        <p class="head4">ORDER NUMBER</p>
-        <div class="number_bg">
-          <p class="title your_order">6</p>
-        </div>
+        <p class="head2">...</p>
+        <form class="check_status">
+          <label for="ordernum" class="labels">TYPE IN YOUR ORDER NUMBER</label>
+          <input type="number" class="digits" id="ordernum" name="number" placeholder="0" required="" />
+
+          <button class="check head2">CHECK</button>
+        </form>
       </article>
       <article class="grid_item2">
         <h4 class="head4">RECEIPTS</h4>
