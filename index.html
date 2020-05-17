@@ -7,42 +7,49 @@
     <title>FooBar - Home</title>
   </head>
   <body class="indexBody">
-    <nav class="grid desk_nav">
-      <div class="menu_item0"><img src="" alt="" class="arrow" /></div>
-      <a href="index.html">
-        <div class="menu_item1">
-          <h2 class="head4">FOOBAR</h2>
-          <img src="" alt="" class="icon home_icon" />
+    <nav class="desk_nav smooth_out">
+      <div class="max_height">
+        <div class="menu_item arrow_container"><img src="/static/images/svg_icons/arrow.svg" alt="Toggle menu" class="arrow" /></div>
+
+        <div class="menu_item menu-home itm">
+          <h2 class="head2">FOOBAR</h2>
+          <div class="icon_wrapper">
+            <img src="/static/images/svg_icons/home.svg" alt="home" class="icon home_icon" />
+          </div>
         </div>
-      </a>
-      <a href="order.html">
-        <div class="menu_item2">
-          <h2 class="head4">BUY</h2>
-          <img src="" alt="" class="icon buy_icon" />
+
+        <div class="menu_item menu-buy itm">
+          <h2 class="head2">BUY</h2>
+          <div class="icon_wrapper">
+            <img src="/static/images/svg_icons/cart_new.svg" alt="Buy beer" class="icon buy_icon" />
+          </div>
         </div>
-      </a>
-      <a href="beer.html">
-        <div class="menu_item3">
-          <h2 class="head4">BEER</h2>
-          <img src="" alt="" class="icon beer_icon" />
+
+        <div class="menu_item menu-beer itm">
+          <h2 class="head2">BEER</h2>
+          <div class="icon_wrapper">
+            <img src="/static/images/svg_icons/beer_icon.svg" alt="Browse beer" class="icon beer_icon" />
+          </div>
         </div>
-      </a>
-      <a href="win.html">
-        <div class="menu_item4">
-          <h2 class="head4">WIN</h2>
-          <img src="" alt="" class="icon win_ico" />
+
+        <div class="menu_item menu-win itm">
+          <h2 class="head2">WIN</h2>
+          <div class="icon_wrapper">
+            <img src="/static/images/svg_icons/rosette.svg" alt="Win" class="icon win_ico" />
+          </div>
         </div>
-      </a>
-      <a href="login.html">
-        <div class="menu_item5">
-          <h2 class="head4">LOG IN</h2>
-          <img src="" alt="" class="log_in_icon" />
+
+        <div class="menu_item menu-login itm">
+          <h2 class="head2">LOG IN</h2>
+          <div class="icon_wrapper">
+            <img src="/static/images/svg_icons/lock_icon_light.svg" alt="Log in" class="log_in_icon" />
+          </div>
         </div>
-      </a>
+      </div>
     </nav>
     <main class="home_container grid">
-      <article class="infobox">
-        <div class="queue">
+      <article class="queue">
+        <div class="infobox">
           <div class="wrap">
             <p class="head5">UPDATED</p>
             <p class="title time">19:52</p>
@@ -53,16 +60,38 @@
           </div>
           <div class="wrap">
             <p class="head5">SERVED TODAY</p>
-            <p class="title">123</p>
+            <p class="title served_today">123</p>
           </div>
           <div class="wrap">
             <p class="head5">WINNERS</p>
-            <p class="title">2</p>
+            <p class="title wins_today">2</p>
           </div>
-          <article class="queue_box"></article>
         </div>
+        <article class="queue_box">
+          <div class="wrap">
+            <div class="q_bar"></div>
+            <p class="q_num head4"></p>
+          </div>
+          <div class="wrap">
+            <div class="q_bar"></div>
+            <p class="q_num head4"></p>
+          </div>
+          <div class="wrap">
+            <div class="q_bar"></div>
+            <p class="q_num head4"></p>
+          </div>
+          <div class="wrap">
+            <div class="q_bar"></div>
+            <p class="q_num head4"></p>
+          </div>
+          <div class="wrap">
+            <div class="q_bar"></div>
+            <p class="q_num head4"></p>
+          </div>
+          <img src="/static/images/logos/appLogo.svg" alt="FooBar logo" class="logo" />
+        </article>
       </article>
-      <section class="flex">
+      <section class="grid icons">
         <article class="big_icon buy">
           <h3 class="head4">BUY BEER</h3>
         </article>
@@ -70,14 +99,14 @@
           <h3 class="head4">BROWSE BEER</h3>
         </article>
         <article class="big_icon win">
-          <p class="win_txt"><span class="beernumber">XX</span> beers sold left until new winner!</p>
+          <p class="win_txt head4"><span class="beernumber">XX</span> beers sold left until new winner!</p>
           <div class="progress_container">
             <div class="track"></div>
             <div class="bar"></div>
             <p class="num head2">55<span class="percent paragraph">%</span></p>
           </div>
         </article>
-        <article class="big_icon">
+        <article class="big_icon log_in">
           <h3 class="head4">LOG IN</h3>
         </article>
       </section>
