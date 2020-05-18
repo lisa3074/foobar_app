@@ -15,7 +15,11 @@ body {
   left: 30%;
   z-index: 0;
 }
-
+.icon,
+.big_icon,
+.menu_item {
+  cursor: pointer;
+}
 /////////////////
 //QUEUE
 ////////////////
@@ -261,16 +265,5 @@ body {
 @media (min-width: 1300px) {
   .big_icon .head4 {
     padding-bottom: 2rem;
-  }
-}
-@media only screen and (max-aspect-ratio: 4/3) and (min-width: 800px) {
-  .indexBody,
-  .orderBody,
-  .beerBody,
-  .winBody,
-  .loginBody {
-    display: grid;
-    align-content: center;
-    height: 100vh;
   }
 }

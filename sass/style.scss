@@ -2,6 +2,7 @@
 @use 'partials/root';
 @use 'partials/order';
 @use 'partials/index';
+@use 'partials/read_more';
 
 * {
   box-sizing: border-box;
@@ -13,6 +14,8 @@ body {
   width: 100%;
   height: 100%;
   background-color: var(--soft-pink);
+  position: relative;
+  overflow-x: hidden;
 }
 
 .title {
@@ -47,10 +50,92 @@ body {
 ::placeholder {
   font: var(--head4);
 }
+
+:focus {
+  outline: 0;
+}
 form .explain {
   font: 0.8rem "proxima_novaregular", sans-serif;
 }
 
 .grid {
   display: grid;
+}
+
+.flex {
+  display: flex;
+}
+
+//GENERAL BUTTONS
+.secondary {
+  background-color: var(--purple);
+  color: var(--white);
+  border-radius: var(--round-ru);
+  padding: 1rem 1.5rem;
+  width: 10rem;
+  border: 0;
+  box-shadow: var(--box-shadow);
+}
+
+.primary {
+  background-color: var(--yellow);
+  color: var(--dark);
+  border-radius: var(--round-ru);
+  padding: 0.9rem 1.5rem;
+  width: 10rem;
+  border: 0;
+  box-shadow: var(--box-shadow);
+}
+//GENEREL CONTAINERS
+.home_container,
+.order_wrapper {
+  padding: 1rem 1rem calc(1rem + 70px) 1rem;
+  width: 100%;
+}
+@media (min-width: 800px) {
+  .home_container,
+  .order_wrapper {
+    width: 100%;
+    padding-left: 100px;
+  }
+
+  .secondary {
+    width: 18rem;
+  }
+
+  .primary {
+    width: 18rem;
+  }
+}
+/* @media only screen and (max-aspect-ratio: 4/3) and (min-width: 800px) {
+  .indexBody,
+  .orderBody,
+  .beerBody,
+  .winBody,
+  .loginBody {
+    display: grid;
+    align-content: center;
+    height: 100vh;
+  }
+} */
+.close_more:hover,
+button:hover {
+  transition: 0.2s;
+  transform: scale(1.04);
+}
+.close_more:hover {
+  transition: 0.2s;
+  transform: scale(1.1);
+}
+button {
+  cursor: pointer;
+}
+.hidden_left {
+  transition: 1s ease-in;
+  transform: translateX(100vw);
+}
+.show {
+  transition: 1s ease-out;
+  transform: translateX(0px);
+  opacity: 1;
 }

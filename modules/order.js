@@ -8,6 +8,34 @@ export function cartDelegation() {
   setAmount();
   loadJson();
 
+  document.querySelector(".down").addEventListener("click", function () {
+    const isOpen = document.querySelector("details").getAttribute("open");
+    if (isOpen == null) {
+      document.querySelector("details").setAttribute("open", "");
+      document.querySelector(".arrow_down").classList.add("go_down");
+      document.querySelector(".arrow_down").classList.remove("go_up");
+    } else {
+      document.querySelector(".arrow_down").classList.remove("go_down");
+      document.querySelector(".arrow_down").classList.add("go_up");
+      document.querySelector(".first_part_grid").classList.add("opacity");
+      document.querySelector(".button_container").classList.add("opacity");
+      setTimeout(() => {
+        document.querySelector("details").removeAttribute("open", "");
+        document.querySelector(".first_part_grid").classList.remove("opacity");
+        document.querySelector(".button_container").classList.remove("opacity");
+      }, 500);
+    }
+  });
+
+  document.querySelector(".more").addEventListener("click", function () {
+    document.querySelector(".more_container").classList.remove("hidden_left");
+    document.querySelector(".more_container").classList.add("show");
+  });
+  document.querySelector(".close_more").addEventListener("click", function () {
+    document.querySelector(".more_container").classList.add("hidden_left");
+    document.querySelector(".more_container").classList.remove("show");
+  });
+
   document.querySelector(".button_container .more").addEventListener("click", displayReadMore);
   document.querySelector(".order_nav_wrapper .reset").addEventListener("click", reset);
   document.querySelector(".order_nav_wrapper .view_cart").addEventListener("click", setSummary);

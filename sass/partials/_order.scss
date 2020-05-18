@@ -1,3 +1,156 @@
+//GENERAL
+
+details:focus,
+summary:focus {
+  outline: 0;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+.order_container {
+  padding: 3rem 0 2rem;
+}
+
+//BUTTONS
+.button_icon {
+  height: 15px;
+  width: auto;
+}
+.view_cart .button_icon {
+  height: 20px;
+  transform: translateY(-2px) translateX(5px);
+}
+
+.add_icon,
+.remove_icon {
+  height: auto;
+  width: 15px;
+}
+.view_cart,
+.reset {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  height: 3.2rem;
+}
+
+.primary.add {
+  border-radius: var(--round-left);
+}
+
+.primary.remove {
+  border-radius: var(--round-right);
+}
+.primary.remove,
+.primary.add {
+  width: 3.5rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 1px 7px -3px var(--dark);
+}
+.button_wrap {
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 1rem;
+  justify-content: flex-end;
+}
+
+//SUMMARY
+summary {
+  display: grid;
+  grid-template-columns: 1fr 0.5fr;
+  padding: 0 1rem;
+}
+
+.summary_container {
+  padding: 0.5rem 0 1rem;
+}
+
+.beer_category,
+.price {
+  padding: 0.3rem 0;
+}
+
+.name {
+  padding-top: 0.5rem;
+}
+
+.arrow_down {
+  height: 28px;
+  cursor: pointer;
+}
+
+//DETAILS
+details {
+  background-color: var(--white);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--rounded);
+}
+
+//ORDER BUTTONS
+.order_nav_wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 0.5rem;
+  justify-items: flex-end;
+  padding: 0 0 1.5rem;
+}
+
+//DETAILS
+.secondary.more {
+  width: 7rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button_container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.product_details {
+  padding: 0 1rem 1rem 1rem;
+  display: grid;
+  justify-items: center;
+}
+
+.orderBody .txt > h3:nth-child(3) {
+  margin-top: 1rem;
+}
+.label {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-top: 0 auto;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+  z-index: 0;
+}
+
+.amout_chosen {
+  letter-spacing: 15px;
+}
+
+.go_up {
+  transition: 1s;
+  transform: rotate3d(0, 1, 5, 90deg) translateY(12px) translateX(5px);
+  padding: 0rem 1.2rem;
+}
+
+.go_down {
+  transition: 1s;
+  transform: rotate3d(0, 0, 1, 270deg) translateY(-15px) translateX(-5px);
+  padding: 0rem 1.5rem;
+}
+
 details[open] summary ~ * {
   animation: swoop_down 0.4s ease-in-out;
 }
@@ -7,7 +160,7 @@ details[open] summary ~ * {
     opacity: 0;
     margin-top: -300px;
   }
-  80% {
+  50% {
     opacity: 0;
   }
   100% {
@@ -15,9 +168,26 @@ details[open] summary ~ * {
     margin-top: 0px;
   }
 }
-
+summary {
+  z-index: 2;
+}
+.opacity {
+  animation: opacity_kf 1s ease-in-out 1 forwards;
+}
+@keyframes opacity_kf {
+  0% {
+    opacity: 1;
+  }
+  30% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+    margin-top: -200px;
+  }
+}
 //Selve details lukker så hurtigt at man ikke kan nå at se animationen, måske det kan fikses i js?
-details:not([open]) summary ~ * {
+/* details:not([open]) summary ~ * {
   animation: swoop_up 1.5s ease-in-out;
 }
 
@@ -28,6 +198,107 @@ details:not([open]) summary ~ * {
   }
   100% {
     opacity: 0;
-    margin-top: -20px;
+    margin-top: -200px;
+  }
+} */
+
+@media (min-width: 500px) {
+  .first_part_grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    .txt {
+      padding: 0 2rem;
+    }
+  }
+
+  .order_nav_wrapper {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-gap: 0.5rem;
+    justify-items: flex-end;
+    padding: 0 0 1.5rem;
+  }
+}
+@media (min-width: 800px) {
+  .summary_container {
+    display: grid;
+    grid-template-columns: 1fr 0.75fr;
+    grid-template-rows: 1fr 2rem;
+  }
+  .beer_category {
+    padding-top: 2.8rem;
+  }
+
+  .view_cart,
+  .reset {
+    justify-content: flex-end;
+  }
+  .view_cart .button_icon,
+  .reset .button_icon {
+    padding-left: 2.5rem;
+    padding-right: 1rem;
+  }
+  .reset .button_icon {
+    padding-left: 4.1rem;
+  }
+}
+
+@media (min-width: 1000px) {
+  .product_details {
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 1fr;
+    .txt {
+      padding: 0 2rem;
+    }
+  }
+  .button_container {
+    height: 100%;
+    align-items: flex-end;
+  }
+  .summary_container {
+    grid-template-columns: 26.4vw 1fr 1fr;
+    grid-template-rows: 1fr;
+    align-items: center;
+    padding: 0;
+    .beer_category,
+    .price {
+      padding: 0;
+    }
+    .price {
+      text-align: right;
+    }
+    .go_up {
+      transition: 1s;
+      transform: rotate3d(0, 1, 5, 90deg);
+      padding: 0rem 1.2rem;
+    }
+
+    .go_down {
+      transition: 1s;
+      transform: rotate3d(0, 0, 1, 270deg);
+      padding: 0rem 1.5rem;
+    }
+  }
+
+  summary {
+    grid-template-columns: 4fr 1fr;
+  }
+  .down {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  .name {
+    padding-left: 2rem;
+    padding-top: 0;
+  }
+
+  .button_wrap {
+    padding-top: 1rem;
+  }
+  .primary.remove,
+  .primary.add {
+    width: 4rem;
+    height: 2.5rem;
   }
 }

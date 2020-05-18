@@ -11,14 +11,22 @@
   --reg: "proxima_novaregular", sans-serif;
   --bold: "proxima_novabold", sans-serif;
 
-  --title: 1.95rem "proxima_novabold", sans-serif;
+  --title: 1.7rem "proxima_novabold", sans-serif;
+  --head1: 1.3rem "proxima_novabold", sans-serif;
+  --head2: 0.95rem "proxima_novabold", sans-serif;
+  --head3: 0.95rem "proxima_novaregular", sans-serif;
+  --head4: 0.85rem "proxima_novabold", sans-serif; //1.07
+  --head5: 0.7rem "proxima_novabold", sans-serif;
+  --label: 0.85rem "proxima_novabold", sans-serif;
+  --paragraph: 0.85rem "proxima_novaregular", sans-serif;
+  /*  --title: 1.95rem "proxima_novabold", sans-serif;
   --head1: 1.55rem "proxima_novabold", sans-serif;
   --head2: 1.07rem "proxima_novabold", sans-serif;
   --head3: 1.07rem "proxima_novaregular", sans-serif;
   --head4: 0.95rem "proxima_novabold", sans-serif; //1.07
   --head5: 0.8rem "proxima_novabold", sans-serif;
   --label: 0.95rem "proxima_novabold", sans-serif;
-  --paragraph: 0.95rem "proxima_novaregular", sans-serif;
+  --paragraph: 0.95rem "proxima_novaregular", sans-serif; */
 
   --rounded: 30px;
   --round-ru: 30px 0px 30px 30px;
@@ -26,6 +34,9 @@
   --round-rd: 30px 30px 0 30px;
   --round-ld: 30px 30px 30px 0;
   --round-low: 30px 30px 0px 0;
+  --round-high: 0 0 30px 30px;
+  --round-right: 30px 0 0 30px;
+  --round-left: 0 30px 30px 0;
 
   --gradient: linear-gradient(180deg, rgba(145, 117, 188, 1) 0%, rgba(231, 203, 121, 1) 100%);
   --fallback: rgb(145, 117, 188);

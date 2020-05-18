@@ -3,6 +3,7 @@
   width: 100%;
   position: fixed;
   bottom: 0;
+  z-index: 3;
 
   box-shadow: -1px -1px 10px -5px var(--dark);
   border-radius: var(--round-low);
@@ -63,7 +64,7 @@ a {
     }
     .arrow {
       width: auto;
-      height: 30px;
+      height: 28px;
       padding: 0 2rem;
       cursor: pointer;
     }
@@ -76,10 +77,11 @@ a {
       padding-right: 1rem;
       transform: translateX(0.5rem) rotate3d(0, 1, 0, 0deg);
     }
+
     .max_height .arrow {
       transition: 1s;
-      transform: rotate3d(0, 1, 0, 180deg);
-      padding: 0rem 1.2rem;
+      transform: rotate3d(0, 1, 0, 360deg) translateX(10px);
+      padding: 0rem 1.5rem;
     }
     .chosen_img {
       transition: 1s;
@@ -100,8 +102,8 @@ a {
     }
     .max_height .arrow {
       transition: 1s;
-      transform: rotate3d(0, 1, 0, 360deg);
-      padding: 0rem 1.5rem;
+      transform: rotate3d(0, 1, 0, 180deg) translateX(0px);
+      padding: 0rem 1.2rem;
     }
     .chosen {
       transition: 1s;

@@ -7,41 +7,9 @@
     <link rel="stylesheet" href="sass/style.scss" />
   </head>
   <body class="orderBody">
-    <template class="products_sold">
-      <article>
-        <details class="products">
-          <summary>
-            <h1 class="head1 name">EL HEFE</h1>
-            <p class="head2 price">40 DKK</p>
-            <button class="remove"><img src="" alt="" />-</button>
-            <button class="add"><img src="" alt="" />+</button>
-          </summary>
-          <div class="product_details">
-            <img src="" alt="" class="label" />
-            <div class="txt">
-              <h3 class="head2">AROMA</h3>
-              <p class="paragraph aroma"></p>
-              <div class="info flex">
-                <div class="wrap">
-                  <h3 class="head2">ALCOHOL</h3>
-                  <p class="paragraph alc"></p>
-                </div>
-                <div class="wrap">
-                  <h3 class="head2">CATEGORY</h3>
-                  <p class="paragraph cat"></p>
-                </div>
-              </div>
-            </div>
-            <div class="button_container">
-              <button class="more head2">MORE</button>
-            </div>
-          </div>
-        </details>
-      </article>
-    </template>
     <nav class="desk_nav smooth_out">
       <div class="max_height">
-        <div class="menu_item arrow_container"><img src="/static/images/svg_icons/arrow.svg" alt="Toggle menu" class="arrow" /></div>
+        <div class="menu_item arrow_container"><img src="/static/images/svg_icons/yellow_arrow.svg" alt="Toggle menu" class="arrow" /></div>
 
         <div class="menu_item menu-home itm">
           <h2 class="head2">FOOBAR</h2>
@@ -79,187 +47,225 @@
         </div>
       </div>
     </nav>
-    <h1 class="title order_heading">CHOOSE YOUR POISON</h1>
-    <section class="order_container">
-      <!-- APPEND LIST -->
+    <template class="products_sold">
       <article>
         <details class="products">
           <summary>
             <h1 class="head1 name">EL HEFE</h1>
             <p class="head2 price">40 DKK</p>
-            <button class="remove"><img src="" alt="" />-</button>
-            <button class="add"><img src="" alt="" />+</button>
+            <button class="remove primary">-</button>
+            <button class="add primary">+</button>
           </summary>
           <div class="product_details">
             <img src="" alt="" class="label" />
             <div class="txt">
               <h3 class="head2">AROMA</h3>
-              <p class="paragraph aroma">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, dolore reprehenderit perferendis voluptatibus nulla obcaecati ratione sed neque itaque! Iste ratione reprehenderit repellendus quo, recusandae cumque maiores vel praesentium dignissimos.
-              </p>
+              <p class="paragraph aroma"></p>
               <div class="info flex">
                 <div class="wrap">
                   <h3 class="head2">ALCOHOL</h3>
-                  <p class="paragraph alc">70%</p>
+                  <p class="paragraph alc"></p>
                 </div>
                 <div class="wrap">
                   <h3 class="head2">CATEGORY</h3>
-                  <p class="paragraph cat">Ale</p>
+                  <p class="paragraph cat"></p>
                 </div>
               </div>
             </div>
             <div class="button_container">
-              <button class="more head2">MORE</button>
+              <button class="more head2 secondary">MORE</button>
             </div>
           </div>
         </details>
       </article>
-    </section>
-
-    <section class="order_nav_wrapper">
-      <button class="reset head2">RESET</button>
-      <button class="view_cart head2">VIEW CART</button>
-    </section>
-
-    <!-- POPUPS -->
-    <!-- READ MORE -->
-
-    <section class="more_container hide">
-      <img src="" alt="" class="close_more" />
-      <div class="more_header">
-        <h1 class="head1"></h1>
-        <div class="category">
-          <h3 class="head2"></h3>
-          <p class="head3 cat"></p>
-        </div>
-        <div class="alcohol">
-          <h3 class="head2"></h3>
-          <p class="head3 alc"></p>
-        </div>
-      </div>
-      <div class="more_body">
-        <div class="txt1">
-          <h4 class="head2">AROMA</h4>
-          <p class="paragraph aroma">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque est excepturi obcaecati cupiditate provident praesentium quas, debitis assumenda laudantium tempore aspernatur omnis, nemo iste unde nam optio sapiente expedita vitae!</p>
-          <h4 class="head2">APPEARANCE</h4>
-          <p class="paragraph apperance">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo voluptatibus culpa labore veniam rerum! Est, id neque omnis provident animi sint perspiciatis fuga reiciendis! Ipsam aut voluptatibus vitae? Consequatur, voluptatem?</p>
-          <h4 class="head2">MOUTHFEEL</h4>
-          <p class="paragraph mouth_feel">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, quo voluptatem! Quas neque molestiae obcaecati a atque, iure, porro dolor, consequuntur laborum praesentium corrupti? Earum culpa tempora quis quia placeat?</p>
-        </div>
-        <txt2>
-          <h4 class="head2">FLAVOUR</h4>
-          <p class="paragraph flavour">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro repellendus dolorum quia illo rerum obcaecati molestiae sit quod distinctio, quisquam itaque sequi nihil a, accusantium explicabo nulla. Labore, aperiam architecto!</p>
-          <h4 class="head2">OVERALL</h4>
-          <p class="paragraph overall">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo repudiandae corporis optio architecto. Atque voluptates alias quae velit unde eveniet consequatur, corporis recusandae maxime facilis aperiam accusantium, quasi omnis neque.</p>
-        </txt2>
-        <img src="" alt="" class="label" />
-      </div>
-    </section>
-    <section class="cart hide">
-      <img src="" alt="" class="close" />
-      <div class="cart_container grid">
-        <article class="grid_item1">
-          <!-- RESULT STARTS -->
-          <article class="result">
-            <div class="result_list">
-              <!-- APPEND LIST/ITEMS -->
-              <template class="cart_sumup">
-                <div class="buy_items grid">
-                  <h3 class="head2 article">MOWINTIME</h3>
-                  <p class="paragraph amount">4 stk.</p>
-                  <p class="labels final_amount">180 DKK</p>
+    </template>
+    <main class="order_wrapper">
+      <h1 class="title order_heading">CHOOSE YOUR POISON</h1>
+      <section class="order_container">
+        <!-- APPEND LIST -->
+        <article>
+          <details class="products" onclick="return false">
+            <summary>
+              <div class="summary_container">
+                <div class="down">
+                  <img src="/static/images/svg_icons/yellow_arrow.svg" alt="Read more" class="arrow_down go_up" />
+                  <h1 class="head1 name">EL HEFE</h1>
                 </div>
-              </template>
-              <!-- APPEND LIST/ITEMS ENDS -->
-            </div>
-            <div class="buy_items grid">
-              <h3 class="head2">MOWINTIME</h3>
-              <p class="paragraph">4 stk.</p>
-              <p class="labels">180 DKK</p>
-              <h3 class="head2">FAIRY TALE ALE</h3>
-              <p class="paragraph">2 stk</p>
-              <p class="labels">90 DKK</p>
-            </div>
-            <div class="grid total">
-              <h3 class="head2">TOTAL</h3>
-              <p class="labels"><span class="total_amount">270</span> DKK</p>
-            </div>
-          </article>
-          <!-- RESULT ENDS -->
-          <!-- CREDIT CARD STARTS -->
-          <section id="card" class="hide">
-            <form class="credit_card">
-              <fieldset class="card">
-                <div>
-                  <label for="number" class="labels">CREDIT CARD NUMBER</label><input type="number" id="number" placeholder="1234 5678 9012 3456" name="card" required />
-                  <p class="invalid_text paragraph"></p>
+                <p class="beer_category head3">Ale</p>
+                <p class="head2 price">40 DKK<span class="amout_chosen"> x4</span></p>
+              </div>
+              <div class="button_wrap">
+                <button class="remove primary"><img src="/static/images/svg_icons/remove.svg" alt="Remove one" class="remove_icon" /></button>
+                <button class="add primary"><img src="/static/images/svg_icons/add.svg" alt="Add one" class="add_icon" /></button>
+              </div>
+            </summary>
+            <div class="product_details">
+              <div class="first_part_grid">
+                <img src="/static/images/labels/elhefe.png" alt="El Hefe" class="label" />
+                <div class="txt">
+                  <h3 class="head2">AROMA</h3>
+                  <p class="paragraph aroma">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, dolore reprehenderit perferendis voluptatibus nulla obcaecati ratione sed neque itaque! Iste ratione reprehenderit repellendus quo, recusandae cumque maiores vel praesentium dignissimos.
+                  </p>
+                  <h3 class="head2">ALCOHOL</h3>
+                  <p class="paragraph alc">70%</p>
                 </div>
-                <div>
-                  <label for="expire" class="labels">EXPIRE</label><input type="number" id="expire" placeholder="XX / XX" name="card" required />
-                  <p class="invalid_text paragraph"></p>
-                </div>
-                <div>
-                  <label for="secure" class="labels">SECURITY</label><input type="number" id="secure" placeholder="999" name="card" required />
-                  <p class="invalid_text paragraph"></p>
-                </div>
-                <div>
-                  <label for="full_name" class="labels">NAME ON CARD</label><input type="text" id="full_name" placeholder="JOHN SMITH" name="card" required />
-                  <p class="invalid_text paragraph"></p>
-                </div>
-              </fieldset>
-              <fieldset class="pin">
-                <label for="four_digits" class="labels">CHOOSE A 4 DIGIT PIN CODE</label>
-                <p class="explain">You’ll be able to see the status of your order under “log in”.</p>
-                <input type="text" id="four_digits" placeholder="1234" name="pin" required />
-              </fieldset>
-            </form>
-            <article class="pay">
-              <h3 class="head2">PAY IN TOTAL</h3>
-              <h4 class="head2"><span class="total_amount">270</span> DKK</h4>
-            </article>
-          </section>
-          <!-- CREDIT CARD ENDS -->
-          <!-- THANK YOU STARTS -->
-          <section class="thank_you hide">
-            <h2 class="head2">THANK YOU FOR YOUR PURCHASE!</h2>
-            <p class="paragraph">You will have your beer shortly. Keep an eye on the big screen at the bar. When you see your order number under “pick me up” it’s time to go get your beer! You can also log in on this app, to see how far along the pouring of your beer is. To log in you will need your order number and the 4 digit pin you just chose.</p>
-            <div class="order_num">
-              <h2 class="head2">ORDER NUMBER</h2>
-              <div class="number_bg">
-                <p class="head2 your_number">6</p>
+              </div>
+              <div class="button_container">
+                <button class="more head2 secondary">MORE</button>
               </div>
             </div>
-          </section>
-          <!-- THANK YOU ENDS -->
+          </details>
         </article>
-        <article class="grid_item2">
-          <div class="cart_summary">
-            <div class="wrap">
-              <div class="p head5">BEERS ORDERED</div>
-              <p class="title your_number">6</p>
+      </section>
+
+      <section class="order_nav_wrapper">
+        <button class="reset head2 secondary">RESET <img src="/static/images/svg_icons/white_cancel.svg" alt="Reset" class="button_icon" /></button>
+        <button class="view_cart head2 primary">VIEW CART <img src="/static/images/svg_icons/dark_cart.svg" alt="View cart" class="button_icon" /></button>
+      </section>
+
+      <!-- POPUPS -->
+      <!-- READ MORE -->
+
+      <section class="more_container hidden_left">
+        <img src="/static/images/svg_icons/arrow_out.svg" alt="close" class="close_more" />
+        <div class="more_wrapper">
+          <div class="more_header">
+            <h1 class="head1">FAIRY TALE ALE</h1>
+            <div class="category">
+              <h3 class="head2">CATEGORY</h3>
+              <p class="head3 cat">IPA</p>
             </div>
-            <div class="wrap">
-              <div class="p head5">PRICE IN TOTAL</div>
-              <p class="head2"><span class="total_amount title">270</span>DKK</p>
+            <div class="alcohol">
+              <h3 class="head2">ALCOHOL</h3>
+              <p class="head3 alc">5,8%</p>
             </div>
           </div>
-        </article>
-        <article class="grid_item3">
-          <div class="result_nav">
-            <button class="edit head2">EDIT<img src="" alt="" /></button>
-            <button class="checkout head2">CHECKOUT<img src="" alt="" /></button>
+          <div class="more_body">
+            <div class="txt1">
+              <h4 class="head2">AROMA</h4>
+              <p class="paragraph aroma">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque est excepturi obcaecati cupiditate provident praesentium quas, debitis assumenda laudantium tempore aspernatur omnis, nemo iste unde nam optio sapiente expedita vitae!</p>
+              <h4 class="head2">APPEARANCE</h4>
+              <p class="paragraph apperance">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo voluptatibus culpa labore veniam rerum! Est, id neque omnis provident animi sint perspiciatis fuga reiciendis! Ipsam aut voluptatibus vitae? Consequatur, voluptatem?</p>
+              <h4 class="head2">MOUTHFEEL</h4>
+              <p class="paragraph mouth_feel">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, quo voluptatem! Quas neque molestiae obcaecati a atque, iure, porro dolor, consequuntur laborum praesentium corrupti? Earum culpa tempora quis quia placeat?</p>
+            </div>
+            <txt2>
+              <h4 class="head2">FLAVOUR</h4>
+              <p class="paragraph flavour">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro repellendus dolorum quia illo rerum obcaecati molestiae sit quod distinctio, quisquam itaque sequi nihil a, accusantium explicabo nulla. Labore, aperiam architecto!</p>
+              <h4 class="head2">OVERALL</h4>
+              <p class="paragraph overall">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo repudiandae corporis optio architecto. Atque voluptates alias quae velit unde eveniet consequatur, corporis recusandae maxime facilis aperiam accusantium, quasi omnis neque.</p>
+            </txt2>
+            <img src="/static/images/labels/fairytaleale.png" alt="Fairy tale ale" class="label" />
           </div>
-          <div class="credit_card_nav hide">
-            <button class="edit head2">EDIT<img src="" alt="" /></button>
-            <button class="pay head2">PAY<img src="" alt="" /></button>
-          </div>
-          <div class="thank_you_nav hide">
-            <button class="home head2">HOME<img src="" alt="" /></button>
-            <button class="log_in head2">LOG IN<img src="" alt="" /></button>
-          </div>
-        </article>
-      </div>
-    </section>
+        </div>
+      </section>
+      <section class="cart hide">
+        <img src="" alt="" class="close" />
+        <div class="cart_container grid">
+          <article class="grid_item1">
+            <!-- RESULT STARTS -->
+            <article class="result">
+              <div class="result_list">
+                <!-- APPEND LIST/ITEMS -->
+                <template class="cart_sumup">
+                  <div class="buy_items grid">
+                    <h3 class="head2 article">MOWINTIME</h3>
+                    <p class="paragraph amount">4 stk.</p>
+                    <p class="labels final_amount">180 DKK</p>
+                  </div>
+                </template>
+                <!-- APPEND LIST/ITEMS ENDS -->
+              </div>
+              <div class="buy_items grid">
+                <h3 class="head2">MOWINTIME</h3>
+                <p class="paragraph">4 stk.</p>
+                <p class="labels">180 DKK</p>
+                <h3 class="head2">FAIRY TALE ALE</h3>
+                <p class="paragraph">2 stk</p>
+                <p class="labels">90 DKK</p>
+              </div>
+              <div class="grid total">
+                <h3 class="head2">TOTAL</h3>
+                <p class="labels"><span class="total_amount">270</span> DKK</p>
+              </div>
+            </article>
+            <!-- RESULT ENDS -->
+            <!-- CREDIT CARD STARTS -->
+            <section id="card" class="hide">
+              <form class="credit_card">
+                <fieldset class="card">
+                  <div>
+                    <label for="number" class="labels">CREDIT CARD NUMBER</label><input type="number" id="number" placeholder="1234 5678 9012 3456" name="card" required />
+                    <p class="invalid_text paragraph"></p>
+                  </div>
+                  <div>
+                    <label for="expire" class="labels">EXPIRE</label><input type="number" id="expire" placeholder="XX / XX" name="card" required />
+                    <p class="invalid_text paragraph"></p>
+                  </div>
+                  <div>
+                    <label for="secure" class="labels">SECURITY</label><input type="number" id="secure" placeholder="999" name="card" required />
+                    <p class="invalid_text paragraph"></p>
+                  </div>
+                  <div>
+                    <label for="full_name" class="labels">NAME ON CARD</label><input type="text" id="full_name" placeholder="JOHN SMITH" name="card" required />
+                    <p class="invalid_text paragraph"></p>
+                  </div>
+                </fieldset>
+                <fieldset class="pin">
+                  <label for="four_digits" class="labels">CHOOSE A 4 DIGIT PIN CODE</label>
+                  <p class="explain">You’ll be able to see the status of your order under “log in”.</p>
+                  <input type="text" id="four_digits" placeholder="1234" name="pin" required />
+                </fieldset>
+              </form>
+              <article class="pay">
+                <h3 class="head2">PAY IN TOTAL</h3>
+                <h4 class="head2"><span class="total_amount">270</span> DKK</h4>
+              </article>
+            </section>
+            <!-- CREDIT CARD ENDS -->
+            <!-- THANK YOU STARTS -->
+            <section class="thank_you hide">
+              <h2 class="head2">THANK YOU FOR YOUR PURCHASE!</h2>
+              <p class="paragraph">You will have your beer shortly. Keep an eye on the big screen at the bar. When you see your order number under “pick me up” it’s time to go get your beer! You can also log in on this app, to see how far along the pouring of your beer is. To log in you will need your order number and the 4 digit pin you just chose.</p>
+              <div class="order_num">
+                <h2 class="head2">ORDER NUMBER</h2>
+                <div class="number_bg">
+                  <p class="head2 your_number">6</p>
+                </div>
+              </div>
+            </section>
+            <!-- THANK YOU ENDS -->
+          </article>
+          <article class="grid_item2">
+            <div class="cart_summary">
+              <div class="wrap">
+                <div class="p head5">BEERS ORDERED</div>
+                <p class="title your_number">6</p>
+              </div>
+              <div class="wrap">
+                <div class="p head5">PRICE IN TOTAL</div>
+                <p class="head2"><span class="total_amount title">270</span>DKK</p>
+              </div>
+            </div>
+          </article>
+          <article class="grid_item3">
+            <div class="result_nav">
+              <button class="edit head2 secondary">EDIT<img src="" alt="" /></button>
+              <button class="checkout head2 primary">CHECKOUT<img src="" alt="" /></button>
+            </div>
+            <div class="credit_card_nav hide">
+              <button class="edit head2 secondary">EDIT<img src="" alt="" /></button>
+              <button class="pay head2 primary">PAY<img src="" alt="" /></button>
+            </div>
+            <div class="thank_you_nav hide">
+              <button class="home head2 secondary">HOME<img src="" alt="" /></button>
+              <button class="log_in head2 primary">LOG IN<img src="" alt="" /></button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
     <script src="script.js"></script>
   </body>
 </html>

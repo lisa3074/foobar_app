@@ -4,8 +4,9 @@
   "description": "Client application for FooBar",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html --open",
-    "build": "parcel build *.html --public-url ./"
+    "start": "parcel *.html --open",
+    "build": "parcel build *.html --public-url ./",
+    "clean": "rm -rf dist/ && rm -rf .cache/ && npm install && npm start"
   },
   "repository": {
     "type": "git",
