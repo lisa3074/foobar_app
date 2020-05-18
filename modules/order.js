@@ -4,6 +4,7 @@
 
 export function cartDelegation() {
   console.log("cartDelegation");
+
   checkAvailability();
   setAmount();
   loadJson();
@@ -38,7 +39,7 @@ export function cartDelegation() {
 
   document.querySelector(".button_container .more").addEventListener("click", displayReadMore);
   document.querySelector(".order_nav_wrapper .reset").addEventListener("click", reset);
-  document.querySelector(".order_nav_wrapper .view_cart").addEventListener("click", setSummary);
+  document.querySelector(".view_cart").addEventListener("click", checkAmountInCart);
   document.querySelector(".credit_card_nav .pay").addEventListener("click", checkValidity);
 }
 
@@ -55,6 +56,11 @@ function payDelegation() {
 ////////////////////////////////////
 ////// CALCULATION FUNCTIONS ///////
 //////////////////////////////////*/
+function checkAmountInCart() {
+  console.log("checkAmountInCart");
+  //CHECK IF ANYTHIN IS IN THE CART, IF YES=>
+  setSummary();
+}
 
 function checkAvailability() {
   console.log("checkAvailability");
@@ -162,6 +168,17 @@ function reset() {
 
 function displaySummary() {
   console.log("displaySummary");
+  document.querySelector(".cart").classList.remove("hide");
+  document.querySelector(".cart").classList.remove("fadeOut");
+  document.querySelector(".cart").classList.add("fadeInRight");
+
+  document.querySelector(".cart_close").addEventListener("click", function () {
+    document.querySelector(".cart").classList.add("fadeOut");
+    document.querySelector(".cart").classList.remove("fadeInRight");
+    setTimeout(() => {
+      document.querySelector(".cart").classList.add("hide");
+    }, 1200);
+  });
 }
 function displayError() {
   console.log("displayError - order.js");

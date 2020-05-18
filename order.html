@@ -128,7 +128,7 @@
       <!-- READ MORE -->
 
       <section class="more_container hidden_left">
-        <img src="/static/images/svg_icons/arrow_out.svg" alt="close" class="close_more" />
+        <img src="/static/images/svg_icons/arrow_out.svg" alt="close" class="close_more close" />
         <div class="more_wrapper">
           <div class="more_header">
             <h1 class="head1">FAIRY TALE ALE</h1>
@@ -160,8 +160,9 @@
           </div>
         </div>
       </section>
-      <section class="cart hide">
-        <img src="" alt="" class="close" />
+      <section class="cart fadeOut hide">
+        <img src="/static/images/svg_icons/dark_cancel.svg" alt="cancel" class="close cart_close" />
+        <h1 class="title cart_heading">CART</h1>
         <div class="cart_container grid">
           <article class="grid_item1">
             <!-- RESULT STARTS -->
@@ -176,14 +177,16 @@
                   </div>
                 </template>
                 <!-- APPEND LIST/ITEMS ENDS -->
-              </div>
-              <div class="buy_items grid">
-                <h3 class="head2">MOWINTIME</h3>
-                <p class="paragraph">4 stk.</p>
-                <p class="labels">180 DKK</p>
-                <h3 class="head2">FAIRY TALE ALE</h3>
-                <p class="paragraph">2 stk</p>
-                <p class="labels">90 DKK</p>
+                <div class="buy_items grid">
+                  <h3 class="head2 article">MOWINTIME</h3>
+                  <p class="paragraph amount">4 stk.</p>
+                  <p class="labels final_amount">180 DKK</p>
+                </div>
+                <div class="buy_items grid">
+                  <h3 class="head2 article">FAIRY TALE ALE</h3>
+                  <p class="paragraph amount">2 stk</p>
+                  <p class="labels final_amount">90 DKK</p>
+                </div>
               </div>
               <div class="grid total">
                 <h3 class="head2">TOTAL</h3>
@@ -251,16 +254,16 @@
           </article>
           <article class="grid_item3">
             <div class="result_nav">
-              <button class="edit head2 secondary">EDIT<img src="" alt="" /></button>
-              <button class="checkout head2 primary">CHECKOUT<img src="" alt="" /></button>
+              <button class="edit head2 secondary">EDIT<img src="/static/images/svg_icons/white_cancel.svg" alt="Edit" class="button_icon" /></button>
+              <button class="checkout head2 primary">CHECKOUT<img src="/static/images/svg_icons/dark_cart.svg" alt="Checkout" class="button_icon" /></button>
             </div>
             <div class="credit_card_nav hide">
-              <button class="edit head2 secondary">EDIT<img src="" alt="" /></button>
-              <button class="pay head2 primary">PAY<img src="" alt="" /></button>
+              <button class="edit head2 secondary">EDIT<img src="/static/images/svg_icons/white_cancel.svg" alt="Edit" class="button_icon" /></button>
+              <button class="pay head2 primary">PAY<img src="/static/images/svg_icons/dark_cart.svg" alt="Pay" class="button_icon" /></button>
             </div>
             <div class="thank_you_nav hide">
-              <button class="home head2 secondary">HOME<img src="" alt="" /></button>
-              <button class="log_in head2 primary">LOG IN<img src="" alt="" /></button>
+              <button class="home head2 secondary">HOME<img src="/static/images/svg_icons/white_cancel.svg" alt="Home" class="button_icon" /></button>
+              <button class="log_in head2 primary">LOG IN<img src="/static/images/svg_icons/lock_icon_dark.svg" alt="Log in" class="button_icon" /></button>
             </div>
           </article>
         </div>

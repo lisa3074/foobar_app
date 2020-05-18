@@ -18,7 +18,10 @@ details summary::-webkit-details-marker {
   height: 15px;
   width: auto;
 }
-.view_cart .button_icon {
+.view_cart .button_icon,
+.checkout .button_icon,
+.pay .button_icon,
+.home .button_icon {
   height: 20px;
   transform: translateY(-2px) translateX(5px);
 }
@@ -29,7 +32,12 @@ details summary::-webkit-details-marker {
   width: 15px;
 }
 .view_cart,
-.reset {
+.reset,
+.edit,
+.checkout,
+.pay,
+.log_in,
+.home {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -84,6 +92,9 @@ summary {
   height: 28px;
   cursor: pointer;
 }
+.down {
+  cursor: pointer;
+}
 
 //DETAILS
 details {
@@ -93,7 +104,10 @@ details {
 }
 
 //ORDER BUTTONS
-.order_nav_wrapper {
+.order_nav_wrapper,
+.result_nav,
+.credit_card_nav,
+.thank_you_nav {
   display: grid;
   grid-template-columns: 2fr 1fr;
   grid-gap: 0.5rem;
@@ -211,7 +225,10 @@ summary {
     }
   }
 
-  .order_nav_wrapper {
+  .order_nav_wrapper,
+  .result_nav,
+  .credit_card_nav,
+  .thank_you_nav {
     display: grid;
     grid-template-columns: 3fr 1fr;
     grid-gap: 0.5rem;
@@ -230,15 +247,27 @@ summary {
   }
 
   .view_cart,
-  .reset {
+  .reset,
+  .edit,
+  .checkout,
+  .pay,
+  .log_in,
+  .home {
     justify-content: flex-end;
   }
   .view_cart .button_icon,
-  .reset .button_icon {
+  .reset .button_icon,
+  .edit .button_icon,
+  .checkout .button_icon,
+  .pay .button_icon,
+  .log_in.button_icon,
+  .home .button_icon {
     padding-left: 2.5rem;
     padding-right: 1rem;
   }
-  .reset .button_icon {
+  .reset .button_icon,
+  .edit .button_icon,
+  .home .button_icon {
     padding-left: 4.1rem;
   }
 }

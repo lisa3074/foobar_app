@@ -25,13 +25,20 @@
   flex-wrap: nowrap;
   flex-direction: column;
 }
-.close_more {
+.close {
   position: fixed;
   top: 2.5rem;
   right: 2.5rem;
   height: 30px;
   z-index: 6;
   cursor: pointer;
+}
+
+.close_more {
+  right: auto;
+  left: 1.5rem;
+  top: 2.5rem;
+  transform: rotate(180deg);
 }
 .more_header .alcohol .head2,
 .more_header .category .head2 {
@@ -54,7 +61,7 @@
   .more_header {
     padding: 2rem;
   }
-  .close_more {
+  .close {
     right: 3rem;
   }
 }
