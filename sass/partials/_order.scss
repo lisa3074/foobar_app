@@ -259,10 +259,14 @@ summary {
   .reset .button_icon,
   .edit .button_icon,
   .checkout .button_icon,
-  .pay .button_icon,
   .log_in.button_icon,
   .home .button_icon {
     padding-left: 2.5rem;
+    padding-right: 1rem;
+  }
+
+  .pay .button_icon {
+    padding-left: 4rem;
     padding-right: 1rem;
   }
   .reset .button_icon,

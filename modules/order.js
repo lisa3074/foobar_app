@@ -40,6 +40,7 @@ export function cartDelegation() {
   document.querySelector(".button_container .more").addEventListener("click", displayReadMore);
   document.querySelector(".order_nav_wrapper .reset").addEventListener("click", reset);
   document.querySelector(".view_cart").addEventListener("click", checkAmountInCart);
+  document.querySelector(".checkout").addEventListener("click", displayPayment);
   document.querySelector(".credit_card_nav .pay").addEventListener("click", checkValidity);
 }
 
@@ -168,6 +169,7 @@ function reset() {
 
 function displaySummary() {
   console.log("displaySummary");
+  document.querySelector(".result").classList.remove("hide");
   document.querySelector(".cart").classList.remove("hide");
   document.querySelector(".cart").classList.remove("fadeOut");
   document.querySelector(".cart").classList.add("fadeInRight");
@@ -180,9 +182,47 @@ function displaySummary() {
     }, 1200);
   });
 }
+
+function displayPayment() {
+  console.log("displayPayment");
+  document.querySelector(".result").classList.add("fadeOutQuick");
+  setTimeout(() => {
+    document.querySelector(".result").classList.add("hide");
+    document.querySelector(".result_nav").classList.add("hide");
+    document.querySelector(".result").classList.remove("fadeOutQuick");
+  }, 800);
+  setTimeout(() => {
+    document.querySelector(".card").classList.remove("hide");
+    document.querySelector(".credit_card_nav").classList.remove("hide");
+    document.querySelector(".card").classList.add("fadeIn");
+    document.querySelector(".credit_card_nav").classList.add("fadeIn");
+  }, 800);
+  setTimeout(() => {
+    document.querySelector(".credit_card_nav").classList.remove("fadeIn");
+    document.querySelector(".card").classList.remove("fadeIn");
+  }, 1600);
+}
 function displayError() {
   console.log("displayError - order.js");
 }
 function displayThankYou(orderDetails) {
   console.log("displayThankYou");
+  document.querySelector(".card").classList.add("fadeOutQuick");
+  setTimeout(() => {
+    document.querySelector(".card").classList.add("hide");
+    document.querySelector(".credit_card_nav").classList.add("hide");
+    document.querySelector(".card").classList.remove("fadeOutQuick");
+  }, 800);
+
+  setTimeout(() => {
+    document.querySelector(".thank_you").classList.remove("hide");
+    document.querySelector(".thank_you_nav").classList.remove("hide");
+    document.querySelector(".thank_you").classList.add("fadeIn");
+    document.querySelector(".thank_you_nav").classList.add("fadeIn");
+  }, 800);
+  setTimeout(() => {
+    document.querySelector(".thank_you_nav").classList.remove("fadeIn");
+    document.querySelector(".thank_you").classList.remove("fadeIn");
+  }, 1600);
+  reset();
 }

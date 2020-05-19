@@ -5,6 +5,7 @@ import { cartDelegation } from "./modules/order";
 import { toggleMenu } from "./modules/navigation";
 import { indexDelegation } from "./modules/queue";
 import { getData } from "./modules/win";
+import { card } from "./modules/card_ani";
 import { chosen } from "./modules/navigation";
 import { loadJson as bigQueue } from "./modules/bigQueue";
 import { getData as bigWin } from "./modules/bigWin";
@@ -32,6 +33,7 @@ function appDelegation() {
     document.querySelector(".menu-buy .icon_wrapper").classList.add("chosen_img");
     cartDelegation();
     toggleMenu();
+    card();
   }
   if (beerBody) {
     document.querySelector(".menu-beer").classList.add("chosen");

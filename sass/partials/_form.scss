@@ -1,0 +1,100 @@
+input {
+  // width: 100%;
+  display: block;
+  margin-bottom: 1rem;
+  /*  max-width: 25rem;
+  min-width: 10rem; */
+  padding: 0.4rem;
+  border-radius: 10px;
+  box-shadow: var(--box-shadow);
+  border: 1px solid var(--dark);
+  display: block;
+  background-color: var(--soft-pink);
+  margin: 0.2rem 0 0.2rem 0;
+  color: var(--purple);
+  font: var(--head4);
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+fieldset {
+  border: 0;
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+  border-bottom: 3px solid var(--yellow);
+}
+input::placeholder {
+  color: var(--soft-gray);
+  font: var(--head4);
+}
+
+//DISABLED
+
+input:disabled,
+input.disabled {
+  filter: opacity(0.5) grayscale(0.6);
+  background-color: rgb(255, 234, 251);
+}
+
+//VALID
+input.valid:not(:focus):not(:placeholder-shown),
+input:valid:not(:focus):not(:placeholder-shown) {
+  //background: url(icons/thumbsup.png) no-repeat scroll 7px 7px;
+  background-size: contain;
+  background-size: 15px;
+  background-position: 98% 50%;
+  border: 2px solid #b1eed4;
+}
+
+//INVALID
+input.invalid:not(:focus):not(:placeholder-shown),
+input:invalid:not(:focus):not(:placeholder-shown) {
+  //background: url(icons/thumbsdown.png) no-repeat scroll 7px 7px;
+  background-size: contain;
+  background-size: 15px;
+  background-position: 98% 50%;
+  border: 2px solid #ff5165;
+}
+.invalid_text {
+  color: #ff5165;
+  font-size: 0.7rem;
+}
+
+//FOCUS
+
+input:focus,
+input.focus {
+  box-shadow: 0px 0px 4px var(--yellow);
+  border: 1px solid var(--yellow);
+  outline: var(--yellow);
+}
+
+//HOVER
+
+input.hover:not(:focus):not(:disabled),
+input:hover:not(:focus):not(:disabled) {
+  box-shadow: 0px 0px 5px var(--dark);
+  outline: var(--dark);
+  border: 1px solid var(--purple);
+}
+
+//SPECIFIC STYLING
+
+#month,
+#year,
+#secure {
+  width: 8ch;
+}
+
+#number {
+  width: 19ch;
+}

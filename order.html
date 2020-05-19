@@ -195,30 +195,59 @@
             </article>
             <!-- RESULT ENDS -->
             <!-- CREDIT CARD STARTS -->
-            <section id="card" class="hide">
+            <section id="card" class="card hide">
+              <article class="card_ani"></article>
               <form class="credit_card">
                 <fieldset class="card">
                   <div>
-                    <label for="number" class="labels">CREDIT CARD NUMBER</label><input type="number" id="number" placeholder="1234 5678 9012 3456" name="card" required />
-                    <p class="invalid_text paragraph"></p>
+                    <label for="number" class="labels">CREDIT CARD NUMBER</label>
+                    <input type="text" id="number" maxlength="19" minlength="19" placeholder="1234 5678 9012 3456" name="card" required />
+                    <p class="invalid_text paragraph hide">Enter the 16 digit card number on the front of your card.</p>
+                    <span class="head5 hide">|| Enter 16 digits</span>
                   </div>
                   <div>
-                    <label for="expire" class="labels">EXPIRE</label><input type="number" id="expire" placeholder="XX / XX" name="card" required />
-                    <p class="invalid_text paragraph"></p>
+                    <label for="month" class="labels">MONTH</label>
+                    <input type="number" max="12" min="01" id="month" placeholder="XX" name="card" required />
+                    <p class="invalid_text paragraph hide">You need to enter two digits for the month.</p>
+                    <span class="head5 hide">|| Enter the expire month</span>
                   </div>
                   <div>
-                    <label for="secure" class="labels">SECURITY</label><input type="number" id="secure" placeholder="999" name="card" required />
-                    <p class="invalid_text paragraph"></p>
+                    <label for="year" class="labels">YEAR</label>
+                    <input type="number" max="50" min="20" id="year" placeholder="XX" name="card" required />
+                    <p class="invalid_text paragraph hide">You need to enter two digits for the year.</p>
+                    <span class="head5 hide">|| Enter the expire year</span>
                   </div>
+
                   <div>
-                    <label for="full_name" class="labels">NAME ON CARD</label><input type="text" id="full_name" placeholder="JOHN SMITH" name="card" required />
-                    <p class="invalid_text paragraph"></p>
+                    <label for="secure" class="labels">SECURE</label>
+                    <input type="text" max="999" min="001" id="secure" placeholder="XX" name="card" pattern=".{3,3}" required />
+                    <p class="invalid_text paragraph hide">You need to enter the security code on the back of your card. It consists of 3 digits.</p>
+                    <span class="head5 hide">|| Enter the 3 digit security code</span>
+                  </div>
+
+                  <div>
+                    <label for="full_name" class="labels">NAME ON CARD</label>
+                    <input type="text" id="full_name" placeholder="JOHN SMITH" pattern="(?:[a-z]|[A-Z]).{0,30}\s(?:[a-z]|[A-Z]).{0,30}" name="card" required />
+                    <p class="invalid_text paragraph hide">Enter at least a first name and a last name</p>
+                    <span class="head5 hide">|| Enter your full name as stated on the card</span>
                   </div>
                 </fieldset>
                 <fieldset class="pin">
-                  <label for="four_digits" class="labels">CHOOSE A 4 DIGIT PIN CODE</label>
+                  <h3 class="labels">CREATE AN ACCOUNT OR LOG IN</h3>
+                  <p class="explain">If you already have an account, use those credentials. If not, create a new one”.</p>
                   <p class="explain">You’ll be able to see the status of your order under “log in”.</p>
-                  <input type="text" id="four_digits" placeholder="1234" name="pin" required />
+                  <div>
+                    <label for="username" class="labels">USERNAME</label>
+                    <input type="text" id="username" placeholder="JOHN SMITH" name="login" minlength="5" required />
+                    <p class="invalid_text paragraph hide">Enter a username that has at least 5 characters</p>
+                    <span class="head5 hide">|| Enter a username of at least 5 charachters</span>
+                  </div>
+                  <div>
+                    <label for="password" class="labels">PASSWORD</label>
+                    <input type="password" id="password" placeholder="********" name="login" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required />
+                    <p class="invalid_text paragraph hide">Type at least 6 charachters with at least one uppercase letter and one number</p>
+                    <span class="head5 hide">|| At least 6 charachters with 1 uppercase letter and 1 digit</span>
+                  </div>
                 </fieldset>
               </form>
               <article class="pay">
@@ -269,6 +298,7 @@
         </div>
       </section>
     </main>
+    <script src="/modules/card_ani.js"></script>
     <script src="script.js"></script>
   </body>
 </html>

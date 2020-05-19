@@ -4,6 +4,7 @@
 @use 'partials/index';
 @use 'partials/read_more';
 @use 'partials/cart';
+@use 'partials/form';
 
 * {
   box-sizing: border-box;
@@ -173,5 +174,35 @@ button {
 
   to {
     opacity: 0;
+  }
+}
+.fadeOutQuick {
+  -webkit-animation-name: fadeOutQuick;
+  animation-name: fadeOut;
+  animation-duration: 0.8s;
+}
+
+@keyframes fadeOutQuick {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+  animation-duration: 0.8s;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
   }
 }
