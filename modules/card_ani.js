@@ -18,7 +18,7 @@ export function card() {
       nameInput: "input#full_name", // optional - defaults input[name="name"]
     },
 
-    width: 200, // optional — default 350px
+    //width: 200, // optional — default 350px
     formatting: true, // optional - default true
 
     // Strings for translation - optional
@@ -27,13 +27,13 @@ export function card() {
       monthYear: "mm/yyyy", // optional - default 'month/year'
     },
 
-    // Default placeholders for rendered fields - optional
-    /*    placeholders: {
-      number: "•••• •••• •••• ••••",
-      name: "Full Name",
-      expiry: "••/••",
-      cvc: "•••",
-    }, */
+    //Default placeholders for rendered fields - optional
+    placeholders: {
+      number: "4572 5678 9012 3456",
+      name: "JOHN SMITH",
+      expiry: "xx/xx",
+      cvc: "999",
+    },
 
     /*    masks: {
       cardNumber: "•", // optional - mask card number

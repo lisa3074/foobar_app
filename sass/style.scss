@@ -5,6 +5,7 @@
 @use 'partials/read_more';
 @use 'partials/cart';
 @use 'partials/form';
+@use 'partials/thank_you';
 
 * {
   box-sizing: border-box;
@@ -74,7 +75,8 @@ form .explain {
   color: var(--white);
   border-radius: var(--round-ru);
   padding: 1rem 1.5rem;
-  width: 10rem;
+  width: 8rem;
+  height: 4rem;
   border: 0;
   box-shadow: var(--box-shadow);
 }
@@ -84,9 +86,14 @@ form .explain {
   color: var(--dark);
   border-radius: var(--round-ru);
   padding: 0.9rem 1.5rem;
-  width: 10rem;
+  width: 8rem;
+  height: 4rem;
   border: 0;
   box-shadow: var(--box-shadow);
+}
+
+.checkout.primary {
+  padding: 0.9rem 0.8rem;
 }
 //GENEREL CONTAINERS
 .home_container,
@@ -94,13 +101,37 @@ form .explain {
   padding: 1rem 1rem calc(1rem + 70px) 1rem;
   width: 100%;
 }
+@media (min-width: 360px) {
+  //GENERAL BUTTONS
+  .secondary {
+    width: 10rem;
+    height: auto;
+  }
+
+  .primary {
+    width: 10rem;
+    height: auto;
+  }
+  .checkout.primary {
+    padding: 0.9rem 1.5rem;
+  }
+}
 @media (min-width: 800px) {
   .home_container,
   .order_wrapper {
     width: 100%;
     padding-left: 100px;
   }
+  .secondary {
+    width: 15rem;
+  }
 
+  .primary {
+    width: 15rem;
+  }
+}
+
+@media (min-width: 850px) {
   .secondary {
     width: 18rem;
   }

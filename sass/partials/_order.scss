@@ -21,7 +21,8 @@ details summary::-webkit-details-marker {
 .view_cart .button_icon,
 .checkout .button_icon,
 .pay .button_icon,
-.home .button_icon {
+.home .button_icon,
+.log_in_done .button_icon {
   height: 20px;
   transform: translateY(-2px) translateX(5px);
 }
@@ -36,8 +37,9 @@ details summary::-webkit-details-marker {
 .edit,
 .checkout,
 .pay,
-.log_in,
-.home {
+.log_in_done,
+.home,
+.payment {
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-between;
@@ -251,7 +253,7 @@ summary {
   .edit,
   .checkout,
   .pay,
-  .log_in,
+  .log_in_done,
   .home {
     justify-content: flex-end;
   }
@@ -259,13 +261,14 @@ summary {
   .reset .button_icon,
   .edit .button_icon,
   .checkout .button_icon,
-  .log_in.button_icon,
+  .log_in_done .button_icon,
   .home .button_icon {
     padding-left: 2.5rem;
     padding-right: 1rem;
   }
 
-  .pay .button_icon {
+  .pay .button_icon,
+  .log_in_done .button_icon {
     padding-left: 4rem;
     padding-right: 1rem;
   }

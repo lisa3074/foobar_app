@@ -1,3 +1,4 @@
+let locationSite;
 /*//////////////////////////////////
 ////// DELEGATION FUNCTIONS ///////
 //////////////////////////////////*/
@@ -8,6 +9,7 @@ export function cartDelegation() {
   checkAvailability();
   setAmount();
   loadJson();
+  closePopUp();
 
   document.querySelector(".down").addEventListener("click", function () {
     const isOpen = document.querySelector("details").getAttribute("open");
@@ -42,6 +44,15 @@ export function cartDelegation() {
   document.querySelector(".view_cart").addEventListener("click", checkAmountInCart);
   document.querySelector(".checkout").addEventListener("click", displayPayment);
   document.querySelector(".credit_card_nav .pay").addEventListener("click", checkValidity);
+  document.querySelector(".thank_you_nav .home").addEventListener("click", checkValidity);
+  document.querySelector(".thank_you_nav .log_in_done").addEventListener("click", function () {
+    locationSite = "/login.html";
+    goToPage(locationSite);
+  });
+  document.querySelector(".thank_you_nav .home").addEventListener("click", function () {
+    locationSite = "/index.html";
+    goToPage(locationSite);
+  });
 }
 
 function payDelegation() {
@@ -57,6 +68,34 @@ function payDelegation() {
 ////////////////////////////////////
 ////// CALCULATION FUNCTIONS ///////
 //////////////////////////////////*/
+
+function goToPage(locationSite) {
+  console.log("goToPage");
+  document.querySelector(".orderBody").classList.add("fadeOutQuick");
+  setTimeout(() => {
+    location.href = locationSite;
+  }, 500);
+}
+
+function closePopUp() {
+  console.log("closePopUp");
+  document.querySelectorAll(".cart_close, .edit").forEach((button) => {
+    button.addEventListener("click", function () {
+      document.querySelector(".cart").classList.add("fadeOut");
+      document.querySelector(".cart").classList.remove("fadeInRight");
+      setTimeout(() => {
+        document.querySelector(".cart").classList.add("hide");
+        document.querySelector(".result_nav").classList.remove("hide");
+        document.querySelector(".card").classList.add("hide");
+        document.querySelector(".credit_card_nav").classList.add("hide");
+        document.querySelector(".thank_you").classList.add("hide");
+        document.querySelector(".thank_you_nav").classList.add("hide");
+        document.querySelector(".thank_you_nav").classList.add("hide");
+      }, 1200);
+    });
+  });
+}
+
 function checkAmountInCart() {
   console.log("checkAmountInCart");
   //CHECK IF ANYTHIN IS IN THE CART, IF YES=>
@@ -97,6 +136,7 @@ function checkValidity() {
   displayError();
   //if valid
   payDelegation();
+  displayThankYou();
 }
 
 function updateCounter() {
@@ -173,14 +213,6 @@ function displaySummary() {
   document.querySelector(".cart").classList.remove("hide");
   document.querySelector(".cart").classList.remove("fadeOut");
   document.querySelector(".cart").classList.add("fadeInRight");
-
-  document.querySelector(".cart_close").addEventListener("click", function () {
-    document.querySelector(".cart").classList.add("fadeOut");
-    document.querySelector(".cart").classList.remove("fadeInRight");
-    setTimeout(() => {
-      document.querySelector(".cart").classList.add("hide");
-    }, 1200);
-  });
 }
 
 function displayPayment() {
