@@ -151,15 +151,12 @@ form .explain {
     height: 100vh;
   }
 } */
-.close_more:hover,
+
 button:hover {
   transition: 0.2s;
   transform: scale(1.04);
 }
-.close_more:hover {
-  transition: 0.2s;
-  transform: scale(1.1);
-}
+
 button {
   cursor: pointer;
 }

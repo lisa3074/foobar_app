@@ -1,6 +1,7 @@
 export function toggleMenu() {
   console.log("toggleMenu");
   document.querySelector(".arrow").addEventListener("click", function () {
+    console.log("click");
     document.querySelector(".desk_nav").classList.toggle("smooth_out");
     document.querySelector(".desk_nav").classList.toggle("smooth_in");
   });

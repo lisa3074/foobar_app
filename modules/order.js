@@ -2,7 +2,7 @@ let locationSite;
 const url = "https://foobar3rdsemester.herokuapp.com/beertypes";
 let jsonData;
 let filter;
-let amount = 1;
+let amount = 0;
 /*//////////////////////////////////
 ////// DELEGATION FUNCTIONS ///////
 //////////////////////////////////*/
@@ -20,7 +20,7 @@ export function cartDelegation() {
     document.querySelector(".more_container").classList.remove("show");
   });
 
-  document.querySelector(".button_container .more").addEventListener("click", displayReadMore);
+  //document.querySelector(".button_container .more").addEventListener("click", displayReadMore);
   document.querySelector(".order_nav_wrapper .reset").addEventListener("click", reset);
   document.querySelector(".view_cart").addEventListener("click", checkAmountInCart);
   document.querySelector(".checkout").addEventListener("click", displayPayment);
@@ -226,12 +226,22 @@ function displayProducts(entry) {
     document.querySelector(".product_details .aroma").textContent = entry.description.aroma;
     document.querySelector(".product_details .alc").textContent = entry.alc + "%";
   });
-  amount = clone.querySelector(".amout_chosen").textContent;
+
   clone.querySelector(".add").addEventListener("click", function () {
-    document.querySelector(".amout_chosen").textContent = amount++;
-    clone.querySelector(".remove").addEventListener("click", function () {
-      document.querySelector(".amout_chosen").textContent = amount--;
-    });
+    document.querySelector(".times").classList.remove("hide");
+    amount++;
+    document.querySelector(".amount_chosen").textContent = amount;
+    console.log(amount);
+  });
+  clone.querySelector(".remove").addEventListener("click", function () {
+    if (amount == 0) {
+      amount = 0;
+    } else {
+      document.querySelector(".times").classList.remove("hide");
+      amount--;
+      document.querySelector(".amount_chosen").textContent = amount;
+      console.log(amount);
+    }
   });
 
   clone.querySelector(".more").addEventListener("click", function () {
@@ -240,26 +250,26 @@ function displayProducts(entry) {
     filter = entry.name;
     displayReadMore();
   });
-  /*     clone.querySelectorAll(".down").forEach((arrow) => {
-      arrow.addEventListener("click", function () {
-        const isOpen = document.querySelector("details").getAttribute("open");
-        if (isOpen == null) {
-          document.querySelector("details").setAttribute("open", "");
-          document.querySelector(".arrow_down").classList.add("go_down");
-          document.querySelector(".arrow_down").classList.remove("go_up");
-        } else {
-          document.querySelector(".arrow_down").classList.remove("go_down");
-          document.querySelector(".arrow_down").classList.add("go_up");
-          document.querySelector(".first_part_grid").classList.add("opacity");
-          document.querySelector(".button_container").classList.add("opacity");
-          setTimeout(() => {
-            document.querySelector("details").removeAttribute("open", "");
-            document.querySelector(".first_part_grid").classList.remove("opacity");
-            document.querySelector(".button_container").classList.remove("opacity");
-          }, 500);
-        }
-      });
-    }); */
+
+  /*   clone.querySelector("details").addEventListener("click", function () {
+    const isOpen = document.querySelector("details").getAttribute("open");
+    if (isOpen == null) {
+      document.querySelector("details").setAttribute("open", "");
+      document.querySelector(".arrow_down").classList.add("go_down");
+      document.querySelector(".arrow_down").classList.remove("go_up");
+    } else {
+      document.querySelector(".arrow_down").classList.remove("go_down");
+      document.querySelector(".arrow_down").classList.add("go_up");
+      document.querySelector(".first_part_grid").classList.add("opacity");
+      document.querySelector(".button_container").classList.add("opacity");
+      setTimeout(() => {
+        document.querySelector("details").removeAttribute("open", "");
+        document.querySelector(".first_part_grid").classList.remove("opacity");
+        document.querySelector(".button_container").classList.remove("opacity");
+      }, 500);
+    }
+  }); */
+
   document.querySelector(".order_container").appendChild(clone);
 }
 function displayError() {
