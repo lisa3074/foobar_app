@@ -34,18 +34,38 @@ input[type="number"] {
 
 fieldset {
   border: 0;
-  padding-bottom: 2rem;
+  padding-bottom: 1rem;
 }
 
 .pin {
-  padding: 2rem 0;
-  margin-bottom: 2rem;
+  padding: 2rem 0 1rem;
+  margin-bottom: 1rem;
   border-bottom: 3px solid var(--yellow);
   border-top: 3px solid var(--yellow);
 }
 input::placeholder {
   color: var(--soft-gray);
   font: var(--head4);
+}
+
+.card_wrapper > div > input {
+  margin-bottom: 1rem;
+}
+
+input[type="radio"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  border: 1px solid var(--purple);
+}
+input.checked,
+input:checked {
+  border: 1px solid var(--dark);
+  background-color: var(--purple);
 }
 
 //DISABLED
@@ -57,8 +77,8 @@ input.disabled {
 }
 
 //VALID
-input.valid:not(:focus):not(:placeholder-shown),
-input:valid:not(:focus):not(:placeholder-shown) {
+input.valid:not(:focus):not(:placeholder-shown):not(input[type="radio"]),
+input:valid:not(:focus):not(:placeholder-shown):not(input[type="radio"]) {
   //background: url(icons/thumbsup.png) no-repeat scroll 7px 7px;
   background-size: contain;
   background-size: 15px;
@@ -110,6 +130,23 @@ input:hover:not(:focus):not(:disabled) {
   width: 9ch;
 }
 
+.choice {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  padding-right: 3rem;
+  padding-bottom: 1rem;
+  div {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    padding: 0 1.5rem 0 0;
+    label {
+      padding-left: 0.5rem;
+    }
+  }
+}
+
 .small_inputs {
   display: flex;
   flex-wrap: nowrap;
@@ -134,11 +171,15 @@ label.labels {
     padding-right: 1rem;
   }
 }
-
+.long {
+  transition: 0.5s;
+  width: 100%;
+}
 .user {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .pin p:nth-child(3) {
@@ -150,8 +191,8 @@ label.labels {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  height: 3.2rem;
-  padding: 0 2rem;
+  height: auto;
+  padding: 1rem 1rem 0;
 }
 
 //RESET CARD WIDTH
@@ -209,7 +250,20 @@ label.labels {
   }
 }
 
+@media (min-width: 600px) {
+  .choice {
+    flex-direction: row;
+  }
+}
+@media (min-width: 650px) {
+  .choice {
+    flex-direction: column;
+  }
+}
 @media (min-width: 750px) {
+  .choice {
+    flex-direction: row;
+  }
   .credit_container {
     display: flex;
     flex-direction: row-reverse;
@@ -238,7 +292,7 @@ label.labels {
   #full_name,
   #number,
   .small_inputs {
-    width: 12rem;
+    width: 14rem;
   }
 
   .card_wrapper {

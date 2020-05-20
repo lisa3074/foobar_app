@@ -27,6 +27,9 @@ body {
 .head1 {
   font: var(--head1);
 }
+.head12 {
+  font: var(--head12);
+}
 .head2 {
   font: var(--head2);
 }
@@ -151,6 +154,25 @@ form .explain {
     height: 100vh;
   }
 } */
+::-webkit-scrollbar {
+  width: 0.2rem;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--purple);
+}
+
+::selection {
+  background: var(--soft-purple);
+}
+
+::-moz-selection {
+  background: var(--soft-purple);
+}
 
 button:hover {
   transition: 0.2s;

@@ -6,6 +6,7 @@ import { toggleMenu } from "./modules/navigation";
 import { indexDelegation } from "./modules/queue";
 import { getData } from "./modules/win";
 import { card } from "./modules/card_ani";
+import { isFormValidDelegation } from "./modules/isFormValid";
 import { chosen } from "./modules/navigation";
 import { loadJson as bigQueue } from "./modules/bigQueue";
 import { getData as bigWin } from "./modules/bigWin";

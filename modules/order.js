@@ -3,6 +3,23 @@ const url = "https://foobar3rdsemester.herokuapp.com/beertypes";
 let jsonData;
 let filter;
 let amount = 0;
+let productArray = [];
+
+//let amountArray = [];
+
+const Product = {
+  name: "",
+  category: "",
+  price: "",
+  aroma: "",
+  alcohol: "",
+  label: "",
+  appearance: "",
+  flavor: "",
+  overall: "",
+  mouthfeel: "",
+  amount: "",
+};
 /*//////////////////////////////////
 ////// DELEGATION FUNCTIONS ///////
 //////////////////////////////////*/
@@ -14,6 +31,7 @@ export function cartDelegation() {
   setAmount();
   loadJson();
   closePopUp();
+  form();
 
   document.querySelector(".close_more").addEventListener("click", function () {
     document.querySelector(".more_container").classList.add("hidden_left");
@@ -77,6 +95,23 @@ function closePopUp() {
   });
 }
 
+function form() {
+  console.log("form");
+
+  document.querySelectorAll(".radio").forEach((radio) => {
+    radio.addEventListener("change", function () {
+      const login = document.querySelector("#has_account").checked;
+      if (login) {
+        console.log("log in");
+        document.querySelector(".secure_pass").classList.add("hide");
+      } else {
+        console.log("create account");
+        document.querySelector(".secure_pass").classList.remove("hide");
+      }
+    });
+  });
+}
+
 function checkAmountInCart() {
   console.log("checkAmountInCart");
   //CHECK IF ANYTHIN IS IN THE CART, IF YES=>
@@ -98,20 +133,35 @@ async function loadJson() {
   console.log("loadJson - order.js");
   let response = await fetch(url);
   jsonData = await response.json();
-  //setReadMore();
-  fetchProducts();
+
+  makeObject();
 }
 
-function fetchProducts() {
+function makeObject() {
+  console.log("makeObject");
+  jsonData.forEach((product) => {
+    const productObject = Object.create(Product);
+    productObject.name = product.name;
+    productObject.category = product.category;
+    productObject.price = "40 DKK";
+    productObject.aroma = product.description.aroma;
+    productObject.alcohol = product.alc;
+    productObject.label = product.label;
+    productObject.appearance = product.description.appearance;
+    productObject.flavor = product.description.flavor;
+    productObject.overall = product.description.overallImpression;
+    productObject.mouthfeel = product.description.mouthfeel;
+    productObject.amount = "";
+    productArray.push(productObject);
+  });
+
+  fetchProducts(productArray);
+}
+
+function fetchProducts(product) {
   console.log("fetchProducts");
   document.querySelector(".order_container").innerHTML = "";
-  jsonData.forEach(displayProducts);
-}
-
-function setReadMore() {
-  console.log("setReadMore");
-  document.querySelector(".more_container").innerHTML = "";
-  jsonData.forEach(displayReadMore);
+  product.forEach(displayProducts);
 }
 
 function setSummary() {
@@ -123,12 +173,20 @@ function setSummary() {
 function checkValidity() {
   console.log("checkValidity - order.js");
   const user = getRestDB();
-  //Check if valid
-  //If invalid user/password
-  displayError();
-  //if valid
-  payDelegation();
-  displayThankYou();
+
+  const password = document.querySelector("#password").value;
+  const password2 = document.querySelector("#secure_pass").value;
+
+  if (password2 != password) {
+    console.log("does not match");
+    //If invalid
+    displayError();
+  } else {
+    //if valid
+    console.log("A match");
+    payDelegation();
+    displayThankYou();
+  }
 }
 
 function updateCounter() {
@@ -193,17 +251,17 @@ function displayAmount() {
 
 function displayReadMore() {
   console.log("displayReadMore");
-  jsonData.forEach((entry) => {
-    if (entry.name == filter) {
-      document.querySelector(".more_container .name").textContent = entry.name;
-      document.querySelector(".more_container .cat").textContent = entry.category;
-      document.querySelector(".more_container .alc").textContent = entry.alc + "%";
-      document.querySelector(".more_container .aroma").textContent = entry.description.aroma;
-      document.querySelector(".more_container .appearance").textContent = entry.description.appearance;
-      document.querySelector(".more_container .mouth_feel").textContent = entry.description.mouthfeel;
-      document.querySelector(".more_container .flavor").textContent = entry.description.flavor;
-      document.querySelector(".more_container .overall").textContent = entry.description.overallImpression;
-      document.querySelector(".more_container .label").src = "images/labels/" + entry.label;
+  productArray.forEach((beer) => {
+    if (beer.name == filter) {
+      document.querySelector(".more_container .name").textContent = beer.name;
+      document.querySelector(".more_container .cat").textContent = beer.category;
+      document.querySelector(".more_container .alc").textContent = beer.alcohol + "%";
+      document.querySelector(".more_container .aroma").textContent = beer.aroma;
+      document.querySelector(".more_container .appearance").textContent = beer.appearance;
+      document.querySelector(".more_container .mouth_feel").textContent = beer.mouthfeel;
+      document.querySelector(".more_container .flavor").textContent = beer.flavor;
+      document.querySelector(".more_container .overall").textContent = beer.overall;
+      document.querySelector(".more_container .label").src = "images/labels/" + beer.label;
     }
   });
 }
@@ -212,66 +270,82 @@ function reset() {
   console.log("reset");
 }
 
-function displayProducts(entry) {
-  console.log("displayProducts");
-
-  const clone = document.querySelector(".products_sold").content.cloneNode(true);
-  clone.querySelector(".name").textContent = entry.name;
-  clone.querySelector(".beer_category").textContent = entry.category;
-  clone.querySelector(".price").textContent = "40DKK";
-  clone.querySelector(".product_details .label").src = "images/labels/" + entry.label;
-  clone.querySelector(".product_details .label").alt = entry.name;
-  // clone.querySelector(".beer_category").textContent = entry.category;
-  clone.querySelector("summary").addEventListener("click", function () {
-    document.querySelector(".product_details .aroma").textContent = entry.description.aroma;
-    document.querySelector(".product_details .alc").textContent = entry.alc + "%";
+/* function theAmount(e, beer) {
+  console.log("theAmount");
+  products.forEach((entry) => {
+    if (entry.name == filter) {
+      console.log(filter);
+      const clone = document.querySelector(".products_sold").content.cloneNode(true);
+      if ((e.classList[0] === "remove" && amount == 0) || amount < 0) {
+        amount = 0;
+        clone.querySelector(".amount_chosen").textContent = amount;
+        console.log("remove");
+        document.querySelector(".order_container").appendChild(clone);
+      } else {
+        console.log("theAmount");
+        clone.querySelector(".times").classList.remove("hide");
+        clone.querySelector(".amount_chosen").textContent = amount;
+        console.log(amount);
+        document.querySelector(".order_container").appendChild(clone);
+      }
+    }
   });
+} */
+
+function theAmount(e, beer) {
+  console.log("theAmount");
+  if ((filter = beer.name)) {
+    if ((e.classList[0] === "remove" && amount == 0) || amount < 0) {
+      amount = 0;
+      beer.amount = amount; //reset amount ved anden entry i array
+      console.log(beer.amount);
+      productArray.push(productObject);
+      console.log(productArray);
+    } else {
+      beer.amount = amount;
+      //document.querySelector(".amount_chosen").textContent = beer.amount;
+      console.log(beer.amount);
+      console.log(productArray);
+    }
+  } else {
+    console.log("not the same");
+  }
+}
+
+function displayProducts(beer) {
+  console.log("displayProducts");
+  amount = "0";
+  const clone = document.querySelector(".products_sold").content.cloneNode(true);
+  clone.querySelector(".name").textContent = beer.name;
+  clone.querySelector(".beer_category").textContent = beer.category;
+  clone.querySelector(".price").textContent = "40 DKK";
+  clone.querySelector(".product_details .label").src = "images/labels/" + beer.label;
+  clone.querySelector(".product_details .label").alt = beer.name;
+  clone.querySelector(".product_details .aroma").textContent = beer.aroma;
+  clone.querySelector(".product_details .alc").textContent = beer.alcohol;
+  clone.querySelector(".products .amount_chosen").textContent = "";
 
   clone.querySelector(".add").addEventListener("click", function () {
-    document.querySelector(".times").classList.remove("hide");
+    filter = beer.name;
     amount++;
-    document.querySelector(".amount_chosen").textContent = amount;
-    console.log(amount);
+    theAmount(this, beer);
   });
+
   clone.querySelector(".remove").addEventListener("click", function () {
-    if (amount == 0) {
-      amount = 0;
-    } else {
-      document.querySelector(".times").classList.remove("hide");
-      amount--;
-      document.querySelector(".amount_chosen").textContent = amount;
-      console.log(amount);
-    }
+    filter = beer.name;
+    amount--;
+    theAmount(this, beer);
   });
 
   clone.querySelector(".more").addEventListener("click", function () {
     document.querySelector(".more_container").classList.remove("hidden_left");
     document.querySelector(".more_container").classList.add("show");
-    filter = entry.name;
+    filter = beer.name;
     displayReadMore();
   });
-
-  /*   clone.querySelector("details").addEventListener("click", function () {
-    const isOpen = document.querySelector("details").getAttribute("open");
-    if (isOpen == null) {
-      document.querySelector("details").setAttribute("open", "");
-      document.querySelector(".arrow_down").classList.add("go_down");
-      document.querySelector(".arrow_down").classList.remove("go_up");
-    } else {
-      document.querySelector(".arrow_down").classList.remove("go_down");
-      document.querySelector(".arrow_down").classList.add("go_up");
-      document.querySelector(".first_part_grid").classList.add("opacity");
-      document.querySelector(".button_container").classList.add("opacity");
-      setTimeout(() => {
-        document.querySelector("details").removeAttribute("open", "");
-        document.querySelector(".first_part_grid").classList.remove("opacity");
-        document.querySelector(".button_container").classList.remove("opacity");
-      }, 500);
-    }
-  }); */
-
   document.querySelector(".order_container").appendChild(clone);
 }
+
 function displayError() {
   console.log("displayError - order.js");
 }
