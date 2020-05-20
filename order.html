@@ -51,25 +51,29 @@
       <article>
         <details class="products">
           <summary>
-            <h1 class="head1 name">EL HEFE</h1>
-            <p class="head2 price">40 DKK</p>
-            <button class="remove primary">-</button>
-            <button class="add primary">+</button>
+            <div class="summary_container">
+              <div class="down">
+                <img src="/static/images/svg_icons/yellow_arrow.svg" alt="Read more" class="arrow_down go_up" />
+                <h1 class="head1 name">EL HEFE</h1>
+              </div>
+              <p class="beer_category head3">Ale</p>
+              <p class="head2"><span class="price">40 DKK </span><span class="amout_chosen"> 0</span></p>
+            </div>
+            <div class="button_wrap">
+              <button class="remove primary" onclick="return false"><img src="/static/images/svg_icons/remove.svg" alt="Remove one" class="remove_icon" /></button>
+              <button class="add primary" onclick="return false"><img src="/static/images/svg_icons/add.svg" alt="Add one" class="add_icon" /></button>
+            </div>
           </summary>
           <div class="product_details">
-            <img src="" alt="" class="label" />
-            <div class="txt">
-              <h3 class="head2">AROMA</h3>
-              <p class="paragraph aroma"></p>
-              <div class="info flex">
-                <div class="wrap">
-                  <h3 class="head2">ALCOHOL</h3>
-                  <p class="paragraph alc"></p>
-                </div>
-                <div class="wrap">
-                  <h3 class="head2">CATEGORY</h3>
-                  <p class="paragraph cat"></p>
-                </div>
+            <div class="first_part_grid">
+              <img src="/static/images/labels/elhefe.png" alt="El Hefe" class="label" />
+              <div class="txt">
+                <h3 class="head2">AROMA</h3>
+                <p class="paragraph aroma">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, dolore reprehenderit perferendis voluptatibus nulla obcaecati ratione sed neque itaque! Iste ratione reprehenderit repellendus quo, recusandae cumque maiores vel praesentium dignissimos.
+                </p>
+                <h3 class="head2">ALCOHOL</h3>
+                <p class="paragraph alc">70%</p>
               </div>
             </div>
             <div class="button_container">
@@ -79,44 +83,11 @@
         </details>
       </article>
     </template>
+
     <main class="order_wrapper">
       <h1 class="title order_heading">CHOOSE YOUR POISON</h1>
       <section class="order_container">
         <!-- APPEND LIST -->
-        <article>
-          <details class="products" onclick="return false">
-            <summary>
-              <div class="summary_container">
-                <div class="down">
-                  <img src="/static/images/svg_icons/yellow_arrow.svg" alt="Read more" class="arrow_down go_up" />
-                  <h1 class="head1 name">EL HEFE</h1>
-                </div>
-                <p class="beer_category head3">Ale</p>
-                <p class="head2 price">40 DKK<span class="amout_chosen"> x4</span></p>
-              </div>
-              <div class="button_wrap">
-                <button class="remove primary"><img src="/static/images/svg_icons/remove.svg" alt="Remove one" class="remove_icon" /></button>
-                <button class="add primary"><img src="/static/images/svg_icons/add.svg" alt="Add one" class="add_icon" /></button>
-              </div>
-            </summary>
-            <div class="product_details">
-              <div class="first_part_grid">
-                <img src="/static/images/labels/elhefe.png" alt="El Hefe" class="label" />
-                <div class="txt">
-                  <h3 class="head2">AROMA</h3>
-                  <p class="paragraph aroma">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa, dolore reprehenderit perferendis voluptatibus nulla obcaecati ratione sed neque itaque! Iste ratione reprehenderit repellendus quo, recusandae cumque maiores vel praesentium dignissimos.
-                  </p>
-                  <h3 class="head2">ALCOHOL</h3>
-                  <p class="paragraph alc">70%</p>
-                </div>
-              </div>
-              <div class="button_container">
-                <button class="more head2 secondary">MORE</button>
-              </div>
-            </div>
-          </details>
-        </article>
       </section>
 
       <section class="order_nav_wrapper">
@@ -131,7 +102,7 @@
         <img src="/static/images/svg_icons/arrow_out.svg" alt="close" class="close_more close" />
         <div class="more_wrapper">
           <div class="more_header">
-            <h1 class="head1">FAIRY TALE ALE</h1>
+            <h1 class="head1 name">FAIRY TALE ALE</h1>
             <div class="category">
               <h3 class="head2">CATEGORY</h3>
               <p class="head3 cat">IPA</p>
@@ -146,17 +117,17 @@
               <h4 class="head2">AROMA</h4>
               <p class="paragraph aroma">Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque est excepturi obcaecati cupiditate provident praesentium quas, debitis assumenda laudantium tempore aspernatur omnis, nemo iste unde nam optio sapiente expedita vitae!</p>
               <h4 class="head2">APPEARANCE</h4>
-              <p class="paragraph apperance">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo voluptatibus culpa labore veniam rerum! Est, id neque omnis provident animi sint perspiciatis fuga reiciendis! Ipsam aut voluptatibus vitae? Consequatur, voluptatem?</p>
+              <p class="paragraph appearance">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo voluptatibus culpa labore veniam rerum! Est, id neque omnis provident animi sint perspiciatis fuga reiciendis! Ipsam aut voluptatibus vitae? Consequatur, voluptatem?</p>
               <h4 class="head2">MOUTHFEEL</h4>
               <p class="paragraph mouth_feel">Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, quo voluptatem! Quas neque molestiae obcaecati a atque, iure, porro dolor, consequuntur laborum praesentium corrupti? Earum culpa tempora quis quia placeat?</p>
             </div>
             <txt2>
               <h4 class="head2">FLAVOUR</h4>
-              <p class="paragraph flavour">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro repellendus dolorum quia illo rerum obcaecati molestiae sit quod distinctio, quisquam itaque sequi nihil a, accusantium explicabo nulla. Labore, aperiam architecto!</p>
+              <p class="paragraph flavor">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Porro repellendus dolorum quia illo rerum obcaecati molestiae sit quod distinctio, quisquam itaque sequi nihil a, accusantium explicabo nulla. Labore, aperiam architecto!</p>
               <h4 class="head2">OVERALL</h4>
               <p class="paragraph overall">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Illo repudiandae corporis optio architecto. Atque voluptates alias quae velit unde eveniet consequatur, corporis recusandae maxime facilis aperiam accusantium, quasi omnis neque.</p>
             </txt2>
-            <img src="/static/images/labels/fairytaleale.png" alt="Fairy tale ale" class="label" />
+            <img src="/static/images/labels/elhefe.png" alt="Fairy tale ale" class="label" />
           </div>
         </div>
       </section>
@@ -264,7 +235,7 @@
             <!-- CREDIT CARD ENDS -->
             <!-- THANK YOU STARTS -->
             <section class="thank_you hide">
-              <h2 class="head2">THANK YOU FOR YOUR PURCHASE!</h2>
+              <h2 class="head1">THANK YOU FOR YOUR PURCHASE!</h2>
               <p class="paragraph">
                 You will have your beer shortly.
               </p>

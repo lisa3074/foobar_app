@@ -86,8 +86,9 @@ summary {
   padding: 0.3rem 0;
 }
 
-.name {
+.orderBody .name {
   padding-top: 0.5rem;
+  text-transform: uppercase;
 }
 
 .arrow_down {
@@ -151,7 +152,7 @@ details {
   z-index: 0;
 }
 
-.amout_chosen {
+.amount_chosen {
   letter-spacing: 15px;
 }
 
@@ -292,7 +293,7 @@ summary {
     align-items: flex-end;
   }
   .summary_container {
-    grid-template-columns: 26.4vw 1fr 1fr;
+    grid-template-columns: 26vw 1fr 1fr;
     grid-template-rows: 1fr;
     align-items: center;
     padding: 0;
@@ -324,7 +325,7 @@ summary {
     flex-wrap: nowrap;
   }
 
-  .name {
+  .products .name {
     padding-left: 2rem;
     padding-top: 0;
   }
@@ -336,5 +337,10 @@ summary {
   .primary.add {
     width: 4rem;
     height: 2.5rem;
+  }
+}
+@media (min-width: 1200px) {
+  .summary_container {
+    grid-template-columns: 26.2vw 1fr 1fr;
   }
 }

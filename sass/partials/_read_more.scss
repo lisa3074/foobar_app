@@ -40,9 +40,12 @@
   top: 2.5rem;
   transform: rotate(180deg);
 }
-.more_header .alcohol .head2,
-.more_header .category .head2 {
-  display: none;
+
+.more_header .alcohol,
+.more_header .category {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 0.5rem 0;
 }
 .more_header .head2 {
   padding-right: 1rem;
@@ -93,7 +96,8 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto;
-    align-items: center;
+    grid-column-gap: 2rem;
+    align-items: baseline;
   }
 }
 @media (min-width: 1100px) {
@@ -117,16 +121,11 @@
   .more_wrapper {
     width: 90%;
   }
-  .more_header .alcohol .head2,
+  /*   .more_header .alcohol .head2,
   .more_header .category .head2 {
     display: block;
   }
-
-  .more_header .alcohol,
-  .more_header .category {
-    display: flex;
-    flex-wrap: nowrap;
-  }
+ */
 
   .more_header {
     display: grid;

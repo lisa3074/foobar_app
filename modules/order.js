@@ -1,4 +1,8 @@
 let locationSite;
+const url = "https://foobar3rdsemester.herokuapp.com/beertypes";
+let jsonData;
+let filter;
+let amount = 1;
 /*//////////////////////////////////
 ////// DELEGATION FUNCTIONS ///////
 //////////////////////////////////*/
@@ -11,29 +15,6 @@ export function cartDelegation() {
   loadJson();
   closePopUp();
 
-  document.querySelector(".down").addEventListener("click", function () {
-    const isOpen = document.querySelector("details").getAttribute("open");
-    if (isOpen == null) {
-      document.querySelector("details").setAttribute("open", "");
-      document.querySelector(".arrow_down").classList.add("go_down");
-      document.querySelector(".arrow_down").classList.remove("go_up");
-    } else {
-      document.querySelector(".arrow_down").classList.remove("go_down");
-      document.querySelector(".arrow_down").classList.add("go_up");
-      document.querySelector(".first_part_grid").classList.add("opacity");
-      document.querySelector(".button_container").classList.add("opacity");
-      setTimeout(() => {
-        document.querySelector("details").removeAttribute("open", "");
-        document.querySelector(".first_part_grid").classList.remove("opacity");
-        document.querySelector(".button_container").classList.remove("opacity");
-      }, 500);
-    }
-  });
-
-  document.querySelector(".more").addEventListener("click", function () {
-    document.querySelector(".more_container").classList.remove("hidden_left");
-    document.querySelector(".more_container").classList.add("show");
-  });
   document.querySelector(".close_more").addEventListener("click", function () {
     document.querySelector(".more_container").classList.add("hidden_left");
     document.querySelector(".more_container").classList.remove("show");
@@ -113,13 +94,24 @@ function setAmount() {
   displayAmount();
 }
 
-function loadJson() {
+async function loadJson() {
   console.log("loadJson - order.js");
-  setReadMore();
+  let response = await fetch(url);
+  jsonData = await response.json();
+  //setReadMore();
+  fetchProducts();
+}
+
+function fetchProducts() {
+  console.log("fetchProducts");
+  document.querySelector(".order_container").innerHTML = "";
+  jsonData.forEach(displayProducts);
 }
 
 function setReadMore() {
   console.log("setReadMore");
+  document.querySelector(".more_container").innerHTML = "";
+  jsonData.forEach(displayReadMore);
 }
 
 function setSummary() {
@@ -201,10 +193,77 @@ function displayAmount() {
 
 function displayReadMore() {
   console.log("displayReadMore");
+  jsonData.forEach((entry) => {
+    if (entry.name == filter) {
+      document.querySelector(".more_container .name").textContent = entry.name;
+      document.querySelector(".more_container .cat").textContent = entry.category;
+      document.querySelector(".more_container .alc").textContent = entry.alc + "%";
+      document.querySelector(".more_container .aroma").textContent = entry.description.aroma;
+      document.querySelector(".more_container .appearance").textContent = entry.description.appearance;
+      document.querySelector(".more_container .mouth_feel").textContent = entry.description.mouthfeel;
+      document.querySelector(".more_container .flavor").textContent = entry.description.flavor;
+      document.querySelector(".more_container .overall").textContent = entry.description.overallImpression;
+      document.querySelector(".more_container .label").src = "images/labels/" + entry.label;
+    }
+  });
 }
 
 function reset() {
   console.log("reset");
+}
+
+function displayProducts(entry) {
+  console.log("displayProducts");
+
+  const clone = document.querySelector(".products_sold").content.cloneNode(true);
+  clone.querySelector(".name").textContent = entry.name;
+  clone.querySelector(".beer_category").textContent = entry.category;
+  clone.querySelector(".price").textContent = "40DKK";
+  clone.querySelector(".product_details .label").src = "images/labels/" + entry.label;
+  clone.querySelector(".product_details .label").alt = entry.name;
+  // clone.querySelector(".beer_category").textContent = entry.category;
+  clone.querySelector("summary").addEventListener("click", function () {
+    document.querySelector(".product_details .aroma").textContent = entry.description.aroma;
+    document.querySelector(".product_details .alc").textContent = entry.alc + "%";
+  });
+  amount = clone.querySelector(".amout_chosen").textContent;
+  clone.querySelector(".add").addEventListener("click", function () {
+    document.querySelector(".amout_chosen").textContent = amount++;
+    clone.querySelector(".remove").addEventListener("click", function () {
+      document.querySelector(".amout_chosen").textContent = amount--;
+    });
+  });
+
+  clone.querySelector(".more").addEventListener("click", function () {
+    document.querySelector(".more_container").classList.remove("hidden_left");
+    document.querySelector(".more_container").classList.add("show");
+    filter = entry.name;
+    displayReadMore();
+  });
+  /*     clone.querySelectorAll(".down").forEach((arrow) => {
+      arrow.addEventListener("click", function () {
+        const isOpen = document.querySelector("details").getAttribute("open");
+        if (isOpen == null) {
+          document.querySelector("details").setAttribute("open", "");
+          document.querySelector(".arrow_down").classList.add("go_down");
+          document.querySelector(".arrow_down").classList.remove("go_up");
+        } else {
+          document.querySelector(".arrow_down").classList.remove("go_down");
+          document.querySelector(".arrow_down").classList.add("go_up");
+          document.querySelector(".first_part_grid").classList.add("opacity");
+          document.querySelector(".button_container").classList.add("opacity");
+          setTimeout(() => {
+            document.querySelector("details").removeAttribute("open", "");
+            document.querySelector(".first_part_grid").classList.remove("opacity");
+            document.querySelector(".button_container").classList.remove("opacity");
+          }, 500);
+        }
+      });
+    }); */
+  document.querySelector(".order_container").appendChild(clone);
+}
+function displayError() {
+  console.log("displayError - order.js");
 }
 
 function displaySummary() {
@@ -214,7 +273,6 @@ function displaySummary() {
   document.querySelector(".cart").classList.remove("fadeOut");
   document.querySelector(".cart").classList.add("fadeInRight");
 }
-
 function displayPayment() {
   console.log("displayPayment");
   document.querySelector(".result").classList.add("fadeOutQuick");
@@ -233,9 +291,6 @@ function displayPayment() {
     document.querySelector(".credit_card_nav").classList.remove("fadeIn");
     document.querySelector(".card").classList.remove("fadeIn");
   }, 1600);
-}
-function displayError() {
-  console.log("displayError - order.js");
 }
 function displayThankYou(orderDetails) {
   console.log("displayThankYou");
