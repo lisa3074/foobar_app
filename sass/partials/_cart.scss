@@ -19,6 +19,15 @@
     right: 1.5rem;
   }
 }
+.zero_beer {
+  padding-left: 1rem;
+}
+input + p {
+  display: none;
+}
+input.invalid + p {
+  display: block;
+}
 .cart_container .grid_item1 {
   background-color: var(--white);
   color: var(--dark);

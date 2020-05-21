@@ -138,26 +138,17 @@
           <article class="grid_item1">
             <!-- RESULT STARTS -->
             <article class="result">
-              <div class="result_list">
-                <!-- APPEND LIST/ITEMS -->
-                <template class="cart_sumup">
-                  <div class="buy_items grid">
-                    <h3 class="head2 article">MOWINTIME</h3>
-                    <p class="paragraph amount">4 stk.</p>
-                    <p class="labels final_amount">180 DKK</p>
-                  </div>
-                </template>
-                <!-- APPEND LIST/ITEMS ENDS -->
+              <template class="cart_sumup">
                 <div class="buy_items grid">
                   <h3 class="head2 article">MOWINTIME</h3>
                   <p class="paragraph amount">4 stk.</p>
                   <p class="labels final_amount">180 DKK</p>
                 </div>
-                <div class="buy_items grid">
-                  <h3 class="head2 article">FAIRY TALE ALE</h3>
-                  <p class="paragraph amount">2 stk</p>
-                  <p class="labels final_amount">90 DKK</p>
-                </div>
+              </template>
+              <p class="paragraph zero_beer">sdkjdhfkljadhf</p>
+              <div class="result_list">
+                <!-- APPEND LIST/ITEMS -->
+                <!-- APPEND LIST/ITEMS ENDS -->
               </div>
               <div class="grid total">
                 <h3 class="head2">TOTAL</h3>
@@ -174,7 +165,7 @@
                     <div>
                       <label for="number" class="labels">CREDIT CARD NUMBER</label>
                       <input type="text" id="number" maxlength="19" minlength="19" placeholder="1234 5678 9012 3456" pattern=".{19,19}" name="card" required />
-                      <p class="invalid_text paragraph hide">Enter the 16 digit card number on the front of your card.</p>
+                      <p class="invalid_text star hide">*</p>
                       <span class="head5 hide">|| Enter 16 digits</span>
                     </div>
                     <div class="small_inputs">
@@ -182,27 +173,27 @@
                         <div>
                           <label for="month" class="labels">MONTH</label>
                           <input type="number" max="12" min="01" id="month" placeholder="XX" name="card" required />
-                          <p class="invalid_text paragraph hide">You need to enter two digits for the month.</p>
+                          <p class="invalid_text star hide">*</p>
                           <span class="head5 hide">|| Enter the expire month</span>
                         </div>
                         <div>
                           <label for="year" class="labels">YEAR</label>
-                          <input type="number" max="50" min="20" id="year" placeholder="XX" name="card" required />
-                          <p class="invalid_text paragraph hide">You need to enter two digits for the year.</p>
+                          <input type="number" max="99" min="20" id="year" placeholder="XX" name="card" required />
+                          <p class="invalid_text star hide">*</p>
                           <span class="head5 hide">|| Enter the expire year</span>
                         </div>
                       </div>
                       <div>
                         <label for="secure" class="labels">CVC</label>
                         <input type="text" max="999" min="001" id="secure" placeholder="XXX" name="card" pattern=".{3,3}" required />
-                        <p class="invalid_text paragraph hide">You need to enter the security code on the back of your card. It consists of 3 digits.</p>
+                        <p class="invalid_text star hide">*</p>
                         <span class="head5 hide">|| Enter the 3 digit security code</span>
                       </div>
                     </div>
                     <div>
                       <label for="full_name" class="labels">NAME ON CARD</label>
                       <input type="text" id="full_name" placeholder="JOHN SMITH" pattern="(?:[a-z]|[A-Z]).{0,30}\s(?:[a-z]|[A-Z]).{0,30}" name="card" required />
-                      <p class="invalid_text paragraph hide">Enter at least a first name and a last name</p>
+                      <p class="invalid_text star hide">*</p>
                       <span class="head5 hide">|| Enter your full name as stated on the card</span>
                     </div>
                   </fieldset>
@@ -225,27 +216,35 @@
                     <div>
                       <label for="username" class="labels">USERNAME</label>
                       <input type="text" id="username" placeholder="JOHN SMITH" name="login" minlength="5" required />
-                      <p class="invalid_text paragraph hide">Enter a username that has at least 5 characters</p>
+                      <p class="invalid_text star">*</p>
                       <span class="head5 hide">|| Enter a username of at least 5 charachters</span>
                     </div>
                     <div>
                       <label for="password" class="labels">PASSWORD</label>
                       <input type="password" id="password" placeholder="••••••••" name="login" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required />
-                      <p class="invalid_text paragraph hide">Type at least 6 charachters with at least one uppercase letter and one number</p>
+                      <p class="invalid_text star">*</p>
                       <span class="head5 hide">|| At least 6 charachters with 1 uppercase letter and 1 digit</span>
                     </div>
                     <div class="secure_pass hide">
                       <label for="secure_pass" class="labels">RE-TYPE PASSWORD</label>
-                      <input type="password" id="secure_pass" placeholder="••••••••" name="login" required />
-                      <p class="invalid_text paragraph hide">Enter a username that has at least 5 characters</p>
+                      <input type="password" id="secure_pass" placeholder="••••••••" name="login" />
+                      <p class="invalid_text star">*</p>
                       <span class="head5 hide">|| Enter a username of at least 5 charachters</span>
                     </div>
                   </div>
+                  <p class="invalid_creditcard invalid_text hide">You need to fill out 16 digits for the credit card</p>
+                  <p class="invalid_month invalid_text hide">You need to enter two digits for the month</p>
+                  <p class="invalid_year invalid_text hide">You need to enter two digits for the year and the year has to be bigger than 20</p>
+                  <p class="invalid_cvc invalid_text hide">You need to enter the security code on the back of your card (3 digits).</p>
+                  <p class="invalid_name invalid_text hide">Enter at least a first and a last name</p>
+                  <p class="invalid_user invalid_text hide">Type at least 5 characters for the user name</p>
+                  <p class="invalid_password invalid_text hide">The password has to contain 6 charachters, one uppercase letter and one number</p>
+                  <p class="invalid_password2 invalid_text hide">The two passwords does not match</p>
                 </fieldset>
               </form>
               <article class="payment">
                 <h3 class="head2">PAY IN TOTAL</h3>
-                <h4 class="head2"><span class="total_amount">270</span> DKK</h4>
+                <h4 class="head2"><span class="total_amount_bottom">270</span> DKK</h4>
               </article>
             </section>
             <!-- CREDIT CARD ENDS -->
@@ -277,7 +276,7 @@
               </div>
               <div class="wrap">
                 <div class="p head5">PRICE IN TOTAL</div>
-                <p class="head2"><span class="total_amount title">270</span>DKK</p>
+                <p class="head2"><span class="total_amount_right title">270</span>DKK</p>
               </div>
             </div>
           </article>

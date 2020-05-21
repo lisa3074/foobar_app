@@ -4,10 +4,9 @@ import { checkValidity } from "./modules/login";
 import { cartDelegation } from "./modules/order";
 import { toggleMenu } from "./modules/navigation";
 import { indexDelegation } from "./modules/queue";
+import { checkIfValid } from "./modules/order";
 import { getData } from "./modules/win";
 import { card } from "./modules/card_ani";
-import { isFormValidDelegation } from "./modules/isFormValid";
-import { chosen } from "./modules/navigation";
 import { loadJson as bigQueue } from "./modules/bigQueue";
 import { getData as bigWin } from "./modules/bigWin";
 import { loadJson as bigLine } from "./modules/bigLine";
@@ -35,6 +34,7 @@ function appDelegation() {
     cartDelegation();
     toggleMenu();
     card();
+    form.setAttribute("novalidate", true);
   }
   if (beerBody) {
     document.querySelector(".menu-beer").classList.add("chosen");
