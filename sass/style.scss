@@ -19,6 +19,8 @@ body {
   background-color: var(--soft-pink);
   position: relative;
   overflow-x: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
 
 .title {

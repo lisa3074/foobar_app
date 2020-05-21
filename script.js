@@ -29,6 +29,13 @@ function appDelegation() {
     toggleMenu();
   }
   if (orderBody) {
+    const form = document.querySelector("form");
+    const elements = form.elements;
+
+    //DEBUG, FJERN EFTER
+    window.elements = elements;
+    window.form = form;
+
     document.querySelector(".menu-buy").classList.add("chosen");
     document.querySelector(".menu-buy .icon_wrapper").classList.add("chosen_img");
     cartDelegation();
@@ -44,6 +51,9 @@ function appDelegation() {
   if (indexBody) {
     document.querySelector(".menu-home").classList.add("chosen");
     document.querySelector(".menu-home .icon_wrapper").classList.add("chosen_img");
+    document.querySelector(".big_icon.win").addEventListener("click", function () {
+      location.href = "/win.html";
+    });
     indexDelegation();
     toggleMenu();
   }

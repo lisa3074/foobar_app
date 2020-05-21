@@ -11,6 +11,11 @@ details summary::-webkit-details-marker {
 
 .order_container {
   padding: 3rem 0 2rem;
+  //max-width: 1000px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  margin: 0 auto;
 }
 
 //BUTTONS
@@ -73,7 +78,7 @@ details summary::-webkit-details-marker {
 //SUMMARY
 summary {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 2fr 0.5fr;
   padding: 0 1rem;
 }
 
@@ -171,9 +176,6 @@ details {
 .times {
   letter-spacing: 15px;
 }
-.price {
-  padding-right: 1rem;
-}
 
 details[open] summary ~ * {
   animation: swoop_down 0.4s ease-in-out;
@@ -229,22 +231,29 @@ summary {
 
 details[open] .arrow_down {
   transition: 1s;
-  transform: rotate3d(0, 0, 1, 270deg) translateX(2px);
+  transform: rotate3d(0, 0, 1, 270deg) translateX(-5px) translateY(-13px);
   padding: 0rem 1.5rem;
 }
 
 details:not([open]) .arrow_down {
   transition: 1s;
-  transform: rotate3d(0, 1, 5, 90deg) translateX(-2px);
+  transform: rotate3d(0, 1, 5, 90deg) translateX(5px) translateY(13px);
   padding: 0rem 1.2rem;
 }
-
+button.pay {
+  padding: 0 2rem;
+}
 @media (min-width: 500px) {
   .first_part_grid {
     display: grid;
     grid-template-columns: 1fr 2fr;
   }
-
+  .price {
+    padding: 0rem 1rem 0 0;
+  }
+  button.pay {
+    padding: 0 1rem;
+  }
   .order_nav_wrapper,
   .result_nav,
   .credit_card_nav,
@@ -263,12 +272,32 @@ details:not([open]) .arrow_down {
 
   .summary_container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 2rem;
+    grid-template-columns: 40vw 1fr;
+    grid-template-rows: 1fr 2.5rem;
+    grid-template-areas:
+      "titel price"
+      "cat cat";
+  }
+  .order_container .label {
+    padding: 0 2rem 0 0;
+  }
+  .beer_category {
+    grid-area: cat;
+    padding-top: 0.5rem;
+  }
+  .price_container {
+    grid-area: price;
+  }
+  .name {
+    grid-area: title;
   }
   .price_container {
     display: flex;
     align-items: flex-end;
+  }
+  .button_wrap {
+    align-items: center;
+    padding-bottom: 0;
   }
 
   .view_cart,
@@ -286,25 +315,50 @@ details:not([open]) .arrow_down {
   .checkout .button_icon,
   .log_in_done .button_icon,
   .home .button_icon {
-    padding-left: 2.5rem;
     padding-right: 1rem;
   }
 
-  .pay .button_icon,
+  .pay .button_icon {
+    padding-left: 2rem;
+    padding-right: 1rem;
+  }
+
   .log_in_done .button_icon {
-    padding-left: 4rem;
+    padding-left: 1.5rem;
     padding-right: 1rem;
   }
   .reset .button_icon,
   .edit .button_icon,
   .home .button_icon {
-    padding-left: 4.1rem;
+    padding-left: 1.5rem;
   }
 }
 
 @media (min-width: 600px) {
   .first_part_grid {
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 40vw 2fr;
+  }
+  .order_container .label {
+    padding: 0 4rem 0 0;
+  }
+}
+@media (min-width: 800px) {
+  .view_cart .button_icon,
+  .reset .button_icon,
+  .edit .button_icon,
+  .checkout .button_icon,
+  .log_in_done .button_icon,
+  .home .button_icon {
+    padding-left: 2.5rem;
+  }
+  .reset .button_icon,
+  .edit .button_icon,
+  .home .button_icon {
+    padding-left: 4rem;
+  }
+  .pay .button_icon,
+  .log_in_done .button_icon {
+    padding-left: 4rem;
   }
 }
 @media (min-width: 1000px) {
@@ -316,17 +370,26 @@ details:not([open]) .arrow_down {
     height: 100%;
     align-items: flex-end;
   }
+  .price {
+    padding-right: 1rem;
+  }
   .summary_container {
-    grid-template-columns: 30vw 1fr 1fr;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 1fr;
+    grid-template-areas: "titel cat price";
     align-items: center;
     padding: 0;
     .beer_category,
     .price_container {
       padding: 0;
     }
+    .beer_category {
+      text-align: left;
+    }
     .price_container {
-      text-align: right;
+      display: flex;
+      justify-content: flex-end;
     }
     .go_up {
       transition: 1s;
@@ -340,8 +403,12 @@ details:not([open]) .arrow_down {
       padding: 0rem 1.5rem;
     }
   }
+
+  .order_container .label {
+    padding: 0 5rem;
+  }
   .first_part_grid {
-    grid-template-columns: 30vw 2fr;
+    grid-template-columns: 1fr 1fr;
   }
   summary {
     grid-template-columns: 4fr 1fr;
@@ -352,12 +419,12 @@ details:not([open]) .arrow_down {
   }
 
   .products .name {
-    padding-left: 2rem;
-    padding-top: 0;
+    padding-left: 1rem;
+    padding-top: 0.2rem;
   }
 
   .button_wrap {
-    padding-top: 1rem;
+    padding: 1rem 0;
   }
   .primary.remove,
   .primary.add {

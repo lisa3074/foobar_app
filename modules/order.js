@@ -7,13 +7,13 @@ let productArray = [];
 let amountArray = [];
 let amountObject;
 let object;
-const form = document.querySelector("form");
-const elements = form.elements;
+/* const form = document.querySelector("form");
+const elements = form.elements; */
 let total_amount = 0;
 let total_price = 0;
 //DEBUG, FJERN EFTER
-window.elements = elements;
-window.form = form;
+/* window.elements = elements;
+window.form = form; */
 
 //let amountArray = [];
 
@@ -99,9 +99,11 @@ function closePopUp() {
   console.log("closePopUp");
   document.querySelectorAll(".cart_close, .edit").forEach((button) => {
     button.addEventListener("click", function () {
+      window.scrollTo(0, 0);
       document.querySelector(".cart").classList.add("fadeOut");
       document.querySelector(".cart").classList.remove("fadeInRight");
-
+      total_price = 0;
+      total_amount = 0;
       setTimeout(() => {
         document.querySelector(".cart").classList.add("hide");
         document.querySelector(".result_nav").classList.remove("hide");
@@ -414,33 +416,14 @@ function reset() {
     total_amount = 0;
     total_price = 0;
     amount = 0;
+    document.querySelectorAll(".amount_chosen").forEach((amount) => {
+      amount.textContent = "";
+    });
+    document.querySelectorAll(".times").forEach((time) => {
+      time.classList.add("hide");
+    });
   });
   console.log(amountArray);
-}
-
-function theAmount(e) {
-  console.log("theAmount");
-  object.forEach((el) => {
-    if (filter == el.name) {
-      console.log(el.name);
-      if ((e.classList[0] === "remove" && amount == 0) || amount < 0) {
-        amount = 0;
-        el.amount = amount; //reset amount ved anden entry i array
-        console.log(el.amount);
-        console.log(amountArray);
-        document.querySelector(".amount_chosen").textContent = el.amount;
-        document.querySelector(".times").classList.remove("hide");
-      } else {
-        el.amount = amount; //reset amount ved anden entry i array
-        document.querySelector(".amount_chosen").textContent = el.amount;
-        document.querySelector(".times").classList.remove("hide");
-        console.log(el.amount);
-        console.log(amountArray);
-      }
-    } else {
-      console.log("not the same");
-    }
-  });
 }
 
 function displayProducts(beer) {
@@ -460,13 +443,13 @@ function displayProducts(beer) {
     filter = beer.name;
     console.log(filter);
     amount++;
-    theAmount(this);
+    theAmount(this, 1);
   });
 
   clone.querySelector(".remove").addEventListener("click", function () {
     filter = beer.name;
     amount--;
-    theAmount(this);
+    theAmount(this, -1);
   });
 
   clone.querySelector(".more").addEventListener("click", function () {
@@ -476,6 +459,34 @@ function displayProducts(beer) {
     displayReadMore();
   });
   document.querySelector(".order_container").appendChild(clone);
+}
+
+function theAmount(e, modifier) {
+  console.log("theAmount");
+  console.log(e.parentNode.previousElementSibling.querySelector(".amount_chosen"));
+  object.forEach((el) => {
+    if (filter == el.name) {
+      console.log("The same");
+      console.log(el.name);
+      if ((e.classList[0] === "remove" && amount == 0) || amount < 0) {
+        amount = 0;
+        el.amount = amount; //reset amount ved anden entry i array
+        e.parentNode.previousElementSibling.querySelector(".amount_chosen").textContent = "";
+        e.parentNode.previousElementSibling.querySelector(".times").classList.add("hide");
+        console.log(el.amount);
+        console.table(amountArray);
+      } else {
+        el.amount = el.amount + modifier; //reset amount ved anden entry i array
+        e.parentNode.previousElementSibling.querySelector(".amount_chosen").textContent = el.amount;
+
+        e.parentNode.previousElementSibling.querySelector(".times").classList.remove("hide");
+        console.log(el.amount);
+        console.table(amountArray);
+      }
+    } else {
+      console.log("not the same");
+    }
+  });
 }
 
 function displayError() {
@@ -498,7 +509,7 @@ function displaySummary() {
       const clone = document.querySelector(".cart_sumup").content.cloneNode(true);
       clone.querySelector(".article").textContent = ordered.name;
       clone.querySelector(".amount").textContent = ordered.amount + " pcs.";
-      clone.querySelector(".final_amount").textContent = ordered.amount * "40" + " DKK";
+      clone.querySelector(".final_amount").textContent = total_price + " DKK";
       document.querySelector(".result_list").appendChild(clone);
     }
   });
