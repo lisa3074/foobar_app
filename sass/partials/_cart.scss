@@ -60,7 +60,10 @@ input.invalid + p {
     }
   }
 }
-
+.disabled {
+  pointer-events: none;
+  filter: grayscale(0.5) opacity(0.3);
+}
 .cart_container .grid_item3 {
   grid-area: buttons;
   padding: 1.5rem 0;

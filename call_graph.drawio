@@ -1,6 +1,6 @@
-<mxfile host="localhost" modified="2020-05-15T16:00:10.667Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.45.0 Chrome/78.0.3904.130 Electron/7.2.4 Safari/537.36" etag="LuBuo3DiAYBKpuu9etlp" version="13.0.9">
+<mxfile host="localhost" modified="2020-05-22T07:12:16.621Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.45.1 Chrome/78.0.3904.130 Electron/7.2.4 Safari/537.36" etag="cAtHbW88bgzXsOS_pUln" version="13.0.9">
     <diagram id="VoRkvZ0OsH4jN3PAigYA" name="Page-1">
-        <mxGraphModel dx="818" dy="472" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+        <mxGraphModel dx="648" dy="1134" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -228,18 +228,6 @@
                         <mxPoint y="9" as="offset"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="80" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.296;exitY=1.012;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="72" target="79" edge="1">
-                    <mxGeometry relative="1" as="geometry">
-                        <Array as="points">
-                            <mxPoint x="1195" y="623"/>
-                        </Array>
-                    </mxGeometry>
-                </mxCell>
-                <mxCell id="81" value="invalid" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="80" vertex="1" connectable="0">
-                    <mxGeometry x="-0.1919" y="-1" relative="1" as="geometry">
-                        <mxPoint as="offset"/>
-                    </mxGeometry>
-                </mxCell>
                 <mxCell id="90" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.69;entryDx=0;entryDy=0;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryPerimeter=0;" parent="1" source="72" target="89" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <Array as="points">
@@ -250,7 +238,7 @@
                 <mxCell id="106" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=-0.005;exitY=0.403;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="76" target="105" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="72" value="&lt;b&gt;checkValidity();&lt;br&gt;&lt;/b&gt;&lt;font style=&quot;font-size: 9px&quot;&gt;check username/password&amp;nbsp;&lt;br&gt;const user = getRestDB();&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
+                <mxCell id="72" value="&lt;b&gt;checkIfValid();&lt;br&gt;&lt;/b&gt;&lt;font style=&quot;font-size: 9px&quot;&gt;check username/password&amp;nbsp;&lt;br&gt;const user = getRestDB();&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="1159" y="543" width="120" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="105" value="&lt;b&gt;updateCounter();&lt;br&gt;&lt;/b&gt;&lt;font style=&quot;font-size: 9px&quot;&gt;put beer bought&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
@@ -280,9 +268,6 @@
                 </mxCell>
                 <mxCell id="76" value="&lt;b&gt;payDelegation();&lt;br&gt;&lt;/b&gt;&lt;font style=&quot;font-size: 9px&quot;&gt;&lt;br&gt;const order = createHerokuObject();&lt;br&gt;&lt;br&gt;const orderDetails = postHeroku(order);&lt;br&gt;&lt;br&gt;const restDbObject = createRestDbObject(orderDetails);&lt;br&gt;&lt;br&gt;postRestDb(restDbObject);&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="1090" y="670" width="170" height="340" as="geometry"/>
-                </mxCell>
-                <mxCell id="79" value="&lt;b&gt;displayError();&lt;/b&gt;&lt;font style=&quot;font-size: 9px&quot;&gt;&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="1000" y="603" width="120" height="40" as="geometry"/>
                 </mxCell>
                 <mxCell id="86" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1.017;entryY=0.294;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="82" edge="1">
                     <mxGeometry relative="1" as="geometry">
@@ -429,7 +414,7 @@
                 <mxCell id="137" value="&lt;b&gt;displayReceipts();&lt;/b&gt;&lt;font style=&quot;font-size: 9px&quot;&gt;&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">
                     <mxGeometry x="664" y="482" width="120" height="40" as="geometry"/>
                 </mxCell>
-                <mxCell id="215" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="138" target="139">
+                <mxCell id="215" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="138" target="139" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="138" value="&lt;b&gt;getStatus();&lt;/b&gt;&lt;font style=&quot;font-size: 9px&quot;&gt;&lt;br&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" parent="1" vertex="1">

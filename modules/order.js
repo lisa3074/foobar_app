@@ -1,16 +1,22 @@
 let locationSite;
 const url = "https://foobar3rdsemester.herokuapp.com/beertypes";
+const endpoint = "https://foobar3rdsemester.herokuapp.com/";
 let jsonData;
 let filter;
 let amount = 0;
 let productArray = [];
 let amountArray = [];
+let herokuArray = [];
+let restDbArray = [];
 let amountObject;
 let object;
 /* const form = document.querySelector("form");
 const elements = form.elements; */
 let total_amount = 0;
 let total_price = 0;
+let data;
+let order;
+let orderDetails;
 //DEBUG, FJERN EFTER
 /* window.elements = elements;
 window.form = form; */
@@ -20,8 +26,9 @@ window.form = form; */
 const Product = {
   name: "",
   amount: "", //antal øl
-  total: "",
-  beer_amount: "", //antal øl i alt
+  price: "", //pris for alle ens øl
+  total_price: "",
+  total_beers: "", //antal øl i alt
   category: "",
   price: "",
   aroma: "",
@@ -34,6 +41,7 @@ const Product = {
   username: "",
   password: "",
   order_number: "",
+  bartender: "",
 };
 /*//////////////////////////////////
 ////// DELEGATION FUNCTIONS ///////
@@ -41,9 +49,9 @@ const Product = {
 
 export function cartDelegation() {
   console.log("cartDelegation");
-
-  checkAvailability();
-  setAmount();
+  setTimeout(() => {
+    checkAvailability();
+  }, 200);
   loadJson();
   closePopUp();
   logInOrSignUp();
@@ -76,10 +84,12 @@ export function cartDelegation() {
 function payDelegation() {
   console.log("payDelegation");
   updateCounter();
-  const order = createHerokuObject();
-  const orderDetails = postHeroku(order);
+  console.log(order);
+  console.table(orderDetails);
+  /*  const order = createHerokuObject();
   const restDbObject = createRestDbObject(orderDetails);
-  postRestDb(restDbObject);
+  postRestDb(restDbObject);*/
+  postHeroku(order);
 }
 
 /*
@@ -149,15 +159,33 @@ function logInOrSignUp() {
   });
 }
 
-function checkAvailability() {
+async function checkAvailability() {
   console.log("checkAvailability");
-  //if some tabs are empty
-  displayDisabled();
-}
+  let beerArray = [];
+  let beerName = {};
 
-function setAmount() {
-  console.log("setAmount");
-  displayAmount();
+  //if some tabs are empty
+  let response = await fetch(endpoint, {
+    method: "get",
+  });
+  data = await response.json();
+  console.log(data.taps);
+
+  data.storage.forEach((beer) => {
+    beerName = beer.name;
+    beerArray.push(beerName);
+  });
+  console.log(beerArray);
+  beerArray.forEach((e) => {
+    for (let i = 0; i < data.taps.length; i++) {
+      // console.log(data.taps[i]["beer"]);
+      if (data.taps[i]["beer"] == e) {
+        let availableBeer = data.taps[i]["beer"];
+        console.log(availableBeer);
+        displayAvailableBeer(availableBeer);
+      }
+    }
+  });
 }
 
 async function loadJson() {
@@ -234,14 +262,12 @@ function checkIfValid(e) {
     });
   });
 
-  const formIsValid = passWord();
+  const formIsValid = checkPassWord();
   const user = getRestDB();
 
   if (isValid && formIsValid) {
-    /*  post({
-      name: object.name,
-      amount: object.amount,
-    }); */
+    //post();
+
     console.log("all good");
     form.reset();
     payDelegation();
@@ -310,7 +336,7 @@ function postRestDb(restDbObject) {
 ////// RETURN FUNCTIONS ///////
 //////////////////////////////////*/
 
-function passWord() {
+function checkPassWord() {
   console.log("password");
   let formIsValid;
   const password1 = document.querySelector("#password").value;
@@ -346,33 +372,97 @@ function passWord() {
   return formIsValid;
 }
 
+function setAmount(clicked, modifier) {
+  console.log("setAmount");
+  object.forEach((el) => {
+    if (filter == el.name) {
+      if ((clicked.classList[0] === "remove" && amount == 0) || amount < 0) {
+        amount = 0;
+        el.amount = amount;
+        displayAmount(0, clicked, el);
+        console.table(amountArray);
+      } else {
+        el.amount = el.amount + modifier;
+        displayAmount(1, clicked, el);
+        console.table(amountArray);
+      }
+    }
+  });
+}
+
+function createHerokuObject(ordered) {
+  console.log("createHerokuObject");
+  //const randomNumber = Math.floor(Math.random() * 10) + 1;
+  //const randomCharacter = randomChar(1);
+  const herokuObject = Object.create(Product);
+  herokuObject.name = ordered.name;
+  herokuObject.amount = ordered.amount;
+  //herokuObject.order_number = randomCharacter + randomNumber;
+  herokuArray.push(herokuObject);
+  return herokuArray;
+}
+
+function randomChar(length) {
+  let result;
+  const characters = "abcdefghijklmnopqrstuvwxyz";
+  const charactersLength = characters.length;
+  for (var i = 0; i < length; i++) {
+    result = characters.charAt(Math.floor(Math.random() * charactersLength));
+    console.log(result);
+  }
+  return result;
+}
+
+function createRestDbObject(ordered, total_price) {
+  console.log("createRestDbObject");
+  const restDbObject = Object.create(Product);
+  restDbObject.name = ordered.name;
+  restDbObject.amount = ordered.amount;
+  restDbObject.price = ordered.amount * 40;
+  restDbObject.total_beer = amount;
+  restDbObject.username = document.querySelector("#username").value;
+  restDbObject.password = document.querySelector("#password").value;
+  restDbObject.order_number = "";
+  //use last index to find full price of the order
+  restDbObject.total_price = total_price;
+  restDbObject.bartender = "";
+  restDbArray.push(restDbObject);
+  return restDbArray;
+}
+
 function getRestDB() {
   console.log("getRestDB - order.js");
   return;
 }
 
-function createHerokuObject() {
-  console.log("createHerokuObject");
-  //name, amount
-  return;
-}
-
-function postHeroku(order) {
+async function postHeroku() {
   console.log("postHeroku");
   //POST object to heroku DB
-  const orderDetails = getHeroku();
-  displayThankYou(orderDetails);
-  return orderDetails;
+
+  const postData = JSON.stringify(order);
+  let response = await fetch(endpoint + "order", {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+    },
+    body: postData,
+  });
+  data = await response.json();
+  console.log(data);
+
+  //const orderDetails = getHeroku();
+  displayThankYou();
+  //return orderDetails;
 }
 
 function getHeroku() {
-  console.log("createRestDbObject");
+  console.log("getHeroku");
   //GET the just placed order (order number and bartender)
   const orderDetails = "whatever the GET returns";
   return orderDetails;
 }
 
-function createRestDbObject(orderDetails) {
+function createRestDbObjectL(orderDetails) {
   console.log("createRestDbObject");
   const restDbObject = "the object created";
   //name, amount, total, beer_amount, full_price, username, password, order_number, bartender
@@ -385,11 +475,27 @@ function createRestDbObject(orderDetails) {
 ////// DISPLAY FUNCTIONS ///////
 //////////////////////////////////*/
 
-function displayDisabled() {
-  console.log("displayDisabled");
-}
-function displayAmount() {
-  console.log("displayAmount");
+function displayAvailableBeer(beer) {
+  //console.log("displayAvailableBeer");
+  const className = beer;
+  const noSpaces = className.toLowerCase().replace(" ", "");
+  const noSpacesAtAll = noSpaces.replace(" ", "");
+  console.log(noSpacesAtAll);
+  document.querySelectorAll(".wrapper").forEach((e) => {
+    if (e.classList[2] == noSpacesAtAll) {
+      e.classList.remove("disabled");
+    }
+    setTimeout(() => {
+      if (e.classList[0] == "disabled") {
+        /* e.querySelector(".beer_category").textContent = "Sorry, not on tap right now!";
+        e.querySelector(".price").textContent = "";
+        e.querySelector("details").style.height = "4rem";
+        e.querySelector(".button_wrap").classList.add("hide");
+        e.querySelector(".arrow_down").classList.add("hide"); */
+        e.classList.add("hide");
+      }
+    }, 100);
+  });
 }
 
 function displayReadMore() {
@@ -429,7 +535,12 @@ function reset() {
 function displayProducts(beer) {
   console.log("displayProducts");
   amount = "0";
+  //Put name as class on parent article to differentiate
+  const className = beer.name;
+  const noSpaces = className.toLowerCase().replace(" ", "");
+  const noSpacesAtAll = noSpaces.replace(" ", "");
   const clone = document.querySelector(".products_sold").content.cloneNode(true);
+  clone.querySelector(".wrapper").classList.add(noSpacesAtAll);
   clone.querySelector(".name").textContent = beer.name;
   clone.querySelector(".beer_category").textContent = beer.category;
   clone.querySelector(".price").textContent = "40 DKK";
@@ -443,13 +554,13 @@ function displayProducts(beer) {
     filter = beer.name;
     console.log(filter);
     amount++;
-    theAmount(this, 1);
+    setAmount(this, 1);
   });
 
   clone.querySelector(".remove").addEventListener("click", function () {
     filter = beer.name;
     amount--;
-    theAmount(this, -1);
+    setAmount(this, -1);
   });
 
   clone.querySelector(".more").addEventListener("click", function () {
@@ -458,39 +569,19 @@ function displayProducts(beer) {
     filter = beer.name;
     displayReadMore();
   });
+
   document.querySelector(".order_container").appendChild(clone);
 }
 
-function theAmount(e, modifier) {
-  console.log("theAmount");
-  console.log(e.parentNode.previousElementSibling.querySelector(".amount_chosen"));
-  object.forEach((el) => {
-    if (filter == el.name) {
-      console.log("The same");
-      console.log(el.name);
-      if ((e.classList[0] === "remove" && amount == 0) || amount < 0) {
-        amount = 0;
-        el.amount = amount; //reset amount ved anden entry i array
-        e.parentNode.previousElementSibling.querySelector(".amount_chosen").textContent = "";
-        e.parentNode.previousElementSibling.querySelector(".times").classList.add("hide");
-        console.log(el.amount);
-        console.table(amountArray);
-      } else {
-        el.amount = el.amount + modifier; //reset amount ved anden entry i array
-        e.parentNode.previousElementSibling.querySelector(".amount_chosen").textContent = el.amount;
-
-        e.parentNode.previousElementSibling.querySelector(".times").classList.remove("hide");
-        console.log(el.amount);
-        console.table(amountArray);
-      }
-    } else {
-      console.log("not the same");
-    }
-  });
-}
-
-function displayError() {
-  console.log("displayError - order.js");
+function displayAmount(param, clicked, el) {
+  console.log("displayAmount");
+  if (param == 0) {
+    clicked.parentNode.previousElementSibling.querySelector(".amount_chosen").textContent = "";
+    clicked.parentNode.previousElementSibling.querySelector(".times").classList.add("hide");
+  } else {
+    clicked.parentNode.previousElementSibling.querySelector(".amount_chosen").textContent = el.amount;
+    clicked.parentNode.previousElementSibling.querySelector(".times").classList.remove("hide");
+  }
 }
 
 function displaySummary() {
@@ -511,8 +602,15 @@ function displaySummary() {
       clone.querySelector(".amount").textContent = ordered.amount + " pcs.";
       clone.querySelector(".final_amount").textContent = total_price + " DKK";
       document.querySelector(".result_list").appendChild(clone);
+
+      order = createHerokuObject(ordered);
+      orderDetails = createRestDbObject(ordered, total_price);
+
+      //  payDelegation(order, orderDetails);
     }
   });
+
+  //if there is nothing in the cart else...
   if (total_amount == 0) {
     document.querySelector(".checkout").setAttribute("disabled", "");
     document.querySelector(".zero_beer").textContent = "You need to put some beer in the cart to buy some!";
@@ -525,6 +623,7 @@ function displaySummary() {
   document.querySelector(".total_amount_bottom").textContent = total_price;
   document.querySelector(".wrap .your_number").textContent = total_amount;
 }
+
 function displayPayment() {
   console.log("displayPayment");
   document.querySelector(".result").classList.add("fadeOutQuick");
