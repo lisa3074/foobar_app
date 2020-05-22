@@ -167,7 +167,6 @@
                       <label for="number" class="labels">CREDIT CARD NUMBER</label>
                       <input type="text" id="number" maxlength="19" minlength="19" placeholder="1234 5678 9012 3456" pattern=".{19,19}" name="card" required />
                       <p class="invalid_text star hide">*</p>
-                      <span class="head5 hide">|| Enter 16 digits</span>
                     </div>
                     <div class="small_inputs">
                       <div class="expire">
@@ -175,27 +174,23 @@
                           <label for="month" class="labels">MONTH</label>
                           <input type="number" max="12" min="01" id="month" placeholder="XX" name="card" required />
                           <p class="invalid_text star hide">*</p>
-                          <span class="head5 hide">|| Enter the expire month</span>
                         </div>
                         <div>
                           <label for="year" class="labels">YEAR</label>
                           <input type="number" max="99" min="20" id="year" placeholder="XX" name="card" required />
                           <p class="invalid_text star hide">*</p>
-                          <span class="head5 hide">|| Enter the expire year</span>
                         </div>
                       </div>
                       <div>
                         <label for="secure" class="labels">CVC</label>
                         <input type="text" max="999" min="001" id="secure" placeholder="XXX" name="card" pattern=".{3,3}" required />
                         <p class="invalid_text star hide">*</p>
-                        <span class="head5 hide">|| Enter the 3 digit security code</span>
                       </div>
                     </div>
                     <div>
                       <label for="full_name" class="labels">NAME ON CARD</label>
                       <input type="text" id="full_name" placeholder="JOHN SMITH" pattern="(?:[a-z]|[A-Z]).{0,30}\s(?:[a-z]|[A-Z]).{0,30}" name="card" required />
                       <p class="invalid_text star hide">*</p>
-                      <span class="head5 hide">|| Enter your full name as stated on the card</span>
                     </div>
                   </fieldset>
                 </article>
@@ -218,19 +213,16 @@
                       <label for="username" class="labels">USERNAME</label>
                       <input type="text" id="username" placeholder="JOHN SMITH" name="login" minlength="5" required />
                       <p class="invalid_text star">*</p>
-                      <span class="head5 hide">|| Enter a username of at least 5 charachters</span>
                     </div>
                     <div>
                       <label for="password" class="labels">PASSWORD</label>
                       <input type="password" id="password" placeholder="••••••••" name="login" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required />
                       <p class="invalid_text star">*</p>
-                      <span class="head5 hide">|| At least 6 charachters with 1 uppercase letter and 1 digit</span>
                     </div>
                     <div class="secure_pass hide">
                       <label for="secure_pass" class="labels">RE-TYPE PASSWORD</label>
                       <input type="password" id="secure_pass" placeholder="••••••••" name="login" />
                       <p class="invalid_text star">*</p>
-                      <span class="head5 hide">|| Enter a username of at least 5 charachters</span>
                     </div>
                   </div>
                   <p class="invalid_creditcard invalid_text hide">You need to fill out 16 digits for the credit card</p>
@@ -273,7 +265,7 @@
             <div class="cart_summary">
               <div class="wrap">
                 <div class="p head5">BEERS ORDERED</div>
-                <p class="title your_number">6</p>
+                <p class="title your_number">...</p>
               </div>
               <div class="wrap">
                 <div class="p head5">PRICE IN TOTAL</div>

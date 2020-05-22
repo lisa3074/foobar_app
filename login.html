@@ -47,47 +47,53 @@
         </div>
       </div>
     </nav>
-    <h1 class="title login_heading">LOG IN</h1>
-    <section class="log_in_container grid">
-      <article class="grid_item1">
-        <form action="" class="login">
-          <fieldset class="log_in_site">
+    <main class="main_content">
+      <h1 class="title login_heading">LOG IN</h1>
+      <section class="log_in_container">
+        <article class="grid_item1">
+          <form class="login_form">
+            <fieldset class="log_in_site">
+              <div>
+                <label for="username_login" class="labels">USERNAME</label>
+                <input type="text" id="username_login" placeholder="JOHN SMITH" name="login" minlength="5" required />
+                <p class="invalid_text star">The password does not mach an existing login</p>
+              </div>
+              <div>
+                <label for="password_login" class="labels">PASSWORD</label>
+                <input type="password" id="password_login" placeholder="••••••••" name="login" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required />
+                <p class="invalid_text star">The password does not mach an existing login</p>
+              </div>
+            </fieldset>
+          </form>
+        </article>
+        <article class="grid_item2 lock"></article>
+        <article class="grid_item3">
+          <button class="log_into_account log_in_done head2 primary">LOG IN<img src="/static/images/svg_icons/lock_icon_dark.svg" alt="Log in" class="button_icon" /></button>
+        </article>
+      </section>
+      <!--   <h1 class="title login_heading hide">ACCOUNT</h1> -->
+      <section class="account_container hide">
+        <article class="grid_item1">
+          <div>
+            <h2 class="title">ORDER STATUS</h2>
+            <p class="head2 status_write">... STILL BREWING</p>
+          </div>
+          <form class="check_status">
+            <label for="ordernum" class="labels">TYPE IN YOUR ORDER NUMBER</label>
             <div>
-              <label for="order_number" class="labels">ORDER NUMBER</label>
-              <input type="number" class="order_number" id="order_number" name="login" placeholder="6" required />
-              <p class="invalid_text">Sorry didn't work</p>
+              <input type="number" class="digits" id="ordernum" name="number" placeholder="0" required="" />
+              <button class="check primary head2">CHECK</button>
             </div>
-            <div>
-              <label for="digits" class="labels">4 DIGIT PIN CODE</label>
-              <input type="number" class="digits" id="digits" name="login" placeholder="1234" required />
-              <p class="invalid_text">Sorry didn't work</p>
-            </div>
-          </fieldset>
-        </form>
-      </article>
-      <article class="grid_item2 lock"></article>
-      <article class="grid_item3">
-        <button class="log_into_account head2">LOG IN<img src="" alt="" /></button>
-      </article>
-    </section>
-    <section class="account_container grid">
-      <article class="grid_item1">
-        <h2 class="title">ORDER STATUS</h2>
-        <p class="head2">...</p>
-        <form class="check_status">
-          <label for="ordernum" class="labels">TYPE IN YOUR ORDER NUMBER</label>
-          <input type="number" class="digits" id="ordernum" name="number" placeholder="0" required="" />
-
-          <button class="check head2">CHECK</button>
-        </form>
-      </article>
-      <article class="grid_item2">
-        <h4 class="head4">RECEIPTS</h4>
-      </article>
-      <article class="grid_item3">
-        <h4 class="head4">LOG OUT</h4>
-      </article>
-    </section>
+          </form>
+        </article>
+        <article class="grid_item2">
+          <h4 class="head4">RECEIPTS</h4>
+        </article>
+        <article class="grid_item3">
+          <h4 class="head4">LOG OUT</h4>
+        </article>
+      </section>
+    </main>
 
     <script src="script.js"></script>
   </body>

@@ -1,6 +1,8 @@
 let locationSite;
 const url = "https://foobar3rdsemester.herokuapp.com/beertypes";
 const endpoint = "https://foobar3rdsemester.herokuapp.com/";
+const restDb = "https://frontend-22d4.restdb.io/rest/foobar";
+const apiKey = "5e9581a6436377171a0c234f";
 let jsonData;
 let filter;
 let amount = 0;
@@ -8,20 +10,17 @@ let productArray = [];
 let amountArray = [];
 let herokuArray = [];
 let restDbArray = [];
-let amountObject;
+let restDbObject;
 let object;
-/* const form = document.querySelector("form");
-const elements = form.elements; */
 let total_amount = 0;
 let total_price = 0;
 let data;
 let order;
 let orderDetails;
-//DEBUG, FJERN EFTER
-/* window.elements = elements;
-window.form = form; */
-
-//let amountArray = [];
+let theId;
+let formIsValid;
+let username_value;
+let password_value;
 
 const Product = {
   name: "",
@@ -86,10 +85,23 @@ function payDelegation() {
   updateCounter();
   console.log(order);
   console.table(orderDetails);
-  /*  const order = createHerokuObject();
-  const restDbObject = createRestDbObject(orderDetails);
-  postRestDb(restDbObject);*/
-  postHeroku(order);
+
+  /*  const order = createHerokuObject();*/
+  postHeroku();
+  setTimeout(() => {
+    console.log(theId);
+    displayOrderNumber();
+  }, 1000);
+  setTimeout(() => {
+    postRestDb({
+      order_number: theId,
+      total_beer: amount,
+      total_price: total_price,
+      username: username_value,
+      password: password_value,
+      restDbArray,
+    });
+  }, 2000);
 }
 
 /*
@@ -128,6 +140,9 @@ function closePopUp() {
   document.querySelectorAll(".cart_close").forEach((cross) => {
     cross.addEventListener("click", function () {
       form.reset();
+      setTimeout(() => {
+        location.href = "/order.html";
+      }, 500);
       document.querySelectorAll(".amount_chosen").forEach((amount) => {
         amount.textContent = "";
       });
@@ -202,6 +217,7 @@ function makeAmountObject() {
     const amountObject = Object.create(Product);
     amountObject.name = beer.name;
     amountObject.amount = amount;
+    amountObject.id1 = "";
     amountArray.push(amountObject);
   });
   return amountArray;
@@ -262,14 +278,16 @@ function checkIfValid(e) {
     });
   });
 
-  const formIsValid = checkPassWord();
+  formIsValid = checkPassWord();
   const user = getRestDB();
 
   if (isValid && formIsValid) {
     //post();
 
     console.log("all good");
-    form.reset();
+    setTimeout(() => {
+      form.reset();
+    }, 2000);
     payDelegation();
     displayThankYou();
   } else {
@@ -326,9 +344,21 @@ function updateCounter() {
   //PUT beer ordered
 }
 
-function postRestDb(restDbObject) {
+async function postRestDb(payload) {
   console.log("postRestDb");
   //POST object to restDB
+  const postData = JSON.stringify(payload);
+  let response = await fetch(restDb, {
+    method: "post",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apikey": apiKey,
+      "cache-control": "no-cache",
+    },
+    body: postData,
+  });
+  data = await response.json();
+  console.log(data);
 }
 
 /*
@@ -392,42 +422,53 @@ function setAmount(clicked, modifier) {
 
 function createHerokuObject(ordered) {
   console.log("createHerokuObject");
-  //const randomNumber = Math.floor(Math.random() * 10) + 1;
-  //const randomCharacter = randomChar(1);
   const herokuObject = Object.create(Product);
   herokuObject.name = ordered.name;
   herokuObject.amount = ordered.amount;
-  //herokuObject.order_number = randomCharacter + randomNumber;
   herokuArray.push(herokuObject);
   return herokuArray;
 }
 
-function randomChar(length) {
-  let result;
-  const characters = "abcdefghijklmnopqrstuvwxyz";
-  const charactersLength = characters.length;
-  for (var i = 0; i < length; i++) {
-    result = characters.charAt(Math.floor(Math.random() * charactersLength));
-    console.log(result);
-  }
-  return result;
-}
-
-function createRestDbObject(ordered, total_price) {
+function createRestDbObject(ordered) {
   console.log("createRestDbObject");
-  const restDbObject = Object.create(Product);
+  restDbObject = Object.create(Product);
   restDbObject.name = ordered.name;
   restDbObject.amount = ordered.amount;
   restDbObject.price = ordered.amount * 40;
   restDbObject.total_beer = amount;
   restDbObject.username = document.querySelector("#username").value;
   restDbObject.password = document.querySelector("#password").value;
-  restDbObject.order_number = "";
+  restDbObject.order_number = theId;
   //use last index to find full price of the order
   restDbObject.total_price = total_price;
-  restDbObject.bartender = "";
+  console.table(restDbObject);
+  document.querySelector(".pay").addEventListener("click", function () {
+    if (formIsValid) {
+      setTimeout(() => {
+        createRestDbArray(ordered);
+      }, 1000);
+    }
+  });
+
+  return restDbObject;
+}
+
+function createRestDbArray(ordered) {
+  console.log("createRestDbArray");
+  username_value = document.querySelector("#username").value;
+  password_value = document.querySelector("#password").value;
+  restDbObject = Object.create(Product);
+  restDbObject.name = ordered.name;
+  restDbObject.amount = ordered.amount;
+  restDbObject.price = ordered.amount * 40;
+  /*   restDbObject.total_beer = amount;
+  restDbObject.username = document.querySelector("#username").value;
+  restDbObject.password = document.querySelector("#password").value;
+  restDbObject.order_number = theId;
+  restDbObject.total_price = total_price; */
   restDbArray.push(restDbObject);
-  return restDbArray;
+  console.table(restDbObject);
+  console.table(restDbArray);
 }
 
 function getRestDB() {
@@ -438,7 +479,6 @@ function getRestDB() {
 async function postHeroku() {
   console.log("postHeroku");
   //POST object to heroku DB
-
   const postData = JSON.stringify(order);
   let response = await fetch(endpoint + "order", {
     method: "post",
@@ -449,17 +489,20 @@ async function postHeroku() {
   });
   data = await response.json();
   console.log(data);
-
-  //const orderDetails = getHeroku();
   displayThankYou();
-  //return orderDetails;
+  setTimeout(() => {
+    getHeroku();
+  }, 700);
 }
 
-function getHeroku() {
+async function getHeroku() {
   console.log("getHeroku");
   //GET the just placed order (order number and bartender)
-  const orderDetails = "whatever the GET returns";
-  return orderDetails;
+  let response = await fetch(endpoint, {
+    method: "get",
+  });
+  data = await response.json();
+  theId = data.queue[0]["id"];
 }
 
 function createRestDbObjectL(orderDetails) {
@@ -604,6 +647,7 @@ function displaySummary() {
       document.querySelector(".result_list").appendChild(clone);
 
       order = createHerokuObject(ordered);
+      console.log(order);
       orderDetails = createRestDbObject(ordered, total_price);
 
       //  payDelegation(order, orderDetails);
@@ -662,5 +706,17 @@ function displayThankYou(orderDetails) {
     document.querySelector(".thank_you_nav").classList.remove("fadeIn");
     document.querySelector(".thank_you").classList.remove("fadeIn");
   }, 1600);
-  reset();
+  setTimeout(() => {
+    reset();
+  }, 8000);
+  setTimeout(() => {
+    restDbArray = [];
+    restDbObject = {};
+    herokuArray = [];
+  }, 3000);
+}
+
+function displayOrderNumber() {
+  console.log("displayOrderNumber");
+  document.querySelector(".your_number").textContent = theId;
 }

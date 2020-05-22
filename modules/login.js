@@ -1,9 +1,10 @@
-export function checkValidity() {
+export function checkIfValid() {
   console.log("checkValidity");
   const user = getUser();
   //Check validity
   //if valid
   loginDelegation(user);
+  displayAccount(user);
   //else
   displayError();
 }
@@ -25,6 +26,9 @@ function loginDelegation(user) {
 }
 function displayAccount(user) {
   console.log("displayAccount");
+  document.querySelector(".log_in_container").classList.add("hide");
+  document.querySelector(".account_container").classList.remove("hide");
+  document.querySelector(".main_content .login_heading").textContent = "ACCOUNT";
 }
 
 function setReceipts(user) {
@@ -32,6 +36,9 @@ function setReceipts(user) {
 }
 function logout() {
   console.log("logout");
+  document.querySelector(".log_in_container").classList.remove("hide");
+  document.querySelector(".account_container").classList.add("hide");
+  document.querySelector(".main_content .login_heading").textContent = "LOG IN";
 }
 
 function displayReceipts() {

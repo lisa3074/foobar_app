@@ -1,0 +1,216 @@
+.log_in_container {
+  display: grid;
+  width: 100%;
+  max-width: 860px;
+  height: 100%;
+  margin: 0 auto;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1.5fr 1.3fr 0.5fr;
+  grid-row-gap: 1rem;
+  padding: 3rem 1rem;
+  grid-template-areas:
+    "pic pic pic pic"
+    "login login login login"
+    "button button button button";
+}
+
+.account_container {
+  display: grid;
+  width: 100%;
+  max-width: 650px;
+  height: calc(100vh - 170px);
+  max-height: 500px;
+  margin: 0 auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: 15fr 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
+  padding: 3rem 0rem;
+  grid-template-areas:
+    "status status status status"
+    "status status status status"
+    "status status status status"
+    "reciepts reciepts logout logout"
+    "reciepts reciepts logout logout";
+}
+
+.main_content {
+  padding: 1rem;
+}
+
+.account_container .grid_item1 {
+  grid-area: status;
+  background-color: var(--white);
+  color: var(--dark);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--rounded);
+  background-image: url(/static/images/big_icons/beer_login.png);
+  background-position: 40% 80%;
+  background-size: 130%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  padding: 1rem 2rem;
+  form {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-end;
+    div {
+      display: flex;
+      flex-wrap: nowrap;
+
+      //align-items: flex-end;
+      padding: 0.5rem 2rem 0 0;
+    }
+    button {
+      height: 2.5rem;
+      margin: 0.3rem 0 0 1rem;
+    }
+  }
+  .status_write {
+    color: var(--white);
+    padding: 1rem;
+  }
+  .title {
+    padding-top: 1rem;
+  }
+
+  input {
+    width: 4rem;
+    height: 2.5rem;
+    background-color: var(--soft-purple-light);
+    text-align: center;
+  }
+  .check {
+    padding: 0;
+  }
+}
+.account_container .grid_item2 {
+  grid-area: reciepts;
+  background-image: url(/static/images/big_icons/creditDone.jpg);
+  background-position: 55% 100%;
+  background-size: cover;
+}
+.account_container .grid_item3 {
+  grid-area: logout;
+  background-image: url(/static/images/big_icons/padlock.png);
+  background-position: 54% 50%;
+  background-size: 180%;
+}
+
+.account_container .grid_item3,
+.account_container .grid_item2 {
+  height: 45vw;
+  max-height: 250px;
+  color: var(--dark);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--rounded);
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0.7rem;
+}
+.log_in_container .grid_item1 {
+  grid-area: login;
+  background-color: var(--white);
+  color: var(--dark);
+  box-shadow: var(--box-shadow);
+  border-radius: var(--rounded);
+}
+.log_in_container .grid_item2 {
+  grid-area: pic;
+  height: 100%;
+  width: 100%;
+  background-image: url(/static/images/big_icons/padlock.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  box-shadow: var(--box-shadow);
+  border-radius: var(--rounded);
+}
+.log_in_container .grid_item3 {
+  grid-area: button;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  button {
+    height: 3.2rem;
+  }
+}
+
+.login_heading {
+  padding-left: 1rem;
+}
+
+.login_form {
+  padding: 2rem;
+}
+
+@media (min-width: 450px) {
+  .account_container .grid_item1 {
+    background-image: url(/static/images/big_icons/beer-login.png);
+    background-position: 40% 60%;
+  }
+}
+@media (min-width: 500px) {
+  .account_container .grid_item2 {
+    background-image: url(/static/images/big_icons/creditDone.jpg);
+    background-position: 55% 100%;
+  }
+  .account_container .grid_item3 {
+    background-image: url(/static/images/big_icons/padlock.png);
+    background-position: 54% 50%;
+    background-size: 120%;
+  }
+  .account_container .grid_item1 {
+    background-image: url(/static/images/big_icons/beer-login.png);
+    background-position: 40% 50%;
+    background-size: 115%;
+  }
+}
+@media (min-width: 650px) {
+  .log_in_container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 0.5fr;
+    grid-row-gap: 1.5rem;
+    grid-template-areas:
+      "login login pic pic"
+      "login login pic pic"
+      "button button pic pic";
+  }
+
+  .log_in_container .grid_item1 {
+    border-radius: var(--round-right);
+  }
+  .log_in_container .grid_item2 {
+    border-radius: var(--round-lu);
+  }
+  .log_in_container .grid_item3 {
+    padding-right: 1.5rem;
+    button {
+      height: auto;
+    }
+  }
+  .account_container .grid_item1 {
+    padding: 2rem 3rem;
+  }
+}
+
+@media (min-width: 800px) {
+  .main_content {
+    padding: 1rem 1rem 3rem calc(1rem + 70px);
+  }
+  .check {
+    max-width: 10rem;
+  }
+}
+
+@media (min-height: 1000px) {
+  .account_container .grid_item3,
+  .account_container .grid_item2 {
+    height: 45vw;
+    max-height: 300px;
+  }
+}
