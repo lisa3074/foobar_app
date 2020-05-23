@@ -7,6 +7,7 @@
 @use 'partials/form';
 @use 'partials/thank_you';
 @use 'partials/login';
+@use 'partials/beer';
 
 * {
   box-sizing: border-box;
@@ -75,6 +76,10 @@ form .explain {
   display: flex;
 }
 
+details {
+  cursor: pointer;
+}
+
 //GENERAL BUTTONS
 .secondary {
   background-color: var(--purple);
@@ -126,7 +131,7 @@ form .explain {
   .home_container,
   .order_wrapper {
     width: 100%;
-    padding-left: 100px;
+    padding: 1rem 1rem 1rem 100px;
   }
   .secondary {
     width: 15rem;
@@ -180,6 +185,13 @@ form .explain {
 button:hover:not(:disabled) {
   transition: 0.2s;
   transform: scale(1.04);
+}
+
+button.buy_beer:hover:not(:disabled) {
+  transition: 0.2s;
+  transform: none;
+  width: 8.2rem;
+  height: 3.4rem;
 }
 
 button {

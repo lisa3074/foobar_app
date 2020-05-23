@@ -71,7 +71,6 @@
           <button class="log_into_account log_in_done head2 primary">LOG IN<img src="/static/images/svg_icons/lock_icon_dark.svg" alt="Log in" class="button_icon" /></button>
         </article>
       </section>
-      <!--   <h1 class="title login_heading hide">ACCOUNT</h1> -->
       <section class="account_container hide">
         <article class="grid_item1">
           <div>
@@ -93,7 +92,83 @@
           <h4 class="head4">LOG OUT</h4>
         </article>
       </section>
+      <section class="receipts_container hide">
+        <!-- APPEND RECEIPTS HERE -->
+        <h1 class="title receipt_heading">YOUR RECEIPTS</h1>
+        <img src="/static/images/svg_icons/dark_cancel.svg" alt="close" class="close_receipts close" />
+        <article class="wrapper">
+          <details class="receipt">
+            <summary>
+              <div class="down">
+                <img src="/static/images/svg_icons/yellow_arrow.svg" alt="Read more" class="arrow_down go_up" />
+                <h1 class="head2 name">11/5-2020</h1>
+              </div>
+              <p class="head2 order">ORDER NR.<span class="order_number head3">65</span></p>
+              <p class="head2 price_container"><span class="price">200</span> DKK</p>
+            </summary>
+            <div class="receipt_details">
+              <div class="buy_items grid">
+                <h3 class="head2 article">MOWINTIME</h3>
+                <p class="paragraph amount">4 stk.</p>
+                <p class="labels final_amount">160 DKK</p>
+              </div>
+              <div class="buy_items grid">
+                <h3 class="head2 article">EL HEFE</h3>
+                <p class="paragraph amount">1 stk.</p>
+                <p class="labels final_amount">40 DKK</p>
+              </div>
+            </div>
+            <div class="grid total">
+              <h3 class="head2">TOTAL</h3>
+              <p class="labels"><span class="total_amount">200</span> DKK</p>
+            </div>
+            <div class="button_container">
+              <button class="delete head2 secondary">DELETE</button>
+            </div>
+          </details>
+        </article>
+        <!-- APPEND RECEIPTS ENDS HERE -->
+      </section>
     </main>
+    
+    <!-- RECEIPT TEMPLATE -->
+     <template class="receipt_temp">
+      <h1 class="title receipt_heading">YOUR RECEIPTS</h1>
+      <img src="/static/images/svg_icons/dark_cancel.svg" alt="close" class="close_receipts close" />
+      <article class="wrapper">
+        <details class="receipt">
+          <summary>
+            <div class="down">
+              <img src="/static/images/svg_icons/yellow_arrow.svg" alt="Read more" class="arrow_down go_up" />
+              <h1 class="head2 name"></h1>
+            </div>
+            <p class="head2 order">ORDER NR.<span class="order_number head3"></span></p>
+            <p class="head2 price_container"><span class="price"></span> DKK</p>
+          </summary>
+          <!-- APPEND DETAIL-LIST HERE -->
+         
+          </div>
+          <div class="grid total">
+            <h3 class="head2">TOTAL</h3>
+            <p class="labels"><span class="total_amount"></span> DKK</p>
+          </div>
+          <div class="button_container">
+            <button class="delete head2 secondary">DELETE</button>
+          </div>
+        </details>
+      </article>
+  </template> 
+
+  <!-- DETAILS_LIST TEMPLATE -->
+  <template class="details_temp">
+    <div class="receipt_details">
+    <div class="buy_items grid">
+    <h3 class="head2 article"></h3>
+    <p class="paragraph amount"></p>
+    <p class="labels final_amount"></p>
+    </div>
+  </template>
+
 
     <script src="script.js"></script>
   </body>

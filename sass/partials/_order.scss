@@ -10,7 +10,7 @@ details summary::-webkit-details-marker {
 }
 
 .order_container {
-  padding: 1rem 0 2rem;
+  padding: 1rem 0 0rem;
   //max-width: 1000px;
   display: flex;
   flex-wrap: nowrap;
@@ -361,7 +361,7 @@ button.pay {
     padding-left: 4rem;
   }
   .order_container {
-    padding: 2rem 0 2rem;
+    padding: 2rem 0 1rem;
   }
 }
 @media (min-width: 1000px) {

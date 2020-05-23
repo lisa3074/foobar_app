@@ -4,6 +4,7 @@ import { checkIfValid as checkIfValidLogin } from "./modules/login";
 import { cartDelegation } from "./modules/order";
 import { toggleMenu } from "./modules/navigation";
 import { indexDelegation } from "./modules/queue";
+import { loadJsonBeer } from "./modules/beer";
 import { checkIfValid } from "./modules/order";
 import { getData } from "./modules/win";
 import { card } from "./modules/card_ani";
@@ -47,6 +48,7 @@ function appDelegation() {
     document.querySelector(".menu-beer").classList.add("chosen");
     document.querySelector(".menu-beer .icon_wrapper").classList.add("chosen_img");
     toggleMenu();
+    loadJsonBeer();
   }
   if (indexBody) {
     document.querySelector(".menu-home").classList.add("chosen");

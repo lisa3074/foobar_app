@@ -267,4 +267,10 @@ body {
   .big_icon .head4 {
     padding-bottom: 2rem;
   }
+  .home_container {
+    height: 100vh;
+    display: flex;
+    flex-wrap: nowrap;
+    align-content: center;
+  }
 }

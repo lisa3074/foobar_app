@@ -590,7 +590,7 @@ function displayProducts(beer) {
   clone.querySelector(".product_details .label").src = "images/labels/" + beer.label;
   clone.querySelector(".product_details .label").alt = beer.name;
   clone.querySelector(".product_details .aroma").textContent = beer.aroma;
-  clone.querySelector(".product_details .alc").textContent = beer.alcohol;
+  clone.querySelector(".product_details .alc").textContent = beer.alcohol + "%";
   clone.querySelector(".products .amount_chosen").textContent = "";
 
   clone.querySelector(".add").addEventListener("click", function () {

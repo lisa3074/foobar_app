@@ -137,7 +137,7 @@ input.invalid + p {
       position: absolute;
       padding: 0;
       top: 1.5rem;
-      left: 4rem;
+      left: 2rem;
     }
     .close {
       top: 1.5rem;
@@ -190,4 +190,11 @@ input.invalid + p {
 }
 .cart_container .grid_item3 {
   padding-right: 1rem;
+}
+@media (min-width: 975px) {
+  .cart {
+    h1 {
+      left: 4rem;
+    }
+  }
 }
