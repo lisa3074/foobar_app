@@ -60,6 +60,9 @@ export function cartDelegation() {
 
   document.querySelector(".close_more").addEventListener("click", function () {
     document.querySelector(".more_container").classList.add("hidden_left");
+    setTimeout(() => {
+      document.querySelector(".more_container").classList.add("hide");
+    }, 1000);
     document.querySelector(".more_container").classList.remove("show");
   });
 
@@ -592,6 +595,7 @@ function displayAvailableBeer(beer) {
 
 function displayReadMore() {
   console.log("displayReadMore");
+
   productArray.forEach((beer) => {
     if (beer.name == filter) {
       document.querySelector(".more_container .name").textContent = beer.name;
@@ -656,8 +660,11 @@ function displayProducts(beer) {
   });
 
   clone.querySelector(".more").addEventListener("click", function () {
-    document.querySelector(".more_container").classList.remove("hidden_left");
-    document.querySelector(".more_container").classList.add("show");
+    document.querySelector(".more_container").classList.remove("hide");
+    setTimeout(() => {
+      document.querySelector(".more_container").classList.remove("hidden_left");
+      document.querySelector(".more_container").classList.add("show");
+    }, 300);
     filter = beer.name;
     displayReadMore();
   });

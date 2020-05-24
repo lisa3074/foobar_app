@@ -18,7 +18,7 @@ function displayBeers(data) {
   clone.querySelector(".name").textContent = data.name;
   clone.querySelector(".beer_alc").textContent = data.alc + "%";
   clone.querySelector(".beer_cat").textContent = data.category;
-  clone.querySelector(".label").src = "/images/labels/" + data.label;
+  clone.querySelector(".label").src = "images/labels/" + data.label;
   clone.querySelector(".label").alt = data.name;
   clone.querySelector(".aroma").textContent = data.description.aroma;
   clone.querySelector(".appearance").textContent = data.description.appearance;
