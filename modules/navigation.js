@@ -15,19 +15,19 @@ function links() {
       let site;
       console.log(menuIsOut);
       if (this == document.querySelector(".menu-home")) {
-        site = "/index.html";
+        site = "index.html";
       }
       if (this == document.querySelector(".menu-buy")) {
-        site = "/order.html";
+        site = "order.html";
       }
       if (this == document.querySelector(".menu-beer")) {
-        site = "/beer.html";
+        site = "beer.html";
       }
       if (this == document.querySelector(".menu-win")) {
-        site = "/win.html";
+        site = "win.html";
       }
       if (this == document.querySelector(".menu-login")) {
-        site = "/login.html";
+        site = "login.html";
       }
       if (menuIsOut.value == "desk_nav smooth_in") {
         goToSite(site);

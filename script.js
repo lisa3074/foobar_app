@@ -54,7 +54,7 @@ function appDelegation() {
     document.querySelector(".menu-home").classList.add("chosen");
     document.querySelector(".menu-home .icon_wrapper").classList.add("chosen_img");
     document.querySelector(".big_icon.win").addEventListener("click", function () {
-      location.href = "/win.html";
+      location.href = "win.html";
     });
     indexDelegation();
     toggleMenu();

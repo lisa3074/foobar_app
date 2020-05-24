@@ -48,31 +48,41 @@
       </div>
     </nav>
     <section class="winner">
-      <article class="win_top grid">
+      <article class="win_wrapper">
         <div class="grid_item1">
           <h1 class="win_title">WIN A FREE BEER</h1>
-          <p class="the_how">HOW?</p>
-          <p class="win_text">For every 100 beers sold one lucky bastard wins one beer of own choosing. To win, you’ll need to have ordered within the hour from the announcement. If you were the lucky one, show your receipt at the bar. You have 15 minutes to come get your prize after the winner is announced.</p>
+          <p class="the_how win_subhead">HOW?</p>
+          <p class="win_text paragraph">For every 100 beers sold one lucky bastard wins one beer of own choosing. To win, you’ll need to have ordered within the hour from the announcement.</p>
+          <p class="win_text paragraph">If you were the lucky one, show your receipt at the bar. You have 15 minutes to come get your prize after the winner is announced.</p>
         </div>
-        <div class="grid_item2">
-          <div class="track"></div>
-          <div class="bar"></div>
-          <p class="num">51<span class="percentage"></span>%</p>
-        </div>
-      </article>
-      <article class="win_bottom grid">
-        <div class="wrap">
-          <p class="heading">WHO IS THE WINNER</p>
-          <p class="content">?</p>
-        </div>
-        <div class="wrap">
-          <p class="heading">BEERS SOLD LEFT UNTIL WIN</p>
-          <p class="content">49</p>
-        </div>
-        <div class="wrap">
-          <p class="heading">BEER WON TODAY</p>
-          <p class="content">9</p>
-        </div>
+
+        <article class="progres_circle grid_item2">
+          <div class="box">
+            <div class="percent">
+              <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 150 150">
+                <circle cy="70" cx="70" r="70"></circle>
+                <circle cy="70" cx="70" r="70"></circle>
+              </svg>
+              <div class="number">
+                <p class="num win_percent"><span class="percentage win_number">50</span>%</p>
+              </div>
+            </div>
+          </div>
+        </article>
+        <article class="win_bottom grid_item3">
+          <div class="wrap">
+            <p class="win_subhead">BEERS WON TODAY</p>
+            <p class="win_smallnumbers">9</p>
+          </div>
+          <div class="wrap">
+            <p class="win_subhead">ORDERS LEFT UNTIL WIN</p>
+            <p class="win_smallnumbers">49</p>
+          </div>
+          <div class="wrap">
+            <p class="win_subhead">WHO IS THE WINNER</p>
+            <p class="win_smallnumbers">?</p>
+          </div>
+        </article>
       </article>
     </section>
 

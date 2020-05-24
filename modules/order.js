@@ -74,11 +74,11 @@ export function cartDelegation() {
 
   //document.querySelector(".thank_you_nav .home").addEventListener("click", checkValidity);
   document.querySelector(".thank_you_nav .log_in_done").addEventListener("click", function () {
-    locationSite = "/login.html";
+    locationSite = "login.html";
     goToPage(locationSite);
   });
   document.querySelector(".thank_you_nav .home").addEventListener("click", function () {
-    locationSite = "/index.html";
+    locationSite = "index.html";
     goToPage(locationSite);
   });
 }
@@ -146,7 +146,7 @@ function closePopUp() {
     cross.addEventListener("click", function () {
       form.reset();
       setTimeout(() => {
-        location.href = "/order.html";
+        location.href = "order.html";
       }, 500);
       document.querySelectorAll(".amount_chosen").forEach((amount) => {
         amount.textContent = "";

@@ -27,7 +27,7 @@ function displayBeers(data) {
   clone.querySelector(".overall").textContent = data.description.overallImpression;
 
   clone.querySelector(".buy_beer").addEventListener("click", function () {
-    location.href = "/order.html";
+    location.href = "order.html";
   });
 
   document.querySelector(".beer_container").appendChild(clone);

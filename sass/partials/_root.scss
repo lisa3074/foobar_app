@@ -7,7 +7,7 @@
   --soft-yellow: #ece0c9;
   --soft-purple: #bdacd7;
   --soft-purple-light: #ddd3eb;
-  --soft-blue: #c0cdf2;
+  --soft-blue: rgb(192, 205, 242, 0.5);
   --soft-gray: #b3a6be;
 
   --reg: "proxima_novaregular", sans-serif;
@@ -23,14 +23,6 @@
   --label: 0.85rem "proxima_novabold", sans-serif;
   --invalid: 0.8rem "proxima_novaregular", sans-serif;
   --paragraph: 0.85rem "proxima_novaregular", sans-serif;
-  /*  --title: 1.95rem "proxima_novabold", sans-serif;
-  --head1: 1.55rem "proxima_novabold", sans-serif;
-  --head2: 1.07rem "proxima_novabold", sans-serif;
-  --head3: 1.07rem "proxima_novaregular", sans-serif;
-  --head4: 0.95rem "proxima_novabold", sans-serif; //1.07
-  --head5: 0.8rem "proxima_novabold", sans-serif;
-  --label: 0.95rem "proxima_novabold", sans-serif;
-  --paragraph: 0.95rem "proxima_novaregular", sans-serif; */
 
   --rounded: 30px;
   --round-ru: 30px 0px 30px 30px;
@@ -46,8 +38,14 @@
   --fallback: rgb(145, 117, 188);
 
   --box-shadow: 3px 10px 20px -15px var(--dark);
-}
 
+  --win-title: 1.7rem "proxima_novabold", sans-serif;
+  --win-subhead: 1.1rem "proxima_novabold", sans-serif;
+  --win-number: 4.5rem "proxima_novabold", sans-serif;
+  --win-percent: 2rem "proxima_novabold", sans-serif;
+  --win-paragraph: 1.05rem "proxima_novaregular", sans-serif;
+  --win-smallnumbers: 3.125rem "proxima_novabold", sans-serif;
+}
 /* 
 WIN SITE FONT SIZES
 Overskrift: 2.5rem
@@ -69,3 +67,13 @@ tal: 3.125rem
   font-weight: normal;
   font-style: normal;
 }
+/* @media (min-width: 800px) {
+  :root {
+    --win-paragraph: 1.25rem "proxima_novaregular", sans-serif;
+    --win-title: 2.5rem "proxima_novabold", sans-serif;
+    --win-number: 5.3rem "proxima_novabold", sans-serif;
+    --win-percent: 3rem "proxima_novabold", sans-serif;
+    --win-subhead: 1.25rem "proxima_novabold", sans-serif;
+    --win-smallnumbers: 3.125rem "proxima_novabold", sans-serif;
+  }
+} */
