@@ -21,6 +21,8 @@ let theId;
 let formIsValid;
 let username_value;
 let password_value;
+const today = new Date();
+let todayDate = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
 
 const Product = {
   name: "",
@@ -41,6 +43,7 @@ const Product = {
   password: "",
   order_number: "",
   bartender: "",
+  date: "",
 };
 /*//////////////////////////////////
 ////// DELEGATION FUNCTIONS ///////
@@ -48,9 +51,9 @@ const Product = {
 
 export function cartDelegation() {
   console.log("cartDelegation");
-  setTimeout(() => {
+  /*  setTimeout(() => {
     checkAvailability();
-  }, 200);
+  }, 200); */
   loadJson();
   closePopUp();
   logInOrSignUp();
@@ -93,12 +96,14 @@ function payDelegation() {
     displayOrderNumber();
   }, 1000);
   setTimeout(() => {
+    console.log(todayDate);
     postRestDb({
       order_number: theId,
       total_beer: amount,
       total_price: total_price,
       username: username_value,
       password: password_value,
+      date: todayDate,
       restDbArray,
     });
   }, 2000);
@@ -209,6 +214,9 @@ async function loadJson() {
   jsonData = await response.json();
   let arrayProduct = productArray;
   makeBeerObject(arrayProduct);
+  setTimeout(() => {
+    checkAvailability();
+  }, 200);
 }
 
 function makeAmountObject() {
@@ -280,8 +288,9 @@ function checkIfValid(e) {
 
   formIsValid = checkPassWord();
   const user = getRestDB();
+  const isUserValid = checkUser();
 
-  if (isValid && formIsValid) {
+  if (isValid && formIsValid && isUserValid) {
     //post();
 
     console.log("all good");
@@ -337,6 +346,49 @@ function checkIfValid(e) {
     }
   }
   console.log("submitted");
+}
+
+async function checkUser() {
+  console.log("check user");
+  const login = document.querySelector("#has_account").checked;
+  const username = document.querySelector("#username").value;
+  const password = document.querySelector("#password").value;
+  let response = await fetch(restDb, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apikey": apiKey,
+      "cache-control": "no-cache",
+    },
+  });
+  let data = await response.json();
+  let result;
+  console.log(data);
+  if (login) {
+    console.log("login");
+    //Check validity
+    data.forEach((order) => {
+      if (order.username == username) {
+        console.log("Username correct");
+        result = false;
+        if (order.username == username && order.password == password) {
+          console.log("username and password correct");
+          result = true;
+        } else {
+          console.log("password incorrect");
+          result = false;
+        }
+      } else {
+        console.log("username incorrect");
+        result = false;
+      }
+      return result;
+    });
+  } else {
+    console.log("create login");
+    result = true;
+  }
+  return result;
 }
 
 function updateCounter() {
@@ -439,6 +491,8 @@ function createRestDbObject(ordered) {
   restDbObject.username = document.querySelector("#username").value;
   restDbObject.password = document.querySelector("#password").value;
   restDbObject.order_number = theId;
+  restDbObject.date = todayDate;
+  console.log(todayDate);
   //use last index to find full price of the order
   restDbObject.total_price = total_price;
   console.table(restDbObject);
@@ -461,11 +515,6 @@ function createRestDbArray(ordered) {
   restDbObject.name = ordered.name;
   restDbObject.amount = ordered.amount;
   restDbObject.price = ordered.amount * 40;
-  /*   restDbObject.total_beer = amount;
-  restDbObject.username = document.querySelector("#username").value;
-  restDbObject.password = document.querySelector("#password").value;
-  restDbObject.order_number = theId;
-  restDbObject.total_price = total_price; */
   restDbArray.push(restDbObject);
   console.table(restDbObject);
   console.table(restDbArray);

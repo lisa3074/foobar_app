@@ -1,66 +1,211 @@
+//import { loadJson } from "./bigQueue";
+const endpoint = "https://foobar3rdsemester.herokuapp.com/";
 const restDb = "https://frontend-22d4.restdb.io/rest/foobar";
+const apiKey = "5e9581a6436377171a0c234f";
+let form = document.querySelector(".login_form");
+let data;
 
-export function checkIfValid() {
-  console.log("checkValidity");
-  const user = getUser();
-  //Check validity
-  //if valid
-  loginDelegation(user);
-  displayAccount(user);
-  //else
-  displayError();
-}
-function getUser() {
+export async function getUser() {
   console.log("getUser");
   //GET
-  return;
+  let response = await fetch(restDb, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apikey": apiKey,
+      "cache-control": "no-cache",
+    },
+  });
+  data = await response.json();
+  console.log(data);
+  checkIfValid(data);
 }
-function displayError() {
+function checkIfValid(data) {
+  console.log("checkIfValid");
+  const username = document.querySelector("#username_login").value;
+  const password = document.querySelector("#password_login").value;
+  let userValid;
+
+  //Check validity
+  data.forEach((order) => {
+    if (order.username == username) {
+      console.log("Username correct");
+      userValid = true;
+      if (order.username == username && order.password == password) {
+        console.log("username and password correct");
+        loginDelegation(username, data);
+        displayAccount();
+      } else {
+        console.log("password incorrect");
+        displayError(userValid);
+        userValid = true;
+      }
+    } else {
+      console.log("username incorrect");
+      displayError(userValid);
+    }
+  });
+}
+function displayError(userValid) {
   console.log("displayError");
+  const username = document.querySelector("#username_login");
+  const password = document.querySelector("#password_login");
+
+  if (userValid) {
+    console.log("correct username");
+    username.classList.remove("invalid");
+    password.classList.add("invalid");
+    document.querySelector(".invalid_user").classList.add("hide");
+    document.querySelector(".invalid_password").classList.remove("hide");
+  } else {
+    console.log("invalid username");
+    username.classList.add("invalid");
+    document.querySelector(".invalid_user").classList.remove("hide");
+  }
 }
-function loginDelegation(user) {
+
+function loginDelegation(username, data) {
   console.log("loginDelegation");
-  displayAccount(user);
-  setReceipts(user);
+  displayAccount();
   document.querySelector(".account_container .grid_item3").addEventListener("click", logout);
-  document.querySelector(".account_container .grid_item2").addEventListener("click", setReceipts);
-  document.querySelector(".check_status .check").addEventListener("click", getStatus);
+  document.querySelector(".account_container .grid_item2").addEventListener("click", function () {
+    displayReceipts(username, data);
+  });
+  document.querySelector(".check_status .check").addEventListener("click", function (e) {
+    e.preventDefault;
+    getStatus(e);
+  });
 }
-function displayAccount(user) {
+function displayAccount() {
   console.log("displayAccount");
   document.querySelector(".log_in_container").classList.add("hide");
   document.querySelector(".account_container").classList.remove("hide");
-  document.querySelector(".receipts_container").classList.add("hide");
+  document.querySelector(".receipts_wrapper").classList.add("hide");
   document.querySelector(".main_content .login_heading").textContent = "ACCOUNT";
 }
 
-function setReceipts(user) {
-  console.log("setReceipts");
-  displayReceipts();
-}
 function logout() {
   console.log("logout");
   document.querySelector(".log_in_container").classList.remove("hide");
   document.querySelector(".account_container").classList.add("hide");
-  document.querySelector(".receipts_container").classList.add("hide");
+  document.querySelector(".receipts_wrapper").classList.add("hide");
+  document.querySelector(".invalid_password").classList.add("hide");
+  document.querySelector(".invalid_user").classList.add("hide");
+  document.querySelector("#password_login").classList.remove("invalid");
+  document.querySelector("#username_login").classList.remove("invalid");
+  form.reset();
   document.querySelector(".main_content .login_heading").textContent = "LOG IN";
 }
 
-function displayReceipts() {
+function displayReceipts(username, data) {
   console.log("displayReceipts");
+  document.querySelector(".receipts_container").innerHTML = "";
+  data.forEach((order) => {
+    if (username == order.username) {
+      console.table(order);
+      const clone = document.querySelector(".receipt_temp").content.cloneNode(true);
+      clone.querySelector(".wrapper").dataset.id = order._id;
+      clone.querySelector(".name").textContent = order.date;
+      clone.querySelector(".order_number").textContent = order.order_number;
+      clone.querySelector(".price").textContent = order.total_price;
+      clone.querySelector(".total_amount").textContent = order.total_price;
+      order.restDbArray.forEach((beer) => {
+        const clone_details = document.querySelector(".details_temp").content.cloneNode(true);
+        clone_details.querySelector(".article").textContent = beer.name;
+        clone_details.querySelector(".amount").textContent = beer.amount;
+        clone_details.querySelector(".final_amount").textContent = beer.price;
+        clone.querySelector(".details").appendChild(clone_details);
+      });
+      clone.querySelector(".delete").addEventListener("click", function () {
+        deleteIt(order._id);
+      });
+      document.querySelector(".receipts_container").appendChild(clone);
+    }
+  });
   document.querySelector(".log_in_container").classList.add("hide");
   document.querySelector(".account_container").classList.add("hide");
-  document.querySelector(".receipts_container").classList.remove("hide");
+  document.querySelector(".receipts_wrapper").classList.remove("hide");
   document.querySelector(".main_content .login_heading").textContent = "RECEIPTS";
   document.querySelector(".close_receipts").addEventListener("click", function () {
     displayAccount();
   });
 }
-function getStatus() {
-  console.log("getStatus");
-  //gem resultatet in en const status
-  displayStatus(status);
+
+async function deleteIt(id) {
+  console.log("delete");
+  //elementet med det pågældende id (der er sendt med videre fra klik) slettes med det samme i DOM'en
+  document.querySelector(`article[data-id="${id}"]`).remove();
+  let response = await fetch(`${restDb}/${id}`, {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apikey": apiKey,
+      "cache-control": "no-cache",
+    },
+  });
+  //Herefter slettes elementet i db
+  data = await response.json();
+  console.log(data);
 }
-function displayStatus(status) {
+
+async function getStatus(e) {
+  e.preventDefault();
+  const orderNumber = document.querySelector("#ordernum").value;
+  let status;
+  let workingTender;
+  let tenderStatus;
+  console.log("getStatus");
+  //GET
+  let response = await fetch(endpoint, {
+    method: "get",
+  });
+  let herokuData = await response.json();
+  console.log(herokuData);
+
+  //gem resultatet in en const status
+  herokuData.queue.forEach((orders) => {
+    if (orderNumber == orders.id) {
+      console.log("queue");
+      status = "queue";
+    }
+  });
+  herokuData.serving.forEach((order) => {
+    if (orderNumber == order.id) {
+      console.log("served");
+      status = "served";
+      herokuData.bartenders.forEach((bartender) => {
+        if (orderNumber == bartender.servingCustomer) {
+          workingTender = bartender.name;
+          if (bartender.statusDetail == "pourBeer" || bartender.statusDetail == "reserveTap" || bartender.statusDetail == "startServing" || bartender.statusDetail == "releaseTap") {
+            tenderStatus = "pouring";
+          } else if (bartender.statusDetail == "receivePayment") {
+            tenderStatus = "done";
+          }
+        }
+      });
+    }
+  });
+  displayStatus(status, workingTender, tenderStatus);
+}
+function displayStatus(status, workingTender, tenderStatus) {
   console.log("displayStatus");
+
+  if (status == "queue") {
+    console.log("still in queue");
+    document.querySelector(".status_write").textContent = "Still in queue...";
+  } else if (status == "served") {
+    if (tenderStatus == "pouring") {
+      document.querySelector(".status_write").textContent = "Being poured right now!";
+      document.querySelector(".bartender_write").textContent = "Your bartender is " + workingTender;
+    } else {
+      document.querySelector(".status_write").textContent = "Ready for pick up!";
+      document.querySelector(".bartender_write").textContent = "Served by " + workingTender;
+    }
+
+    console.log("being served");
+  } else {
+    document.querySelector(".status_write").textContent = "Has been picked up...";
+    console.log("The order has been picked up or the order does not exist");
+    document.querySelector(".bartender_write").textContent = "";
+  }
 }

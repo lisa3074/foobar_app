@@ -68,8 +68,10 @@
   }
   .status_write {
     color: var(--white);
-    padding: 1rem;
+    padding: 1rem 1rem 0.2rem 0;
+    text-transform: uppercase;
   }
+
   .title {
     padding-top: 1rem;
   }
@@ -181,7 +183,7 @@
 }
 
 .receipts_container {
-  .receipt_details {
+  .details {
     padding: 1rem 0;
   }
   .buy_items {
@@ -217,7 +219,7 @@
   }
 }
 
-.receipts_container {
+.receipts_wrapper {
   background-color: var(--soft-pink);
   z-index: 2;
   width: 100vw;
@@ -368,7 +370,7 @@
 }
 
 @media (min-width: 975px) {
-  .receipts_container {
+  .receipts_wrapper {
     .receipt_heading {
       padding: 1.5rem 2rem 2rem 4rem;
     }

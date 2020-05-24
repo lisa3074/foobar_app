@@ -56,13 +56,15 @@
               <div>
                 <label for="username_login" class="labels">USERNAME</label>
                 <input type="text" id="username_login" placeholder="JOHN SMITH" name="login" minlength="5" required />
-                <p class="invalid_text star">The password does not mach an existing login</p>
+                <p class="invalid_text star">*</p>
               </div>
               <div>
                 <label for="password_login" class="labels">PASSWORD</label>
                 <input type="password" id="password_login" placeholder="••••••••" name="login" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required />
-                <p class="invalid_text star">The password does not mach an existing login</p>
+                <p class="invalid_text star">*</p>
               </div>
+              <p class="invalid_user invalid_text hide">The username does not mach an existing login</p>
+              <p class="invalid_password invalid_text hide">The password does not mach an existing login</p>
             </fieldset>
           </form>
         </article>
@@ -75,7 +77,8 @@
         <article class="grid_item1">
           <div>
             <h2 class="title">ORDER STATUS</h2>
-            <p class="head2 status_write">... STILL BREWING</p>
+            <p class="head2 status_write"></p>
+            <p class="head2 bartender_write"></p>
           </div>
           <form class="check_status">
             <label for="ordernum" class="labels">TYPE IN YOUR ORDER NUMBER</label>
@@ -92,50 +95,20 @@
           <h4 class="head4">LOG OUT</h4>
         </article>
       </section>
-      <section class="receipts_container hide">
-        <!-- APPEND RECEIPTS HERE -->
+      <section class="receipts_wrapper hide">
         <h1 class="title receipt_heading">YOUR RECEIPTS</h1>
         <img src="/static/images/svg_icons/dark_cancel.svg" alt="close" class="close_receipts close" />
-        <article class="wrapper">
-          <details class="receipt">
-            <summary>
-              <div class="down">
-                <img src="/static/images/svg_icons/yellow_arrow.svg" alt="Read more" class="arrow_down go_up" />
-                <h1 class="head2 name">11/5-2020</h1>
-              </div>
-              <p class="head2 order">ORDER NR.<span class="order_number head3">65</span></p>
-              <p class="head2 price_container"><span class="price">200</span> DKK</p>
-            </summary>
-            <div class="receipt_details">
-              <div class="buy_items grid">
-                <h3 class="head2 article">MOWINTIME</h3>
-                <p class="paragraph amount">4 stk.</p>
-                <p class="labels final_amount">160 DKK</p>
-              </div>
-              <div class="buy_items grid">
-                <h3 class="head2 article">EL HEFE</h3>
-                <p class="paragraph amount">1 stk.</p>
-                <p class="labels final_amount">40 DKK</p>
-              </div>
-            </div>
-            <div class="grid total">
-              <h3 class="head2">TOTAL</h3>
-              <p class="labels"><span class="total_amount">200</span> DKK</p>
-            </div>
-            <div class="button_container">
-              <button class="delete head2 secondary">DELETE</button>
-            </div>
-          </details>
-        </article>
+      
+      <article class="receipts_container">
+        <!-- APPEND RECEIPTS HERE -->
         <!-- APPEND RECEIPTS ENDS HERE -->
-      </section>
+      </article>
+    </section>
     </main>
     
     <!-- RECEIPT TEMPLATE -->
      <template class="receipt_temp">
-      <h1 class="title receipt_heading">YOUR RECEIPTS</h1>
-      <img src="/static/images/svg_icons/dark_cancel.svg" alt="close" class="close_receipts close" />
-      <article class="wrapper">
+      <article class="wrapper" data-id="">
         <details class="receipt">
           <summary>
             <div class="down">
@@ -145,6 +118,7 @@
             <p class="head2 order">ORDER NR.<span class="order_number head3"></span></p>
             <p class="head2 price_container"><span class="price"></span> DKK</p>
           </summary>
+          <div class="details">
           <!-- APPEND DETAIL-LIST HERE -->
          
           </div>

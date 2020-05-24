@@ -1,6 +1,6 @@
 "use strict";
 import "@babel/polyfill";
-import { checkIfValid as checkIfValidLogin } from "./modules/login";
+import { getUser } from "./modules/login";
 import { cartDelegation } from "./modules/order";
 import { toggleMenu } from "./modules/navigation";
 import { indexDelegation } from "./modules/queue";
@@ -24,7 +24,7 @@ function appDelegation() {
   const dashBody = document.querySelector(".dashBody");
 
   if (loginBody) {
-    document.querySelector(".grid_item3 .log_into_account").addEventListener("click", checkIfValidLogin);
+    document.querySelector(".grid_item3 .log_into_account").addEventListener("click", getUser);
     document.querySelector(".menu-login").classList.add("chosen");
     document.querySelector(".menu-login .icon_wrapper").classList.add("chosen_img");
     toggleMenu();
