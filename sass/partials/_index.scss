@@ -150,27 +150,25 @@ body {
 //PROGRESS
 ///////////////////
 .progres_circle {
-  display: flex;
-  flex-wrap: nowrap;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  height: 100%;
+  width: 100%;
 }
 
 .win {
   position: relative;
+  padding: 1rem;
 }
 
-.win_txt {
-  position: absolute;
-  transform: translate(0px, -68px);
-  padding: 0 1rem;
+.big_icon.win .head4 {
+  padding-bottom: 0;
+  align-self: center;
 }
 .box_icon {
   position: relative;
-  width: 70%;
-  height: 70%;
-  padding-bottom: 0.5rem;
+  width: 100%;
+  height: 100%;
+  // padding-bottom: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -226,6 +224,14 @@ svg {
   color: var(--dark);
 }
 
+@media (min-width: 514px) {
+  .infobox .wrap {
+    flex-basis: 200px;
+  }
+  .win_number {
+    font-size: 2rem;
+  }
+}
 @media (min-width: 570px) {
   .logo {
     width: 30%;
@@ -237,11 +243,6 @@ svg {
 
   .big_icon .head4 {
     padding-bottom: 2rem;
-  }
-}
-@media (min-width: 514px) {
-  .infobox .wrap {
-    flex-basis: 200px;
   }
 }
 @media (min-width: 650px) {
@@ -267,6 +268,9 @@ svg {
   }
   .big_icon .head4 {
     padding-bottom: 1rem;
+  }
+  .win_number {
+    font-size: 1.5rem;
   }
 }
 @media (min-width: 800px) {
@@ -330,11 +334,8 @@ svg {
   .progres_circle {
     justify-content: space-between;
   }
-  .box_icon {
-    padding-bottom: 2rem;
-  }
-  .win_txt {
-    padding-top: 1rem;
+  .win_number {
+    font-size: 2rem;
   }
 
   @keyframes the_ani_height {
@@ -354,12 +355,19 @@ svg {
   }
 }
 
+@media (min-width: 1000px) {
+  .win .head4 {
+    font: var(--head2);
+  }
+}
+
 @media (min-width: 1100px) {
   .logo {
     width: 15%;
     left: 46%;
   }
 }
+
 @media (min-width: 1300px) {
   .big_icon .head4 {
     padding-bottom: 2rem;
@@ -369,5 +377,8 @@ svg {
     display: flex;
     flex-wrap: nowrap;
     align-content: center;
+  }
+  .win_number {
+    font-size: 2.5rem;
   }
 }
