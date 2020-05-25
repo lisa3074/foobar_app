@@ -129,6 +129,7 @@ function closePopUp() {
   console.log("closePopUp");
   document.querySelectorAll(".cart_close, .edit").forEach((button) => {
     button.addEventListener("click", function () {
+      document.querySelector(".order_container").classList.remove("hide");
       window.scrollTo(0, 0);
       document.querySelector(".cart").classList.add("fadeOut");
       document.querySelector(".cart").classList.remove("fadeInRight");
@@ -686,6 +687,7 @@ function displayAmount(param, clicked, el) {
 function displaySummary() {
   console.log("displaySummary");
   document.querySelector(".result").classList.remove("hide");
+  document.querySelector(".order_container").classList.add("hide");
   document.querySelector(".cart").classList.remove("hide");
   document.querySelector(".cart").classList.remove("fadeOut");
   document.querySelector(".cart").classList.add("fadeInRight");

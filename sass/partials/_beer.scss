@@ -1,4 +1,4 @@
-.beerBody summary {
+.beerBody .summary {
   padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -8,7 +8,10 @@
     "down down"
     "cat alc";
 }
-
+.beerBody summary {
+  display: block;
+  padding: 0;
+}
 .beer_container {
   .down {
     grid-area: down;
@@ -138,7 +141,7 @@ p.disclamer {
   .beer_wrapper {
     padding: 1rem 1rem 3rem calc(1rem + 80px);
   }
-  .beerBody summary {
+  .beerBody .summary {
     padding: 0;
     display: grid;
     align-items: center;
@@ -155,7 +158,7 @@ p.disclamer {
 @media (min-width: 1000px) {
   .beer_container {
     .more_body,
-    summary {
+    .summary {
       grid-template-columns: 2.5fr 2fr 1.5fr;
     }
   }

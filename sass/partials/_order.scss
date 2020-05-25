@@ -76,7 +76,7 @@ details summary::-webkit-details-marker {
 }
 
 //SUMMARY
-summary {
+.summary {
   display: grid;
   grid-template-columns: 2fr 0.5fr;
   padding: 0 1rem;
@@ -413,7 +413,7 @@ button.pay {
   .first_part_grid {
     grid-template-columns: 1fr 1fr;
   }
-  summary {
+  .summary {
     grid-template-columns: 4fr 1fr;
   }
   .down {

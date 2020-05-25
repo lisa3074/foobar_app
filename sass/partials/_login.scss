@@ -150,7 +150,7 @@
   padding: 2rem;
 }
 
-.receipts_container summary {
+.receipts_container .summary {
   padding: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -283,7 +283,7 @@
       "button button pic pic";
   }
 
-  .receipts_container summary {
+  .receipts_container .summary {
     display: grid;
     grid-template-columns: 1.5fr 1fr 1fr;
     grid-template-rows: 1fr;
@@ -309,7 +309,7 @@
       grid-area: order;
       justify-self: flex-start;
     }
-    summary .price_container {
+    .summary .price_container {
       grid-area: price;
       justify-self: flex-end;
       align-self: center;
