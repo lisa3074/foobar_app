@@ -69,9 +69,9 @@ function getWinner(min, max) {
   return Math.floor(Math.random() * (max - min)) + min;
 }
 function displayProgress(percentUntilWin) {
+  console.log("displayProgress");
   const path = document.querySelector(".box .percent svg circle:nth-child(2)");
   path.style.setProperty("--progress", percentUntilWin);
-  console.log("displayProgress");
   document.querySelector(".win_number").textContent = percentUntilWin;
   //vis animation
 }

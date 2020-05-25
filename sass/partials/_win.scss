@@ -185,6 +185,10 @@
 }
 @media (min-width: 800px) {
   .winner {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: center;
     padding: 2rem 2rem 2rem 100px;
     .grid_item1 {
       grid-area: text;
@@ -195,9 +199,10 @@
     }
     .grid_item3 {
       grid-area: facts;
-      padding-top: 2rem;
+      padding: 2rem;
     }
     .win_wrapper {
+      justify-items: center;
       display: grid;
       grid-template-columns: auto auto;
       grid-template-rows: 50vh 30vh;

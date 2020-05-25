@@ -3,10 +3,11 @@ const array = [];
 let jsonData;
 let beforeLastServed;
 let oldBeerCount = 0;
+let lastTime = 0;
 //let beerCount;
 
 const Queue = {
-  queueNumber: "",
+  queueLength: "",
   loggedAt: "",
   servedToday: "",
 };
@@ -24,34 +25,44 @@ async function loadJson() {
   makeObjects();
 }
 function makeObjects() {
+  let now;
   console.log("makeObjects");
   const foobarObject = Object.create(Queue);
   console.log(jsonData);
-  foobarObject.queueNumber = jsonData.queue.length;
+  foobarObject.queueLength = jsonData.queue.length;
   foobarObject.serving1 = JSON.parse(jsonData.bartenders[0]["servingCustomer"]);
   foobarObject.serving2 = JSON.parse(jsonData.bartenders[1]["servingCustomer"]);
   foobarObject.serving3 = JSON.parse(jsonData.bartenders[2]["servingCustomer"]);
   foobarObject.servedToday = Math.max(foobarObject.serving1, foobarObject.serving2, foobarObject.serving3);
-  if (foobarObject.queueNumber > 0) {
-    foobarObject.orderNumber = JSON.parse(jsonData.queue[0]["id"]);
-    foobarObject.loggedAt = JSON.parse(jsonData.queue[0]["startTime"]);
-
-    //checks how many beer were ordered in each order to get the full number of ordered beers (only works until reload)
-    for (let i = 0; i < foobarObject.queueNumber; i++) {
-      foobarObject.order = jsonData.queue[i].order.length;
-      oldBeerCount += foobarObject.order;
-      console.log(oldBeerCount);
-    }
+  now = new Date().getTime();
+  console.log(now - lastTime);
+  if (now - lastTime > 1000) {
+    setData(foobarObject);
   }
-  foobarObject.beerCount = oldBeerCount;
+  if (now - lastTime > 10000) {
+    if (foobarObject.queueLength > 0) {
+      foobarObject.orderNumber = JSON.parse(jsonData.queue[0]["id"]);
+      foobarObject.loggedAt = JSON.parse(jsonData.queue[0]["startTime"]);
 
-  //foobarObject.beingPoured = jsonData.bartenders.servingCustomer;
-  console.log(foobarObject);
-  loops(foobarObject);
+      //checks how many beer were ordered in each order to get the full number of ordered beers (only works until reload)
+      for (let i = 0; i < foobarObject.queueLength; i++) {
+        foobarObject.order = jsonData.queue[i].order.length;
+        oldBeerCount += foobarObject.order;
+        console.log(oldBeerCount);
+      }
+    }
+    foobarObject.beerCount = oldBeerCount;
+
+    //foobarObject.beingPoured = jsonData.bartenders.servingCustomer;
+    console.log(foobarObject);
+
+    loops(foobarObject);
+    lastTime = now;
+  }
 }
 function loops(foobarObject) {
   console.log("loops");
-  const queue = foobarObject.queueNumber;
+  const queue = foobarObject.queueLength;
   array.unshift(queue);
   if (array.length <= 5) {
     console.log("under 10");
@@ -60,7 +71,6 @@ function loops(foobarObject) {
     array.pop();
   }
   //console.log(array);
-
   displayQueue(foobarObject);
 }
 function displayQueue(foobarObject) {
@@ -92,7 +102,7 @@ function displayQueue(foobarObject) {
       foobarObject.servedToday = beforeLastServed;
     }
     timeStamp.textContent = theRightIime;
-    queueNow.textContent = foobarObject.queueNumber;
+    queueNow.textContent = foobarObject.queueLength;
     barNum.textContent = array[number];
     wins.textContent = winsNow;
     served.textContent = foobarObject.servedToday;
@@ -103,4 +113,41 @@ function displayQueue(foobarObject) {
     document.querySelector(".wrap:nth-child(1) > .q_bar").classList.remove("nullHeight");
     document.querySelector(".wrap:nth-child(1) > .q_bar").classList.add("fullHeight");
   }, 10000);
+}
+function setData(winObject) {
+  console.log("setData");
+  let servedToday = winObject.servedToday;
+  let percentUntilWin;
+
+  if (servedToday == 0) {
+    servedToday = beforeLastServed;
+  }
+  console.log(beforeLastServed);
+  if (servedToday < 100) {
+    percentUntilWin = servedToday;
+  } else if (servedToday < 1000) {
+    const thePercentage = servedToday.toString();
+    console.log(servedToday);
+    percentUntilWin = thePercentage.substring(1, 3);
+  } else {
+    const thePercentage = servedToday.toString();
+    console.log(servedToday);
+    percentUntilWin = thePercentage.substring(2, 4);
+  }
+
+  const ordersLeft = 100 - percentUntilWin;
+  displayProgress(percentUntilWin);
+  displayData(ordersLeft);
+}
+function displayProgress(percentUntilWin) {
+  console.log("displayProgress");
+  const path = document.querySelector("div > svg > circle:nth-child(2)");
+  path.style.setProperty("--progress", percentUntilWin);
+  document.querySelector(".win_number").textContent = percentUntilWin;
+}
+function displayData(ordersLeft) {
+  document.querySelector(".beernumber").textContent = ordersLeft;
+  setTimeout(() => {
+    loadJson();
+  }, 1000);
 }
