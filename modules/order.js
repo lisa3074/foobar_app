@@ -97,7 +97,11 @@ function payDelegation() {
   setTimeout(() => {
     console.log(theId);
     displayOrderNumber();
-  }, 1000);
+  }, 1300);
+  setTimeout(() => {
+    console.log(theId);
+    displayOrderNumber();
+  }, 2000);
   setTimeout(() => {
     console.log(todayDate);
     postRestDb({

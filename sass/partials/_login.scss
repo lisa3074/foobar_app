@@ -86,6 +86,20 @@
     padding: 0;
   }
 }
+
+.log_in_site {
+  .star {
+    position: absolute;
+    font: var(--title);
+  }
+  div:nth-child(1) > .star {
+    transform: translateY(-78px) translateX(80px);
+  }
+  div:nth-child(2) > .star {
+    transform: translateY(-76px) translateX(80px);
+  }
+}
+
 .account_container .grid_item2 {
   grid-area: reciepts;
   background-image: url(/static/images/big_icons/creditDone.jpg);
