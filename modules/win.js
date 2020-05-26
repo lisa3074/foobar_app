@@ -1,4 +1,4 @@
-const url = "https://foobar3rdsemester.herokuapp.com/";
+const url = "https://foobar3exam.herokuapp.com/";
 let beforeLastServed;
 let lastTime = 0;
 //let jsonData;

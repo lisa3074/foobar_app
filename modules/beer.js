@@ -1,4 +1,4 @@
-const url = "https://foobar3rdsemester.herokuapp.com/beertypes";
+const url = "https://foobar3exam.herokuapp.com/beertypes";
 export async function loadJsonBeer() {
   console.log("loadJson - beer.js");
   let response = await fetch(url);

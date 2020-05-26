@@ -1,4 +1,4 @@
-const url = "https://foobar3rdsemester.herokuapp.com/";
+const url = "https://foobar3exam.herokuapp.com/";
 const array = [];
 let jsonData;
 let beforeLastServed;

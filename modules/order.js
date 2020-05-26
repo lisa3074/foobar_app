@@ -1,6 +1,6 @@
 let locationSite;
-const url = "https://foobar3rdsemester.herokuapp.com/beertypes";
-const endpoint = "https://foobar3rdsemester.herokuapp.com/";
+const url = "https://foobar3exam.herokuapp.com/beertypes";
+const endpoint = "https://foobar3exam.herokuapp.com/";
 const restDb = "https://frontend-22d4.restdb.io/rest/foobar";
 const apiKey = "5e9581a6436377171a0c234f";
 let jsonData;
@@ -77,7 +77,9 @@ export function cartDelegation() {
   });
 
   //document.querySelector(".button_container .more").addEventListener("click", displayReadMore);
-  document.querySelector(".order_nav_wrapper .reset").addEventListener("click", reset);
+  document.querySelector(".order_nav_wrapper .reset").addEventListener("click", function () {
+    location.href = "order.html";
+  });
   document.querySelector(".view_cart").addEventListener("click", displaySummary);
   document.querySelector(".checkout").addEventListener("click", displayPayment);
   document.querySelector(".credit_card_nav .pay").addEventListener("click", (e) => {
@@ -104,11 +106,9 @@ function payDelegation() {
 
   postHeroku();
   setTimeout(() => {
-    console.log(theId);
     displayOrderNumber();
   }, 1300);
   setTimeout(() => {
-    console.log(theId);
     displayOrderNumber();
   }, 2000);
   setTimeout(() => {
@@ -144,12 +144,12 @@ function closePopUp() {
   document.querySelectorAll(".cart_close, .edit").forEach((button) => {
     button.addEventListener("click", function () {
       location.href = "order.html";
-      document.querySelector(".order_container").classList.remove("hide");
+      /*   document.querySelector(".order_container").classList.remove("hide");
       window.scrollTo(0, 0);
       document.querySelector(".cart").classList.add("fadeOut");
       document.querySelector(".cart").classList.remove("fadeInRight");
       total_price = 0;
-      total_amount = 0;
+      total_amount = 0; */
       setTimeout(() => {
         document.querySelector(".cart").classList.add("hide");
         document.querySelector(".result_nav").classList.remove("hide");
@@ -161,7 +161,7 @@ function closePopUp() {
       }, 1200);
     });
   });
-  document.querySelectorAll(".cart_close").forEach((cross) => {
+  /*  document.querySelectorAll(".cart_close").forEach((cross) => {
     cross.addEventListener("click", function () {
       form.reset();
       setTimeout(() => {
@@ -175,7 +175,7 @@ function closePopUp() {
       });
       reset();
     });
-  });
+  }); */
 }
 
 function logInOrSignUp() {
@@ -220,7 +220,6 @@ async function checkAvailability() {
       // console.log(data.taps[i]["beer"]);
       if (data.taps[i]["beer"] == e) {
         let availableBeer = data.taps[i]["beer"];
-        console.log(availableBeer);
         displayAvailableBeer(availableBeer);
       }
     }
@@ -582,21 +581,9 @@ async function postHeroku() {
     body: postData,
   });
   data = await response.json();
-  console.log(data);
+  theId = data.id;
+  console.log(data.id);
   displayThankYou();
-  setTimeout(() => {
-    getHeroku();
-  }, 700);
-}
-
-async function getHeroku() {
-  console.log("getHeroku");
-  //GET the just placed order (order number)
-  let response = await fetch(endpoint, {
-    method: "get",
-  });
-  data = await response.json();
-  theId = data.queue[0]["id"];
 }
 
 /*
@@ -609,7 +596,6 @@ function displayAvailableBeer(beer) {
   const className = beer;
   const noSpaces = className.toLowerCase().replace(" ", "");
   const noSpacesAtAll = noSpaces.replace(" ", "");
-  console.log(noSpacesAtAll);
   document.querySelectorAll(".wrapper").forEach((e) => {
     if (e.classList[2] == noSpacesAtAll) {
       e.classList.remove("disabled");

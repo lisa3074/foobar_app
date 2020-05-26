@@ -1,5 +1,5 @@
 //import { loadJson } from "./bigQueue";
-const endpoint = "https://foobar3rdsemester.herokuapp.com/";
+const endpoint = "https://foobar3exam.herokuapp.com/";
 const restDb = "https://frontend-22d4.restdb.io/rest/foobar";
 const apiKey = "5e9581a6436377171a0c234f";
 let form = document.querySelector(".login_form");
