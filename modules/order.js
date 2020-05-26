@@ -101,6 +101,7 @@ function payDelegation() {
   updateCounter();
   console.log(order);
   console.table(orderDetails);
+
   postHeroku();
   setTimeout(() => {
     console.log(theId);
@@ -142,6 +143,7 @@ function closePopUp() {
   console.log("closePopUp");
   document.querySelectorAll(".cart_close, .edit").forEach((button) => {
     button.addEventListener("click", function () {
+      location.href = "order.html";
       document.querySelector(".order_container").classList.remove("hide");
       window.scrollTo(0, 0);
       document.querySelector(".cart").classList.add("fadeOut");
