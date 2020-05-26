@@ -18,7 +18,7 @@ input {
 #full_name,
 #number,
 .small_inputs {
-  width: 16rem;
+  width: 100%;
 }
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -151,13 +151,12 @@ input:hover:not(:focus):not(:disabled) {
 //SPECIFIC STYLING
 
 #month,
-#year,
-#secure {
-  width: 6ch;
+#year {
+  width: 8ch;
 }
 
 #secure {
-  width: 9ch;
+  width: 12ch;
 }
 
 .choice {
@@ -183,7 +182,7 @@ input:hover:not(:focus):not(:disabled) {
   justify-content: space-between;
 }
 .card_ani {
-  width: 50%;
+  width: 100%;
   padding-bottom: 1rem;
   display: flex;
   margin-top: 0 auto;
@@ -260,6 +259,8 @@ label.labels {
     min-width: auto;
     width: 250px;
     height: 167px;
+    width: 320px;
+    height: 204px;
   }
 
   #card .jp-card .jp-card-front {
@@ -280,6 +281,31 @@ label.labels {
   }
 }
 
+@media (min-width: 400px) {
+  .card_ani {
+    width: 50%;
+  }
+  .user input,
+  #full_name,
+  #number,
+  .small_inputs {
+    width: 16rem;
+  }
+  #month,
+  #year {
+    width: 6ch;
+  }
+
+  #secure {
+    width: 9ch;
+  }
+  #card .card_ani .jp-card-container,
+  #card .card_ani .jp-card {
+    min-width: auto;
+    width: 250px;
+    height: 167px;
+  }
+}
 @media (min-width: 600px) {
   .choice {
     flex-direction: row;

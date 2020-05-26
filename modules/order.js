@@ -19,8 +19,10 @@ let order;
 let orderDetails;
 let theId;
 let formIsValid;
+let isUserValid;
 let username_value;
 let password_value;
+let result;
 const today = new Date();
 let todayDate = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
 
@@ -44,6 +46,7 @@ const Product = {
   order_number: "",
   bartender: "",
   date: "",
+  time: "",
 };
 /*//////////////////////////////////
 ////// DELEGATION FUNCTIONS ///////
@@ -63,7 +66,14 @@ export function cartDelegation() {
     setTimeout(() => {
       document.querySelector(".more_container").classList.add("hide");
     }, 1000);
+
     document.querySelector(".more_container").classList.remove("show");
+    document.querySelector(".order_container").classList.remove("hide");
+    document.querySelector(".order_container").classList.remove("fadeOut");
+    document.querySelector(".order_container").classList.add("fadeIn");
+    setTimeout(() => {
+      document.querySelector(".order_container").classList.remove("fadeIn");
+    }, 500);
   });
 
   //document.querySelector(".button_container .more").addEventListener("click", displayReadMore);
@@ -106,6 +116,7 @@ function payDelegation() {
     console.log(todayDate);
     postRestDb({
       order_number: theId,
+      time: today.getTime(),
       total_beer: amount,
       total_price: total_price,
       username: username_value,
@@ -178,10 +189,14 @@ function logInOrSignUp() {
         document.querySelector(".invalid_password2").classList.add("hide");
         document.querySelector("#secure_pass").removeAttribute("required");
         document.querySelector(".secure_pass").classList.add("hide");
+        document.querySelector(".invalid_password_match").classList.add("hide");
+        document.querySelector(".invalid_user_match").classList.add("hide");
       } else {
         console.log("create account");
         document.querySelector("#secure_pass").setAttribute("required", "");
         document.querySelector(".secure_pass").classList.remove("hide");
+        document.querySelector(".invalid_password_match").classList.add("hide");
+        document.querySelector(".invalid_user_match").classList.add("hide");
       }
     });
   });
@@ -268,17 +283,7 @@ function fetchProducts(product) {
 function checkIfValid(e) {
   console.log("checkIfValid");
   e.preventDefault();
-  const isValid = form.checkValidity();
   const forElements = form.querySelectorAll("input");
-  const creditNum = document.querySelector("#number");
-  const month = document.querySelector("#month");
-  const year = document.querySelector("#year");
-  const cvc = document.querySelector("#secure");
-  const name = document.querySelector("#full_name");
-  const username = document.querySelector("#username");
-  const password = document.querySelector("#password");
-  const password2 = document.querySelector("#secure_pass");
-  const login = document.querySelector("#has_account").checked;
 
   forElements.forEach((el) => {
     el.classList.remove("invalid");
@@ -295,10 +300,25 @@ function checkIfValid(e) {
   });
 
   formIsValid = checkPassWord();
-  const user = getRestDB();
-  const isUserValid = checkUser();
+  isUserValid = checkUser();
 
-  if (isValid && formIsValid && isUserValid) {
+  checkIfAllIsValid();
+}
+
+function checkIfAllIsValid() {
+  console.log("checkIfAllIsValid");
+  const forElements = form.querySelectorAll("input");
+  const isValid = form.checkValidity();
+  const creditNum = document.querySelector("#number");
+  const month = document.querySelector("#month");
+  const year = document.querySelector("#year");
+  const cvc = document.querySelector("#secure");
+  const name = document.querySelector("#full_name");
+  const username = document.querySelector("#username");
+  const password = document.querySelector("#password");
+  const password2 = document.querySelector("#secure_pass");
+  const login = document.querySelector("#has_account").checked;
+  if (isValid && formIsValid && isUserValid == true) {
     //post();
 
     console.log("all good");
@@ -344,13 +364,17 @@ function checkIfValid(e) {
     }
     if (username.classList[0] == "invalid") {
       document.querySelector(".invalid_user").classList.remove("hide");
+      document.querySelector(".invalid_user_match").classList.add("hide");
     } else {
       document.querySelector(".invalid_user").classList.add("hide");
+      document.querySelector(".invalid_user_match").classList.add("hide");
     }
     if (password.classList[0] == "invalid") {
       document.querySelector(".invalid_password").classList.remove("hide");
+      document.querySelector(".invalid_password_match").classList.add("hide");
     } else {
       document.querySelector(".invalid_password").classList.add("hide");
+      document.querySelector(".invalid_password_match").classList.add("hide");
     }
   }
   console.log("submitted");
@@ -370,25 +394,47 @@ async function checkUser() {
     },
   });
   let data = await response.json();
-  let result;
+  let user;
   console.log(data);
+  console.log(result);
+
   if (login) {
     console.log("login");
     //Check validity
+
     data.forEach((order) => {
-      if (order.username == username) {
+      if (user == true) {
         console.log("Username correct");
-        result = false;
-        if (order.username == username && order.password == password) {
+        if (order.password == password) {
           console.log("username and password correct");
           result = true;
         } else {
           console.log("password incorrect");
+          document.querySelector("#password").classList.add("invalid");
+          document.querySelector(".invalid_password_match").classList.remove("hide");
           result = false;
         }
-      } else {
-        console.log("username incorrect");
-        result = false;
+      } else if (user == undefined) {
+        if (order.username == username) {
+          console.log("Username correct");
+          user = true;
+          document.querySelector("#username").classList.remove("invalid");
+          document.querySelector(".invalid_user_match").classList.add("hide");
+          if (order.username == username && order.password == password) {
+            console.log("username and password correct");
+            result = true;
+          } else {
+            console.log("password incorrect");
+            document.querySelector("#password").classList.add("invalid");
+            document.querySelector(".invalid_password_match").classList.remove("hide");
+            result = false;
+          }
+        } else {
+          console.log("username incorrect");
+          document.querySelector("#username").classList.add("invalid");
+          document.querySelector(".invalid_user_match").classList.remove("hide");
+          result = false;
+        }
       }
       return result;
     });
@@ -396,6 +442,7 @@ async function checkUser() {
     console.log("create login");
     result = true;
   }
+  console.log(result);
   return result;
 }
 
@@ -438,6 +485,8 @@ function checkPassWord() {
     formIsValid = true;
     document.querySelector(".secure_pass .invalid_text").classList.add("hide");
     document.querySelector(".invalid_password2").classList.add("hide");
+    document.querySelector(".invalid_password_match").classList.add("hide");
+    document.querySelector(".invalid_user_match").classList.add("hide");
     // document.querySelector("#secure_pass").removeAttribute("required");
     document.querySelector(".secure_pass").classList.remove("invalid");
   } else {
@@ -447,12 +496,16 @@ function checkPassWord() {
       formIsValid = true;
       console.log("A match");
       document.querySelector(".invalid_password2").classList.add("hide");
+      document.querySelector(".invalid_password_match").classList.add("hide");
+      document.querySelector(".invalid_user_match").classList.add("hide");
       document.querySelector(".secure_pass .invalid_text").classList.add("hide");
       document.querySelector(".secure_pass").classList.remove("invalid");
     } else {
       console.log("does not match");
       console.log(password1 + " " + password2);
       //If invalid
+      document.querySelector(".invalid_password_match").classList.add("hide");
+      document.querySelector(".invalid_user_match").classList.add("hide");
       document.querySelector(".invalid_password2").classList.remove("hide");
       document.querySelector(".secure_pass .invalid_text").classList.remove("hide");
       document.querySelector(".secure_pass").classList.add("invalid");
@@ -505,11 +558,11 @@ function createRestDbObject(ordered) {
   restDbObject.total_price = total_price;
   console.table(restDbObject);
   document.querySelector(".pay").addEventListener("click", function () {
-    if (formIsValid) {
-      setTimeout(() => {
+    setTimeout(() => {
+      if (formIsValid && isUserValid == true) {
         createRestDbArray(ordered);
-      }, 1000);
-    }
+      }
+    }, 3000);
   });
 
   return restDbObject;
@@ -526,11 +579,6 @@ function createRestDbArray(ordered) {
   restDbArray.push(restDbObject);
   console.table(restDbObject);
   console.table(restDbArray);
-}
-
-function getRestDB() {
-  console.log("getRestDB - order.js");
-  return;
 }
 
 async function postHeroku() {
@@ -600,7 +648,10 @@ function displayAvailableBeer(beer) {
 
 function displayReadMore() {
   console.log("displayReadMore");
-
+  document.querySelector(".order_container").classList.add("fadeOut");
+  setTimeout(() => {
+    document.querySelector(".order_container").classList.add("hide");
+  }, 500);
   productArray.forEach((beer) => {
     if (beer.name == filter) {
       document.querySelector(".more_container .name").textContent = beer.name;

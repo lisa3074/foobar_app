@@ -4,6 +4,7 @@ const restDb = "https://frontend-22d4.restdb.io/rest/foobar";
 const apiKey = "5e9581a6436377171a0c234f";
 let form = document.querySelector(".login_form");
 let data;
+let today = new Date();
 
 export async function getUser() {
   console.log("getUser");
@@ -19,6 +20,11 @@ export async function getUser() {
   data = await response.json();
   console.log(data);
   checkIfValid(data);
+  document.querySelector(".log_in_done").classList.remove("disabled");
+}
+export function displayDisabledButton() {
+  console.log("displayDisabledButton");
+  document.querySelector(".log_in_done").classList.add("disabled");
 }
 function checkIfValid(data) {
   console.log("checkIfValid");
@@ -100,6 +106,7 @@ function logout() {
 function displayReceipts(username, data) {
   console.log("displayReceipts");
   document.querySelector(".receipts_container").innerHTML = "";
+  data.sort((a, b) => b.time - a.time);
   data.forEach((order) => {
     if (username == order.username) {
       console.table(order);

@@ -1,6 +1,7 @@
 "use strict";
 import "@babel/polyfill";
 import { getUser } from "./modules/login";
+import { displayDisabledButton } from "./modules/login";
 import { cartDelegation } from "./modules/order";
 import { toggleMenu } from "./modules/navigation";
 import { indexDelegation } from "./modules/queue";
@@ -25,6 +26,14 @@ function appDelegation() {
 
   if (loginBody) {
     document.querySelector(".grid_item3 .log_into_account").addEventListener("click", getUser);
+    document.querySelector(".grid_item3 .log_into_account").addEventListener("click", displayDisabledButton);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        getUser();
+        displayDisabledButton();
+      }
+    });
     document.querySelector(".menu-login").classList.add("chosen");
     document.querySelector(".menu-login .icon_wrapper").classList.add("chosen_img");
     toggleMenu();
