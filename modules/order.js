@@ -81,8 +81,8 @@ export function cartDelegation() {
   document.querySelector(".view_cart").addEventListener("click", displaySummary);
   document.querySelector(".checkout").addEventListener("click", displayPayment);
   document.querySelector(".credit_card_nav .pay").addEventListener("click", (e) => {
-    checkIfValid(e);
     console.log("VALID?");
+    checkIfValid(e);
   });
 
   //document.querySelector(".thank_you_nav .home").addEventListener("click", checkValidity);
@@ -101,8 +101,6 @@ function payDelegation() {
   updateCounter();
   console.log(order);
   console.table(orderDetails);
-
-  /*  const order = createHerokuObject();*/
   postHeroku();
   setTimeout(() => {
     console.log(theId);
@@ -189,14 +187,10 @@ function logInOrSignUp() {
         document.querySelector(".invalid_password2").classList.add("hide");
         document.querySelector("#secure_pass").removeAttribute("required");
         document.querySelector(".secure_pass").classList.add("hide");
-        document.querySelector(".invalid_password_match").classList.add("hide");
-        document.querySelector(".invalid_user_match").classList.add("hide");
       } else {
         console.log("create account");
         document.querySelector("#secure_pass").setAttribute("required", "");
         document.querySelector(".secure_pass").classList.remove("hide");
-        document.querySelector(".invalid_password_match").classList.add("hide");
-        document.querySelector(".invalid_user_match").classList.add("hide");
       }
     });
   });
@@ -300,8 +294,67 @@ function checkIfValid(e) {
   });
 
   formIsValid = checkPassWord();
-  isUserValid = checkUser();
+  checkUser();
+}
 
+async function checkUser() {
+  console.log("checkUser");
+  const login = document.querySelector("#has_account").checked;
+  const username = document.querySelector("#username").value;
+  const password = document.querySelector("#password").value;
+  let response = await fetch(restDb, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apikey": apiKey,
+      "cache-control": "no-cache",
+    },
+  });
+  let data = await response.json();
+  let user;
+  console.log(data);
+  console.log(result);
+
+  if (login) {
+    console.log("login");
+    //Check validity
+
+    data.forEach((order) => {
+      if (user == true) {
+        console.log("Username correct");
+        if (order.password == password) {
+          console.log("username and password correct");
+          isUserValid = true;
+        } else {
+          console.log("password incorrect");
+          document.querySelector("#password").classList.add("invalid");
+          isUserValid = false;
+        }
+      } else if (user == undefined) {
+        if (order.username == username) {
+          console.log("Username correct");
+          user = true;
+          document.querySelector("#username").classList.remove("invalid");
+          if (order.username == username && order.password == password) {
+            console.log("username and password correct");
+            isUserValid = true;
+          } else {
+            console.log("password incorrect");
+            document.querySelector("#password").classList.add("invalid");
+            isUserValid = false;
+          }
+        } else {
+          console.log("username incorrect");
+          document.querySelector("#username").classList.add("invalid");
+          isUserValid = false;
+        }
+      }
+    });
+  } else {
+    console.log("create login");
+    isUserValid = true;
+  }
+  console.log(isUserValid);
   checkIfAllIsValid();
 }
 
@@ -316,8 +369,9 @@ function checkIfAllIsValid() {
   const name = document.querySelector("#full_name");
   const username = document.querySelector("#username");
   const password = document.querySelector("#password");
-  const password2 = document.querySelector("#secure_pass");
-  const login = document.querySelector("#has_account").checked;
+  console.log(isValid);
+  console.log(formIsValid);
+  console.log(isUserValid);
   if (isValid && formIsValid && isUserValid == true) {
     //post();
 
@@ -364,86 +418,29 @@ function checkIfAllIsValid() {
     }
     if (username.classList[0] == "invalid") {
       document.querySelector(".invalid_user").classList.remove("hide");
-      document.querySelector(".invalid_user_match").classList.add("hide");
+      if (username.value.length < 5) {
+        document.querySelector(".invalid_user").textContent = "Type at least 5 characters for the user name";
+      } else {
+        document.querySelector(".invalid_user").textContent = "The username does not match an existing user";
+      }
     } else {
       document.querySelector(".invalid_user").classList.add("hide");
-      document.querySelector(".invalid_user_match").classList.add("hide");
     }
     if (password.classList[0] == "invalid") {
       document.querySelector(".invalid_password").classList.remove("hide");
-      document.querySelector(".invalid_password_match").classList.add("hide");
+      let requirement = /(?=.*\d)(?=.*[A-Z]).{6,}/;
+      if (!password.value.match(requirement)) {
+        console.log("does NOT meets requirement");
+        document.querySelector(".invalid_password").textContent = "The password has to contain 6 charachters, one uppercase letter and one number";
+      } else {
+        console.log(password.value.length);
+        document.querySelector(".invalid_password").textContent = "The password does not match the user.";
+      }
     } else {
       document.querySelector(".invalid_password").classList.add("hide");
-      document.querySelector(".invalid_password_match").classList.add("hide");
     }
   }
   console.log("submitted");
-}
-
-async function checkUser() {
-  console.log("check user");
-  const login = document.querySelector("#has_account").checked;
-  const username = document.querySelector("#username").value;
-  const password = document.querySelector("#password").value;
-  let response = await fetch(restDb, {
-    method: "get",
-    headers: {
-      "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": apiKey,
-      "cache-control": "no-cache",
-    },
-  });
-  let data = await response.json();
-  let user;
-  console.log(data);
-  console.log(result);
-
-  if (login) {
-    console.log("login");
-    //Check validity
-
-    data.forEach((order) => {
-      if (user == true) {
-        console.log("Username correct");
-        if (order.password == password) {
-          console.log("username and password correct");
-          result = true;
-        } else {
-          console.log("password incorrect");
-          document.querySelector("#password").classList.add("invalid");
-          document.querySelector(".invalid_password_match").classList.remove("hide");
-          result = false;
-        }
-      } else if (user == undefined) {
-        if (order.username == username) {
-          console.log("Username correct");
-          user = true;
-          document.querySelector("#username").classList.remove("invalid");
-          document.querySelector(".invalid_user_match").classList.add("hide");
-          if (order.username == username && order.password == password) {
-            console.log("username and password correct");
-            result = true;
-          } else {
-            console.log("password incorrect");
-            document.querySelector("#password").classList.add("invalid");
-            document.querySelector(".invalid_password_match").classList.remove("hide");
-            result = false;
-          }
-        } else {
-          console.log("username incorrect");
-          document.querySelector("#username").classList.add("invalid");
-          document.querySelector(".invalid_user_match").classList.remove("hide");
-          result = false;
-        }
-      }
-      return result;
-    });
-  } else {
-    console.log("create login");
-    result = true;
-  }
-  console.log(result);
-  return result;
 }
 
 function updateCounter() {
@@ -481,31 +478,23 @@ function checkPassWord() {
   const login = document.querySelector("#has_account").checked;
 
   if (login) {
-    console.log("check valid");
+    console.log("login (which means vilid)");
     formIsValid = true;
     document.querySelector(".secure_pass .invalid_text").classList.add("hide");
     document.querySelector(".invalid_password2").classList.add("hide");
-    document.querySelector(".invalid_password_match").classList.add("hide");
-    document.querySelector(".invalid_user_match").classList.add("hide");
-    // document.querySelector("#secure_pass").removeAttribute("required");
     document.querySelector(".secure_pass").classList.remove("invalid");
   } else {
-    // document.querySelector("#secure_pass").setAttribute("required", "");
     if (password2 === password1) {
       //if valid
       formIsValid = true;
       console.log("A match");
       document.querySelector(".invalid_password2").classList.add("hide");
-      document.querySelector(".invalid_password_match").classList.add("hide");
-      document.querySelector(".invalid_user_match").classList.add("hide");
       document.querySelector(".secure_pass .invalid_text").classList.add("hide");
       document.querySelector(".secure_pass").classList.remove("invalid");
     } else {
       console.log("does not match");
       console.log(password1 + " " + password2);
       //If invalid
-      document.querySelector(".invalid_password_match").classList.add("hide");
-      document.querySelector(".invalid_user_match").classList.add("hide");
       document.querySelector(".invalid_password2").classList.remove("hide");
       document.querySelector(".secure_pass .invalid_text").classList.remove("hide");
       document.querySelector(".secure_pass").classList.add("invalid");
@@ -553,8 +542,6 @@ function createRestDbObject(ordered) {
   restDbObject.password = document.querySelector("#password").value;
   restDbObject.order_number = theId;
   restDbObject.date = todayDate;
-  console.log(todayDate);
-  //use last index to find full price of the order
   restDbObject.total_price = total_price;
   console.table(restDbObject);
   document.querySelector(".pay").addEventListener("click", function () {
@@ -602,20 +589,12 @@ async function postHeroku() {
 
 async function getHeroku() {
   console.log("getHeroku");
-  //GET the just placed order (order number and bartender)
+  //GET the just placed order (order number)
   let response = await fetch(endpoint, {
     method: "get",
   });
   data = await response.json();
   theId = data.queue[0]["id"];
-}
-
-function createRestDbObjectL(orderDetails) {
-  console.log("createRestDbObject");
-  const restDbObject = "the object created";
-  //name, amount, total, beer_amount, full_price, username, password, order_number, bartender
-
-  return restDbObject;
 }
 
 /*
@@ -624,7 +603,7 @@ function createRestDbObjectL(orderDetails) {
 //////////////////////////////////*/
 
 function displayAvailableBeer(beer) {
-  //console.log("displayAvailableBeer");
+  console.log("displayAvailableBeer");
   const className = beer;
   const noSpaces = className.toLowerCase().replace(" ", "");
   const noSpacesAtAll = noSpaces.replace(" ", "");
@@ -635,11 +614,6 @@ function displayAvailableBeer(beer) {
     }
     setTimeout(() => {
       if (e.classList[0] == "disabled") {
-        /* e.querySelector(".beer_category").textContent = "Sorry, not on tap right now!";
-        e.querySelector(".price").textContent = "";
-        e.querySelector("details").style.height = "4rem";
-        e.querySelector(".button_wrap").classList.add("hide");
-        e.querySelector(".arrow_down").classList.add("hide"); */
         e.classList.add("hide");
       }
     }, 100);
@@ -748,7 +722,6 @@ function displaySummary() {
   document.querySelector(".cart").classList.add("fadeInRight");
   document.querySelector(".result_list").innerHTML = "";
 
-  //forEach -> createElement
   amountArray.forEach((ordered) => {
     if (ordered.amount > 0) {
       total_price += ordered.amount * 40;
@@ -762,8 +735,6 @@ function displaySummary() {
       order = createHerokuObject(ordered);
       console.log(order);
       orderDetails = createRestDbObject(ordered, total_price);
-
-      //  payDelegation(order, orderDetails);
     }
   });
 
