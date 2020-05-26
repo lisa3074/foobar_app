@@ -9,6 +9,7 @@ let amount = 0;
 let productArray = [];
 let amountArray = [];
 let herokuArray = [];
+let herokuObject;
 let restDbArray = [];
 let restDbObject;
 let object;
@@ -99,7 +100,7 @@ export function cartDelegation() {
 function payDelegation() {
   console.log("payDelegation");
   updateCounter();
-  console.log(order);
+  /*   console.log(order); */
   console.table(orderDetails);
   postHeroku();
   setTimeout(() => {
@@ -242,7 +243,6 @@ function makeAmountObject() {
     const amountObject = Object.create(Product);
     amountObject.name = beer.name;
     amountObject.amount = amount;
-    amountObject.id1 = "";
     amountArray.push(amountObject);
   });
   return amountArray;
@@ -524,11 +524,12 @@ function setAmount(clicked, modifier) {
 
 function createHerokuObject(ordered) {
   console.log("createHerokuObject");
-  const herokuObject = Object.create(Product);
+  herokuObject = Object.create(Product);
   herokuObject.name = ordered.name;
   herokuObject.amount = ordered.amount;
-  herokuArray.push(herokuObject);
-  return herokuArray;
+  //herokuArray.push(herokuObject);
+  console.log(herokuObject);
+  return herokuObject;
 }
 
 function createRestDbObject(ordered) {
@@ -556,6 +557,7 @@ function createRestDbObject(ordered) {
 }
 
 function createRestDbArray(ordered) {
+  console.log(amountArray);
   console.log("createRestDbArray");
   username_value = document.querySelector("#username").value;
   password_value = document.querySelector("#password").value;
@@ -571,7 +573,7 @@ function createRestDbArray(ordered) {
 async function postHeroku() {
   console.log("postHeroku");
   //POST object to heroku DB
-  const postData = JSON.stringify(order);
+  const postData = JSON.stringify(amountArray);
   let response = await fetch(endpoint + "order", {
     method: "post",
     headers: {
@@ -704,6 +706,7 @@ function displayProducts(beer) {
 
 function displayAmount(param, clicked, el) {
   console.log("displayAmount");
+  console.log(amountArray);
   if (param == 0) {
     clicked.parentNode.previousElementSibling.querySelector(".amount_chosen").textContent = "";
     clicked.parentNode.previousElementSibling.querySelector(".times").classList.add("hide");
@@ -732,8 +735,8 @@ function displaySummary() {
       clone.querySelector(".final_amount").textContent = total_price + " DKK";
       document.querySelector(".result_list").appendChild(clone);
 
-      order = createHerokuObject(ordered);
-      console.log(order);
+      /*      order = createHerokuObject(ordered);
+      console.log(order); */
       orderDetails = createRestDbObject(ordered, total_price);
     }
   });
@@ -750,6 +753,8 @@ function displaySummary() {
   document.querySelector(".total_amount_right").textContent = total_price;
   document.querySelector(".total_amount_bottom").textContent = total_price;
   document.querySelector(".wrap .your_number").textContent = total_amount;
+
+  console.log(amountArray);
 }
 
 function displayPayment() {
@@ -770,6 +775,7 @@ function displayPayment() {
     document.querySelector(".credit_card_nav").classList.remove("fadeIn");
     document.querySelector(".card").classList.remove("fadeIn");
   }, 1600);
+  console.log(amountArray);
 }
 function displayThankYou(orderDetails) {
   console.log("displayThankYou");
