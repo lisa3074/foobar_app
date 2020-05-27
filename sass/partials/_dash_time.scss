@@ -46,7 +46,7 @@
     .box .percent svg circle:nth-child(2) {
       fill: none;
       transition: 1s;
-      stroke-dashoffset: calc(440 - (440 * var(--time-estimate)) / 120);
+      stroke-dashoffset: calc(440px - (440px * var(--time-estimate)) / 120);
       stroke-width: 70;
       position: absolute;
       top: 0;

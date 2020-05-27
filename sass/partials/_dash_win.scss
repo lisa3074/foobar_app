@@ -11,7 +11,7 @@
     .logo {
       position: static;
       width: 100%;
-
+      opacity: 0;
       max-width: 150px;
     }
   }
@@ -60,7 +60,7 @@
   }
   .box_icon .percent svg circle:nth-child(2) {
     transition: 1s;
-    stroke-dashoffset: calc(440 - (440 * var(--progress)) / 100);
+    stroke-dashoffset: calc(440px - (440px * var(--progress)) / 100);
     stroke: var(--purple);
   }
   .box_icon .percent .number {
@@ -83,6 +83,10 @@
     svg {
       width: 60%;
       height: 70%;
+    }
+    .winner_big {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
     }
   }
 }

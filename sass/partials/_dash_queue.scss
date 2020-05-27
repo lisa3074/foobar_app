@@ -1,6 +1,12 @@
 .queue_big {
   display: grid;
   grid-template-columns: 1fr 2fr;
+  .logo {
+    position: static;
+    width: 100%;
+
+    max-width: 150px;
+  }
 }
 @media (min-width: 800px) and (orientation: portrait) {
   .queue_big {

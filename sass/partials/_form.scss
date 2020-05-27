@@ -107,27 +107,43 @@ input:invalid:not(:focus):not(:placeholder-shown) {
   }
   .card_wrapper > div:nth-child(1) > .star {
     transform: translateY(-78px) translateX(158px);
+    -ms-transform: translateY(-78px) translateX(158px);
+    -webkit-transform: translateY(-78px) translateX(158px);
   }
   .card_wrapper > div:nth-child(2) > div:nth-child(1) > div:nth-child(1) > .star {
     transform: translateY(-75px) translateX(55px);
+    -ms-transform: translateY(-75px) translateX(55px);
+    -webkit-transform: translateY(-75px) translateX(55px);
   }
   .card_wrapper > div:nth-child(2) > div:nth-child(1) > div:nth-child(2) > .star {
     transform: translateY(-75px) translateX(45px);
+    -webkit-transform: translateY(-75px) translateX(45px);
+    -ms-transform: translateY(-75px) translateX(45px);
   }
   .card_wrapper > div:nth-child(2) > div:nth-child(2) > .star {
     transform: translateY(-75px) translateX(35px);
+    -ms-transform: translateY(-75px) translateX(35px);
+    -webkit-transform: translateY(-75px) translateX(35px);
   }
   .card_wrapper > div:nth-child(3) > .star {
     transform: translateY(-78px) translateX(110px);
+    -ms-transform: translateY(-78px) translateX(110px);
+    -webkit-transform: translateY(-78px) translateX(110px);
   }
   .pin > div.user > div:nth-child(2) > .star {
     transform: translateY(-77px) translateX(82px);
+    -webkit-transform: translateY(-77px) translateX(82px);
+    -ms-transform: translateY(-77px) translateX(82px);
   }
   .pin > div.user > div:nth-child(1) > .star {
     transform: translateY(-75px) translateX(81px);
+    -ms-transform: translateY(-75px) translateX(81px);
+    -webkit-transform: translateY(-75px) translateX(81px);
   }
   .pin > div.user > div.secure_pass > .star {
     transform: translateY(-75px) translateX(138px);
+    -ms-transform: translateY(-75px) translateX(138px);
+    -webkit-transform: translateY(-75px) translateX(138px);
   }
 }
 //FOCUS
