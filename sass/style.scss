@@ -9,6 +9,10 @@
 @use 'partials/login';
 @use 'partials/beer';
 @use 'partials/win';
+@use 'partials/dash_queue';
+@use 'partials/dash_time';
+@use 'partials/dash_generel';
+@use 'partials/dash_win';
 
 * {
   box-sizing: border-box;

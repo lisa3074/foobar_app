@@ -75,6 +75,7 @@ function appDelegation() {
     toggleMenu();
   }
   if (dashBody) {
+    /*  indexDelegation(); */
     dashDelegation();
   }
 }

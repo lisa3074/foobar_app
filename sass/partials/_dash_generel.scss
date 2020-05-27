@@ -1,0 +1,116 @@
+.dash_title {
+  font: var(--win-title);
+}
+.dash_subtitle {
+  font: var(--head2);
+}
+.dash_winner {
+  font: var(--head1);
+}
+
+.dash_big_numbers {
+  font: var(--dash-big-numbers);
+}
+.dash_queue_numbers {
+  font: var(--title);
+}
+
+:root {
+  --progress: 30;
+}
+
+.dash_container {
+  display: grid;
+  max-width: 100%;
+  max-height: 100%;
+
+  grid-template-columns: 1fr;
+  grid-gap: 1rem;
+  grid-template-areas:
+    "queue"
+    "win"
+    "time"
+    "line"
+    "pickup";
+}
+
+.dashBody {
+  background-color: var(--soft-pink);
+  padding: 1rem;
+  color: var(--dark);
+  width: 100%;
+  height: 97vh;
+  h2.dash_title {
+    text-align: center;
+  }
+
+  .queue_big {
+    grid-area: queue;
+  }
+  .winner_big {
+    grid-area: win;
+    height: 100%;
+  }
+  .time_container {
+    grid-area: time;
+  }
+  .line {
+    grid-area: line;
+  }
+  .pickup {
+    grid-area: pickup;
+  }
+  .queue_big,
+  .winner_big,
+  .time_container,
+  .line,
+  .pickup {
+    background-color: var(--white);
+    border-radius: var(--rounded);
+    box-shadow: var(--box-shadow);
+    height: 100%;
+    width: 100%;
+  }
+
+  .time_container,
+  .line,
+  .pickup,
+  .win_big,
+  .queue_right {
+    padding: 1rem;
+    height: 100%;
+    width: 100%;
+  }
+
+  .infobox {
+    height: 100%;
+    padding: 0;
+  }
+}
+@media (min-width: 800px) and (orientation: portrait) {
+  .dash_container {
+    display: grid;
+    max-width: 100%;
+    max-height: 100%;
+    grid-template-rows: 30% 30% 40%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    grid-template-areas:
+      "queue queue queue queue queue queue"
+      "time time win win win win"
+      "line line line pickup pickup pickup";
+  }
+}
+@media (min-width: 800px) and (orientation: landscape) {
+  .dash_container {
+    display: grid;
+    max-width: 100%;
+    max-height: 100%;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    grid-template-areas:
+      "queue queue queue win win win"
+      "time time line line pickup pickup";
+  }
+}
