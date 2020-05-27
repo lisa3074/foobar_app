@@ -25,7 +25,7 @@
         </div>
         <div class="queue_right">
           <h2 class="dash_title">QUEUE</h2>
-          <div class="queue_box_big">
+          <div class="queue_box">
             <div class="wrap">
               <div class="q_bar"></div>
               <p class="q_num dash_subtitle"></p>
@@ -51,14 +51,18 @@
       </article>
       <article class="winner_big">
         <div class="infobox">
-          <img src="" alt="" class="logo" />
+          <img src="static/images/logos/dashboardLogo.svg" alt="Foorbar logo" class="logo" />
           <div class="wrap">
-            <p class="dash_subtitle">ORDERS LEFT UNTIL WIN</p>
-            <p class="dash_title">49</p>
+            <p class="dash_subtitle">ORDERS LEFT</p>
+            <p class="dash_title beernumber">49</p>
           </div>
           <div class="wrap">
-            <p class="dash_subtitle">WINNERS</p>
+            <p class="dash_subtitle">WINNERS TODAY</p>
             <p class="dash_title wins_today">2</p>
+          </div>
+          <div class="wrap">
+            <p class="dash_subtitle">LAST WINNER</p>
+            <p class="dash_title last_win">95</p>
           </div>
         </div>
         <div class="win_big">
@@ -71,7 +75,7 @@
                   <circle cy="70" cx="70" r="70"></circle>
                 </svg>
                 <div class="number">
-                  <p class="num dash_title"><span class="percentage dash_big_numbers">50</span>%</p>
+                  <p class="num dash_title"><span class="win_number dash_big_numbers">50</span>%</p>
                 </div>
               </div>
             </div>
@@ -79,9 +83,9 @@
         </div>
       </article>
       <article class="time_container">
-        <h2 class="dash_title"><span class="time">30</span>MINUTES LINE</h2>
+        <h2 class="dash_title">TIME ESTIMATE</h2>
         <article class="progres_circle">
-          <div class="box">
+          <div class="box time_wrapper">
             <div class="percent">
               <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 150 150" class="progress">
                 <circle cy="70" cx="70" r="70"></circle>
@@ -94,10 +98,8 @@
                 </defs>
               </svg>
               <div class="number">
-                <p class="dash_title zero">0</p>
-                <p class="dash_title fifteen">15</p>
-                <p class="dash_title thirty">30</p>
-                <p class="dash_title forty">40</p>
+                <p class="minutes">30</p>
+                <p class="dash_subtitle">MIN</p>
               </div>
             </div>
           </div>
@@ -107,19 +109,16 @@
         <h2 class="title_big dash_title">BEING POURED</h2>
         <div class="in_line grid">
           <!-- APPEND LINE NUMBERS -->
-          <div class="line_item">
-            <p class="line_number dash_queue_numbers">5</p>
-          </div>
         </div>
         <template class="line_temp">
-          <div class="line_item">
-            <p class="line_number dash_queue_numbers"></p>
+          <div class="item line_item">
+            <p class="item_number line_number dash_queue_numbers"></p>
           </div>
         </template>
         <div class="newest">
-          <p class="heading_new dash_winner">NEWEST</p>
+          <p class="heading_new dash_subtitle">LATEST</p>
           <div class="new_bg">
-            <p class="newest_num dash_big_numbers">22</p>
+            <p class="newest_num dash_big_numbers">- -</p>
           </div>
         </div>
       </article>
@@ -127,19 +126,16 @@
         <h2 class="title_big dash_title">COME PICK ME UP</h2>
         <div class="in_line grid">
           <!-- APPEND PICKUP NUMBERS -->
-          <div class="pickup_item">
-            <p class="pickup_number dash_queue_numbers">3</p>
-          </div>
         </div>
         <template class="pickup_temp">
-          <div class="pickup_item">
-            <p class="pickup_number dash_queue_numbers"></p>
+          <div class="item pickup_item">
+            <p class="item_number pickup_number dash_queue_numbers"></p>
           </div>
         </template>
         <div class="newest">
-          <p class="heading_new dash_winner">NEWEST</p>
+          <p class="heading_new dash_subtitle">LATEST</p>
           <div class="new_bg">
-            <p class="newest_num dash_big_numbers">11</p>
+            <p class="newest_num dash_big_numbers">- -</p>
           </div>
         </div>
       </article>

@@ -2,3 +2,29 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
 }
+@media (min-width: 800px) and (orientation: portrait) {
+  .queue_big {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+
+    .fullHeight {
+      height: calc(var(--height) * 1vh);
+    }
+
+    @keyframes the_ani_height {
+      0% {
+        height: 0;
+      }
+
+      100% {
+        height: calc(var(--height) * 1vh);
+      }
+    }
+    .wrap:nth-child(2) > .q_bar,
+    .wrap:nth-child(3) > .q_bar,
+    .wrap:nth-child(4) > .q_bar,
+    .wrap:nth-child(5) > .q_bar {
+      height: calc(var(--height) * 1vh);
+    }
+  }
+}

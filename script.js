@@ -6,7 +6,8 @@ import { cartDelegation } from "./modules/order";
 import { toggleMenu } from "./modules/navigation";
 import { indexDelegation } from "./modules/queue";
 import { loadJsonBeer } from "./modules/beer";
-import { checkIfValid } from "./modules/order";
+import { clockDelegation } from "./modules/bigClock";
+
 import { getData } from "./modules/win";
 import { card } from "./modules/card_ani";
 import { loadJson as bigQueue } from "./modules/bigQueue";
@@ -75,14 +76,17 @@ function appDelegation() {
     toggleMenu();
   }
   if (dashBody) {
-    /*  indexDelegation(); */
     dashDelegation();
   }
 }
 
 function dashDelegation() {
   console.log("dashDelegation");
+  indexDelegation();
+  clockDelegation();
   bigQueue();
   bigWin();
-  bigLine();
+  setInterval(() => {
+    bigLine();
+  }, 1000);
 }

@@ -18,11 +18,18 @@
 :root {
   --progress: 30;
 }
+.dashBody {
+  --win-title: 1.7rem "proxima_novabold", sans-serif;
+  --dash-big-numbers: 2.3rem "proxima_novabold", sans-serif;
+  --title: 1.2rem "proxima_novabold", sans-serif;
+  --head2: 0.75rem "proxima_novabold", sans-serif;
+}
 
 .dash_container {
   display: grid;
   max-width: 100%;
   max-height: 100%;
+  padding-bottom: 1rem;
 
   grid-template-columns: 1fr;
   grid-gap: 1rem;
@@ -82,9 +89,36 @@
     width: 100%;
   }
 
+  .queue_box {
+    grid-gap: 0.5rem;
+    padding: 0.5rem;
+  }
   .infobox {
     height: 100%;
-    padding: 0;
+    padding: 2rem 1rem 1rem 1rem;
+
+    .wrap {
+      flex-basis: 1000px;
+      text-align: left;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+}
+@media (min-width: 800px) {
+  .dashBody {
+    --win-title: 1.7rem "proxima_novabold", sans-serif;
+    --dash-big-numbers: 4rem "proxima_novabold", sans-serif;
+    --title: 1.7rem "proxima_novabold", sans-serif;
+    --head2: 0.95rem "proxima_novabold", sans-serif;
+    .infobox {
+      height: 100%;
+      padding: 2rem 1rem 1rem 2rem;
+    }
+    .queue_box {
+      grid-gap: 1rem;
+      padding: 1rem 2rem 3rem 2rem;
+    }
   }
 }
 @media (min-width: 800px) and (orientation: portrait) {
@@ -92,12 +126,13 @@
     display: grid;
     max-width: 100%;
     max-height: 100%;
-    grid-template-rows: 30% 30% 40%;
+    grid-template-rows: 30% 35% 35%;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 1rem;
+    padding-bottom: 0rem;
     grid-template-areas:
-      "queue queue queue queue queue queue"
-      "time time win win win win"
+      "queue queue queue queue time time"
+      "win win win win win win"
       "line line line pickup pickup pickup";
   }
 }
@@ -107,6 +142,7 @@
     max-width: 100%;
     max-height: 100%;
     grid-template-rows: 50% 50%;
+    padding-bottom: 0rem;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 1rem;
     grid-template-areas:
