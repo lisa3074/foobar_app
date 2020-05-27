@@ -53,7 +53,7 @@ function setData(winObject) {
   }
 
   if (percentUntilWin == "00") {
-    const minus100 = servedToday - 100;
+    const minus100 = servedToday - 99;
     let winner = setWinner(minus100, servedToday);
     now = new Date().getTime(); // Time in milliseconds
     if (now - lastTime > 40000) {
