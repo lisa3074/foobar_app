@@ -130,8 +130,10 @@ function displayData(winsNow, ordersLeft) {
   console.log("displayData");
   document.querySelector(".wrap:nth-child(1)>.win_smallnumbers").textContent = winsNow;
   document.querySelector(".wrap:nth-child(2)>.win_smallnumbers").textContent = ordersLeft;
-
-  document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = theWinner;
+  if (theWinner == undefined) {
+  } else {
+    document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = theWinner;
+  }
   console.log(theWinner);
 
   //vis info numre
