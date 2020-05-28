@@ -5,7 +5,11 @@ summary:focus {
   outline: 0;
 }
 
-details summary::-webkit-details-marker {
+summary {
+  display: block;
+}
+
+summary::-webkit-details-marker {
   display: none;
 }
 
@@ -231,14 +235,14 @@ summary {
 
 details[open] .arrow_down {
   transition: 1s;
-  transform: rotate3d(0, 0, 1, 180deg) translateX(0px) translateY(-8px);
+  transform: rotate3d(0, 0, 1, 180deg) translateX(0px) translateY(-11px);
   padding: 0.2rem 0rem 0.5rem;
 }
 
 details:not([open]) .arrow_down {
   transition: 1s;
 
-  transform: rotate3d(0, 1, 5, 0deg) translateX(0px) translateY(13px);
+  transform: rotate3d(0, 1, 5, 0deg) translateX(0px) translateY(17px);
   padding: 0.2rem 0rem 0.5rem;
 }
 button.pay {
@@ -406,6 +410,16 @@ button.pay {
       transform: rotate3d(0, 0, 1, 270deg);
       padding: 0rem 1.5rem;
     }
+  }
+  details[open] .arrow_down {
+    transition: 1s;
+    transform: rotate3d(0, 0, 1, 180deg) translateX(0px) translateY(2px);
+  }
+
+  details:not([open]) .arrow_down {
+    transition: 1s;
+
+    transform: rotate3d(0, 1, 5, 0deg) translateX(0px) translateY(4px);
   }
 
   .order_container .label {

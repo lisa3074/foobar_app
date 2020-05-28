@@ -120,6 +120,10 @@ p.disclamer {
       margin-bottom: 0;
       padding: 0;
     }
+
+    .name {
+      padding-left: 2.5rem;
+    }
     .product_txt:nth-child(2) {
       grid-area: txt1;
       padding-left: 4rem;
@@ -152,6 +156,18 @@ p.disclamer {
     .down {
       display: flex;
       flex-direction: row;
+    }
+  }
+  .beerBody {
+    details[open] .arrow_down {
+      transition: 1s;
+      transform: rotate3d(0, 0, 1, 180deg) translateX(-13px) translateY(-9px);
+    }
+
+    details:not([open]) .arrow_down {
+      transition: 1s;
+
+      transform: rotate3d(0, 1, 5, 0deg) translateX(13px) translateY(15px);
     }
   }
 }

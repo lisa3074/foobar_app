@@ -313,6 +313,7 @@ async function checkUser() {
   });
   let data = await response.json();
   let user;
+  let pass;
   console.log(data);
   console.log(result);
 
@@ -321,10 +322,13 @@ async function checkUser() {
     //Check validity
 
     data.forEach((order) => {
-      if (user == true) {
+      if (user == true && pass == true) {
+        isUserValid = true;
+      } else if (user == true) {
         console.log("Username correct");
         if (order.password == password) {
           console.log("username and password correct");
+          pass = true;
           isUserValid = true;
         } else {
           console.log("password incorrect");
@@ -442,6 +446,7 @@ function checkIfAllIsValid() {
     }
   }
   console.log("submitted");
+  document.querySelector(".pay").classList.remove("disabled");
 }
 
 function updateCounter() {
@@ -546,6 +551,8 @@ function createRestDbObject(ordered) {
   restDbObject.total_price = total_price;
   console.table(restDbObject);
   document.querySelector(".pay").addEventListener("click", function () {
+    document.querySelector(".pay").classList.add("disabled");
+
     setTimeout(() => {
       if (formIsValid && isUserValid == true) {
         createRestDbArray(ordered);
