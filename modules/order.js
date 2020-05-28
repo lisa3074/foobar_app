@@ -60,7 +60,6 @@ export function cartDelegation() {
   loadJson();
   closePopUp();
   logInOrSignUp();
-
   document.querySelector(".close_more").addEventListener("click", function () {
     document.querySelector(".more_container").classList.add("hidden_left");
     setTimeout(() => {
@@ -84,9 +83,38 @@ export function cartDelegation() {
   document.querySelector(".checkout").addEventListener("click", displayPayment);
   document.querySelector(".credit_card_nav .pay").addEventListener("click", (e) => {
     console.log("VALID?");
+    document.querySelectorAll(".credit_card input").forEach((el) => {
+      el.addEventListener("keyup", function () {
+        console.log("remove invalid");
+        this.classList.remove("invalid");
+        checkIfAllIsValid();
+      });
+    });
     checkIfValid(e);
   });
-
+  const userElement = document.querySelector("#username");
+  const passElement = document.querySelector("#password");
+  const forElements = form.querySelectorAll("input");
+  forElements.forEach((el) => {
+    el.addEventListener("focusout", function () {
+      if (!el.checkValidity()) {
+        console.log("invalid");
+        //If not valid add class invalid
+        el.classList.add("invalid");
+        setInvalid();
+        // el > p.classList.remove("hide");
+        el.addEventListener("keyup", function () {
+          console.log("remove invalid");
+          el.classList.remove("invalid");
+          setInvalid();
+        });
+        el.addEventListener("focus", function () {
+          this.classList.remove("invalid");
+          setInvalid();
+        });
+      }
+    });
+  });
   //document.querySelector(".thank_you_nav .home").addEventListener("click", checkValidity);
   document.querySelector(".thank_you_nav .log_in_done").addEventListener("click", function () {
     locationSite = "login.html";
@@ -277,21 +305,21 @@ function fetchProducts(product) {
 
 function checkIfValid(e) {
   console.log("checkIfValid");
+  // form.setAttribute("novalidate", true);
+  const d = new Date();
+  const year = d.getFullYear();
   e.preventDefault();
   const forElements = form.querySelectorAll("input");
 
   forElements.forEach((el) => {
     el.classList.remove("invalid");
-    el.addEventListener("focus", function () {
+    /*  el.addEventListener("focus", function () {
       this.classList.remove("invalid");
-    });
-    el.addEventListener("focusout", function () {
-      if (!el.checkValidity()) {
-        console.log("invalid");
-        //If not valid add class invalid
-        el.classList.add("invalid");
-      }
-    });
+    }); */
+
+    if (document.querySelector("#year").value < year.toString().substring(2, 4)) {
+      document.querySelector("#year").classList.add("invalid");
+    }
   });
 
   formIsValid = checkPassWord();
@@ -397,7 +425,8 @@ function checkIfAllIsValid() {
         el.classList.add("invalid");
       }
     });
-    if (creditValue.startsWith("34") || creditValue.startsWith("37") || creditValue.startsWith("38") || creditValue.startsWith("36")) {
+    setInvalid();
+    /* if (creditValue.startsWith("34") || creditValue.startsWith("37") || creditValue.startsWith("38") || creditValue.startsWith("36")) {
       document.querySelector(".invalid_creditcard").classList.remove("hide");
       document.querySelector(".invalid_creditcard").textContent = "We do not accept American Express";
     } else if (creditNum.classList[1] == "invalid" || creditNum.classList[2] == "invalid" || creditNum.classList[0] == "invalid" || creditNum.classList[3] == "invalid" || creditNum.classList[4] == "invalid") {
@@ -448,10 +477,75 @@ function checkIfAllIsValid() {
       }
     } else {
       document.querySelector(".invalid_password").classList.add("hide");
-    }
+    } */
   }
   console.log("submitted");
   document.querySelector(".pay").classList.remove("disabled");
+}
+
+function setInvalid() {
+  console.log("setInvalid");
+
+  const creditNum = document.querySelector("#number");
+  const creditValue = document.querySelector("#number").value.toString();
+  const month = document.querySelector("#month");
+  const year = document.querySelector("#year");
+  const cvc = document.querySelector("#secure");
+  const name = document.querySelector("#full_name");
+  const username = document.querySelector("#username");
+  const password = document.querySelector("#password");
+  if (creditValue.startsWith("34") || creditValue.startsWith("37") || creditValue.startsWith("38") || creditValue.startsWith("36")) {
+    document.querySelector(".invalid_creditcard").classList.remove("hide");
+    document.querySelector(".invalid_creditcard").textContent = "We do not accept American Express";
+  } else if (creditNum.classList[1] == "invalid" || creditNum.classList[2] == "invalid" || creditNum.classList[0] == "invalid" || creditNum.classList[3] == "invalid" || creditNum.classList[4] == "invalid") {
+    document.querySelector(".invalid_creditcard").classList.remove("hide");
+    document.querySelector(".invalid_creditcard").textContent = "You need to fill out 16 digits for the credit card";
+  } else {
+    document.querySelector(".invalid_creditcard").classList.add("hide");
+  }
+  if (month.classList[0] == "invalid" || month.classList[1] == "invalid") {
+    document.querySelector(".invalid_month").classList.remove("hide");
+  } else {
+    document.querySelector(".invalid_month").classList.add("hide");
+  }
+  if (year.classList[0] == "invalid" || year.classList[1] == "invalid") {
+    document.querySelector(".invalid_year").classList.remove("hide");
+  } else {
+    document.querySelector(".invalid_year").classList.add("hide");
+  }
+  if (cvc.classList[0] == "invalid" || cvc.classList[1] == "invalid") {
+    document.querySelector(".invalid_cvc").classList.remove("hide");
+  } else {
+    document.querySelector(".invalid_cvc").classList.add("hide");
+  }
+  if (name.classList[0] == "invalid" || name.classList[1] == "invalid") {
+    document.querySelector(".invalid_name").classList.remove("hide");
+  } else {
+    document.querySelector(".invalid_name").classList.add("hide");
+  }
+  if (username.classList[0] == "invalid") {
+    document.querySelector(".invalid_user").classList.remove("hide");
+    if (username.value.length < 5) {
+      document.querySelector(".invalid_user").textContent = "Type at least 5 characters for the user name";
+    } else {
+      document.querySelector(".invalid_user").textContent = "The username does not match an existing user";
+    }
+  } else {
+    document.querySelector(".invalid_user").classList.add("hide");
+  }
+  if (password.classList[0] == "invalid") {
+    document.querySelector(".invalid_password").classList.remove("hide");
+    let requirement = /(?=.*\d)(?=.*[A-Z]).{6,}/;
+    if (!password.value.match(requirement)) {
+      console.log("does NOT meets requirement");
+      document.querySelector(".invalid_password").textContent = "The password has to contain 6 charachters, one uppercase letter and one number";
+    } else {
+      console.log(password.value.length);
+      document.querySelector(".invalid_password").textContent = "The password does not match the user.";
+    }
+  } else {
+    document.querySelector(".invalid_password").classList.add("hide");
+  }
 }
 
 function updateCounter() {
@@ -517,6 +611,11 @@ function checkPassWord() {
 
 function setAmount(clicked, modifier) {
   console.log("setAmount");
+  setTimeout(() => {
+    document.querySelectorAll("input").forEach((input) => {
+      input.classList.remove("invalid");
+    });
+  }, 1000);
   object.forEach((el) => {
     if (filter == el.name) {
       if ((clicked.classList[0] === "remove" && amount == 0) || amount < 0) {

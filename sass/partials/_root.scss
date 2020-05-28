@@ -18,7 +18,7 @@
   --head12: 1.1rem "proxima_novabold", sans-serif;
   --head2: 0.95rem "proxima_novabold", sans-serif;
   --head3: 0.95rem "proxima_novaregular", sans-serif;
-  --head4: 0.85rem "proxima_novabold", sans-serif; //1.07
+  --head4: 0.85rem "proxima_novabold", sans-serif;
   --head5: 0.7rem "proxima_novabold", sans-serif;
   --label: 0.85rem "proxima_novabold", sans-serif;
   --invalid: 0.8rem "proxima_novaregular", sans-serif;
@@ -49,14 +49,6 @@
 
   --dash-big-numbers: 4rem "proxima_novabold", sans-serif;
 }
-/* 
-WIN SITE FONT SIZES
-Overskrift: 2.5rem
-Procenttal: 5.3rem
-procent: 3.4rem
-Sub-overskrifter og brødtekst: 1.25rem
-tal: 3.125rem
- */
 
 @font-face {
   font-family: "proxima_novabold";
@@ -70,13 +62,3 @@ tal: 3.125rem
   font-weight: normal;
   font-style: normal;
 }
-/* @media (min-width: 800px) {
-  :root {
-    --win-paragraph: 1.25rem "proxima_novaregular", sans-serif;
-    --win-title: 2.5rem "proxima_novabold", sans-serif;
-    --win-number: 5.3rem "proxima_novabold", sans-serif;
-    --win-percent: 3rem "proxima_novabold", sans-serif;
-    --win-subhead: 1.25rem "proxima_novabold", sans-serif;
-    --win-smallnumbers: 3.125rem "proxima_novabold", sans-serif;
-  }
-} */

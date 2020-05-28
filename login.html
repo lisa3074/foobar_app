@@ -98,31 +98,30 @@
       <section class="receipts_wrapper hide">
         <h1 class="title receipt_heading">YOUR RECEIPTS</h1>
         <img src="/static/images/svg_icons/dark_cancel.svg" alt="close" class="close_receipts close" />
-      
-      <article class="receipts_container">
-        <!-- APPEND RECEIPTS HERE -->
-        <!-- APPEND RECEIPTS ENDS HERE -->
-      </article>
-    </section>
+
+        <article class="receipts_container">
+          <!-- APPEND RECEIPTS HERE -->
+          <!-- APPEND RECEIPTS ENDS HERE -->
+        </article>
+      </section>
     </main>
-    
+
     <!-- RECEIPT TEMPLATE -->
-     <template class="receipt_temp">
+    <template class="receipt_temp">
       <article class="wrapper" data-id="">
         <details class="receipt">
           <summary>
             <div class="summary">
-            <div class="down">
-              <img src="/static/images/svg_icons/yellow_arrow_right.svg" alt="Read more" class="arrow_down go_up" />
-              <h1 class="head2 name"></h1>
+              <div class="down">
+                <img src="/static/images/svg_icons/yellow_arrow_right.svg" alt="Read more" class="arrow_down go_up" />
+                <h1 class="head2 name"></h1>
+              </div>
+              <p class="head2 order">ORDER NR.<span class="order_number head3"></span></p>
+              <p class="head2 price_container"><span class="price"></span> DKK</p>
             </div>
-            <p class="head2 order">ORDER NR.<span class="order_number head3"></span></p>
-            <p class="head2 price_container"><span class="price"></span> DKK</p>
-          </div>
           </summary>
           <div class="details">
-          <!-- APPEND DETAIL-LIST HERE -->
-         
+            <!-- APPEND DETAIL-LIST HERE -->
           </div>
           <div class="grid total">
             <h3 class="head2">TOTAL</h3>
@@ -133,18 +132,18 @@
           </div>
         </details>
       </article>
-  </template> 
+    </template>
 
-  <!-- DETAILS_LIST TEMPLATE -->
-  <template class="details_temp">
-    <div class="receipt_details">
-    <div class="buy_items grid">
-    <h3 class="head2 article"></h3>
-    <p class="paragraph amount"></p>
-    <p class="labels final_amount"></p>
-    </div>
-  </template>
-
+    <!-- DETAILS_LIST TEMPLATE -->
+    <template class="details_temp">
+      <div class="receipt_details">
+        <div class="buy_items grid">
+          <h3 class="head2 article"></h3>
+          <p class="paragraph amount"></p>
+          <p class="labels final_amount"></p>
+        </div>
+      </div>
+    </template>
 
     <script src="script.js"></script>
   </body>
