@@ -115,15 +115,21 @@ p.disclamer {
         "txt1 txt2 pic"
         "txt1 txt2 button";
     }
+
     .more_body .label {
       grid-area: pic;
       margin-bottom: 0;
       padding: 0;
     }
 
-    .name {
-      padding-left: 2.5rem;
+    .down .name {
+      padding: 0.4rem 0 0 2.5rem;
     }
+
+    details {
+      padding-top: 1rem;
+    }
+
     .product_txt:nth-child(2) {
       grid-area: txt1;
       padding-left: 4rem;
@@ -161,13 +167,13 @@ p.disclamer {
   .beerBody {
     details[open] .arrow_down {
       transition: 1s;
-      transform: rotate3d(0, 0, 1, 180deg) translateX(-13px) translateY(-9px);
+      transform: rotate3d(0, 0, 1, 180deg) translateX(-13px) translateY(0px);
     }
 
     details:not([open]) .arrow_down {
       transition: 1s;
 
-      transform: rotate3d(0, 1, 5, 0deg) translateX(13px) translateY(15px);
+      transform: rotate3d(0, 1, 5, 0deg) translateX(13px) translateY(7px);
     }
   }
 }
