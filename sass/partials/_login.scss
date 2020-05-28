@@ -133,6 +133,7 @@
   box-shadow: var(--box-shadow);
   border-radius: var(--rounded);
 }
+
 .log_in_container .grid_item2 {
   grid-area: pic;
   height: 100%;
@@ -149,10 +150,12 @@
   grid-area: button;
   display: flex;
   flex-wrap: nowrap;
-  justify-content: flex-end;
-  button {
-    height: 3.2rem;
-  }
+  flex-direction: row;
+  justify-content: space-between;
+}
+#forgot,
+#login {
+  height: 3.2rem;
 }
 
 .login_heading {
@@ -161,7 +164,7 @@
 }
 
 .login_form {
-  padding: 2rem;
+  padding: 4rem 2rem;
 }
 
 .receipts_container .summary {
@@ -263,10 +266,28 @@
   }
 }
 
+#forgot {
+  padding: 0.5rem;
+  .button_icon {
+    padding-left: 0.5rem;
+  }
+}
+
+@media (min-width: 350px) {
+}
 @media (min-width: 450px) {
   .account_container .grid_item1 {
     background-image: url(/static/images/big_icons/beer-login.png);
     background-position: 40% 60%;
+  }
+  #forgot,
+  #login {
+    margin-left: 0.5rem;
+    padding-left: 1rem;
+    flex-grow: 1;
+    .button_icon {
+      padding-left: 3rem;
+    }
   }
 }
 @media (min-width: 500px) {
@@ -343,6 +364,14 @@
       padding-left: 4rem;
     }
   }
+  #forgot,
+  #login {
+    padding: 0.5rem;
+    width: 7rem;
+    .button_icon {
+      padding-left: 1rem;
+    }
+  }
 
   .wrapper {
     padding-top: 0rem;
@@ -372,8 +401,21 @@
   .check {
     max-width: 10rem;
   }
+
+  #login {
+    .button_icon {
+      padding-left: 2rem;
+    }
+  }
 }
 
+@media (min-width: 850px) {
+  #login {
+    .button_icon {
+      padding-left: 3rem;
+    }
+  }
+}
 @media (min-height: 900px) {
   .account_container .grid_item3,
   .account_container .grid_item2 {

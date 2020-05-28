@@ -27,6 +27,10 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+.credit_invalid {
+  padding-bottom: 1rem;
+}
+
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
@@ -34,7 +38,6 @@ input[type="number"] {
 
 fieldset {
   border: 0;
-  padding-bottom: 1rem;
 }
 
 .pin {
@@ -86,8 +89,8 @@ input:valid:not(:focus):not(:placeholder-shown):not(input[type="radio"]) {
 }
 
 //INVALID
-input.invalid:not(:focus):not(:placeholder-shown),
-input:invalid:not(:focus):not(:placeholder-shown) {
+input:invalid:not(:focus):not(:placeholder-shown),
+input.invalid:not(:focus):not(:placeholder-shown) {
   //background: url(icons/thumbsdown.png) no-repeat scroll 7px 7px;
   background-size: contain;
   background-size: 15px;
@@ -99,6 +102,11 @@ input:invalid:not(:focus):not(:placeholder-shown) {
   font-size: 0.7rem;
   font: var(--invalid);
   padding: 0.2rem 0 0 0;
+}
+
+.mail label .explain_mail {
+  color: var(--purple);
+  font-size: 0.8rem;
 }
 .card {
   .star {
@@ -145,6 +153,11 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     -ms-transform: translateY(-75px) translateX(138px);
     -webkit-transform: translateY(-75px) translateX(138px);
   }
+  .pin > div.user > div.mail > .star {
+    transform: translateY(-75px) translateX(138px);
+    -ms-transform: translateY(-75px) translateX(138px);
+    -webkit-transform: translateY(-77px) translateX(50px);
+  }
 }
 //FOCUS
 
@@ -179,15 +192,15 @@ input:hover:not(:focus):not(:disabled) {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
-  padding-right: 3rem;
+
   padding-bottom: 1rem;
   div {
     display: flex;
     flex-wrap: nowrap;
-    align-items: baseline;
+    align-items: center;
     padding: 0 1.5rem 0 0;
     label {
-      padding-left: 0.5rem;
+      padding: 0 0 0.4rem 0.5rem;
     }
   }
 }
@@ -354,7 +367,9 @@ label.labels {
   .user div:nth-child(2) {
     margin-left: 2rem;
   }
-
+  .user div:nth-child(3) {
+    margin-right: 2rem;
+  }
   .pin {
     padding-left: 1rem;
   }
@@ -411,10 +426,6 @@ label.labels {
 }
 
 @media (min-width: 900px) {
-  .user div:nth-child(2) {
-    margin-left: 2rem;
-  }
-
   //RESET CARD WIDTH
   #card .card_ani .jp-card-container,
   #card .card_ani .jp-card {

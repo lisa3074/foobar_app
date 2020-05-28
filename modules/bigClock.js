@@ -32,6 +32,6 @@ function countBeers(jsonData) {
 function displayMinutes() {
   console.log("displayMinutes");
   const path = document.querySelector(".time_wrapper .percent svg circle:nth-child(2)");
-  path.style.setProperty("--time-estimate", count * 2);
-  document.querySelector(".minutes").textContent = count * 2;
+  path.style.setProperty("--time-estimate", Math.round(count * 0.5));
+  document.querySelector(".minutes").textContent = Math.round(count * 0.5);
 }

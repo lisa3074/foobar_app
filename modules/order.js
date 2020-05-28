@@ -19,9 +19,11 @@ let order;
 let orderDetails;
 let theId;
 let formIsValid;
+let isValid;
 let isUserValid;
 let username_value;
 let password_value;
+let email_value;
 let result;
 const today = new Date();
 let todayDate = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
@@ -47,6 +49,7 @@ const Product = {
   bartender: "",
   date: "",
   time: "",
+  email: "",
 };
 /*//////////////////////////////////
 ////// DELEGATION FUNCTIONS ///////
@@ -83,17 +86,16 @@ export function cartDelegation() {
   document.querySelector(".checkout").addEventListener("click", displayPayment);
   document.querySelector(".credit_card_nav .pay").addEventListener("click", (e) => {
     console.log("VALID?");
-    document.querySelectorAll(".credit_card input").forEach((el) => {
-      el.addEventListener("keyup", function () {
-        console.log("remove invalid");
-        this.classList.remove("invalid");
-        checkIfAllIsValid();
-      });
-    });
     checkIfValid(e);
   });
-  const userElement = document.querySelector("#username");
-  const passElement = document.querySelector("#password");
+  document.querySelectorAll(".credit_card input").forEach((el) => {
+    el.addEventListener("keyup", function () {
+      console.log("remove invalid");
+      this.classList.remove("invalid");
+      //checkIfAllIsValid();
+    });
+  });
+
   const forElements = form.querySelectorAll("input");
   forElements.forEach((el) => {
     el.addEventListener("focusout", function () {
@@ -112,6 +114,9 @@ export function cartDelegation() {
           this.classList.remove("invalid");
           setInvalid();
         });
+        if (el.getAttribute("id") == "#username") {
+          console.log("username");
+        }
       }
     });
   });
@@ -148,6 +153,7 @@ function payDelegation() {
       total_price: total_price,
       username: username_value,
       password: password_value,
+      email: email_value,
       date: todayDate,
       restDbArray,
     });
@@ -212,15 +218,53 @@ function logInOrSignUp() {
   document.querySelectorAll(".radio").forEach((radio) => {
     radio.addEventListener("change", function () {
       const login = document.querySelector("#has_account").checked;
+      const noAccount = document.querySelector("#no_account").checked;
+      const newAccount = document.querySelector("#new_account").checked;
+      if (login || newAccount) {
+        document.querySelector("#username").setAttribute("required", "");
+        document.querySelector(".username").classList.remove("hide");
+        document.querySelector("#password").setAttribute("required", "");
+        document.querySelector(".password").classList.remove("hide");
+      }
       if (login) {
         console.log("log in");
         document.querySelector(".invalid_password2").classList.add("hide");
         document.querySelector("#secure_pass").removeAttribute("required");
         document.querySelector(".secure_pass").classList.add("hide");
-      } else {
+
+        document.querySelector(".invalid_mail").classList.add("hide");
+        document.querySelector("#mail").removeAttribute("required");
+        document.querySelector(".mail").classList.add("hide");
+      }
+      if (newAccount) {
         console.log("create account");
         document.querySelector("#secure_pass").setAttribute("required", "");
         document.querySelector(".secure_pass").classList.remove("hide");
+
+        document.querySelector("#mail").setAttribute("required", "");
+        document.querySelector(".mail").classList.remove("hide");
+        document.querySelector(".explain_mail").textContent = " || For your log in details";
+      }
+      if (noAccount) {
+        console.log("no account");
+        document.querySelector(".invalid_password2").classList.add("hide");
+        document.querySelector(".secure_pass").classList.add("hide");
+        document.querySelector("#secure_pass").removeAttribute("required");
+        document.querySelector("#secure_pass").value = "";
+
+        document.querySelector(".invalid_password").classList.add("hide");
+        document.querySelector("#password").removeAttribute("required");
+        document.querySelector("#password").value = "";
+        document.querySelector(".password").classList.add("hide");
+
+        document.querySelector(".invalid_user").classList.add("hide");
+        document.querySelector("#username").removeAttribute("required");
+        document.querySelector("#username").value = "";
+        document.querySelector(".username").classList.add("hide");
+
+        document.querySelector("#mail").setAttribute("required", "");
+        document.querySelector(".mail").classList.remove("hide");
+        document.querySelector(".explain_mail").textContent = " || For your receipt";
       }
     });
   });
@@ -313,15 +357,10 @@ function checkIfValid(e) {
 
   forElements.forEach((el) => {
     el.classList.remove("invalid");
-    /*  el.addEventListener("focus", function () {
-      this.classList.remove("invalid");
-    }); */
-
     if (document.querySelector("#year").value < year.toString().substring(2, 4)) {
       document.querySelector("#year").classList.add("invalid");
     }
   });
-
   formIsValid = checkPassWord();
   checkUser();
 }
@@ -329,6 +368,8 @@ function checkIfValid(e) {
 async function checkUser() {
   console.log("checkUser");
   const login = document.querySelector("#has_account").checked;
+  const noAccount = document.querySelector("#no_account").checked;
+  const newAccount = document.querySelector("#new_account").checked;
   const username = document.querySelector("#username").value;
   const password = document.querySelector("#password").value;
   let response = await fetch(restDb, {
@@ -343,7 +384,6 @@ async function checkUser() {
   let user;
   let pass;
   console.log(data);
-  console.log(result);
 
   if (login) {
     console.log("login");
@@ -352,10 +392,13 @@ async function checkUser() {
     data.forEach((order) => {
       if (user == true && pass == true) {
         isUserValid = true;
+        document.querySelector("#password").classList.remove("invalid");
+        console.log("user and pass are true");
       } else if (user == true) {
         console.log("Username correct");
         if (order.password == password) {
           console.log("username and password correct");
+          document.querySelector("#password").classList.remove("invalid");
           pass = true;
           isUserValid = true;
         } else {
@@ -370,6 +413,7 @@ async function checkUser() {
           document.querySelector("#username").classList.remove("invalid");
           if (order.username == username && order.password == password) {
             console.log("username and password correct");
+            document.querySelector("#password").classList.remove("invalid");
             isUserValid = true;
           } else {
             console.log("password incorrect");
@@ -383,7 +427,7 @@ async function checkUser() {
         }
       }
     });
-  } else {
+  } else if (noAccount || newAccount) {
     console.log("create login");
     isUserValid = true;
   }
@@ -394,15 +438,7 @@ async function checkUser() {
 function checkIfAllIsValid() {
   console.log("checkIfAllIsValid");
   const forElements = form.querySelectorAll("input");
-  const isValid = form.checkValidity();
-  const creditNum = document.querySelector("#number");
-  const creditValue = document.querySelector("#number").value.toString();
-  const month = document.querySelector("#month");
-  const year = document.querySelector("#year");
-  const cvc = document.querySelector("#secure");
-  const name = document.querySelector("#full_name");
-  const username = document.querySelector("#username");
-  const password = document.querySelector("#password");
+  isValid = form.checkValidity();
   console.log(isValid);
   console.log(formIsValid);
   console.log(isUserValid);
@@ -412,7 +448,7 @@ function checkIfAllIsValid() {
     console.log("all good");
     setTimeout(() => {
       form.reset();
-    }, 2000);
+    }, 4000);
     payDelegation();
     displayThankYou();
   } else {
@@ -426,58 +462,6 @@ function checkIfAllIsValid() {
       }
     });
     setInvalid();
-    /* if (creditValue.startsWith("34") || creditValue.startsWith("37") || creditValue.startsWith("38") || creditValue.startsWith("36")) {
-      document.querySelector(".invalid_creditcard").classList.remove("hide");
-      document.querySelector(".invalid_creditcard").textContent = "We do not accept American Express";
-    } else if (creditNum.classList[1] == "invalid" || creditNum.classList[2] == "invalid" || creditNum.classList[0] == "invalid" || creditNum.classList[3] == "invalid" || creditNum.classList[4] == "invalid") {
-      document.querySelector(".invalid_creditcard").classList.remove("hide");
-      document.querySelector(".invalid_creditcard").textContent = "You need to fill out 16 digits for the credit card";
-    } else {
-      document.querySelector(".invalid_creditcard").classList.add("hide");
-    }
-    if (month.classList[0] == "invalid" || month.classList[1] == "invalid") {
-      document.querySelector(".invalid_month").classList.remove("hide");
-    } else {
-      document.querySelector(".invalid_month").classList.add("hide");
-    }
-    if (year.classList[0] == "invalid" || year.classList[1] == "invalid") {
-      document.querySelector(".invalid_year").classList.remove("hide");
-    } else {
-      document.querySelector(".invalid_year").classList.add("hide");
-    }
-    if (cvc.classList[0] == "invalid" || cvc.classList[1] == "invalid") {
-      document.querySelector(".invalid_cvc").classList.remove("hide");
-    } else {
-      document.querySelector(".invalid_cvc").classList.add("hide");
-    }
-    if (name.classList[0] == "invalid" || name.classList[1] == "invalid") {
-      document.querySelector(".invalid_name").classList.remove("hide");
-    } else {
-      document.querySelector(".invalid_name").classList.add("hide");
-    }
-    if (username.classList[0] == "invalid") {
-      document.querySelector(".invalid_user").classList.remove("hide");
-      if (username.value.length < 5) {
-        document.querySelector(".invalid_user").textContent = "Type at least 5 characters for the user name";
-      } else {
-        document.querySelector(".invalid_user").textContent = "The username does not match an existing user";
-      }
-    } else {
-      document.querySelector(".invalid_user").classList.add("hide");
-    }
-    if (password.classList[0] == "invalid") {
-      document.querySelector(".invalid_password").classList.remove("hide");
-      let requirement = /(?=.*\d)(?=.*[A-Z]).{6,}/;
-      if (!password.value.match(requirement)) {
-        console.log("does NOT meets requirement");
-        document.querySelector(".invalid_password").textContent = "The password has to contain 6 charachters, one uppercase letter and one number";
-      } else {
-        console.log(password.value.length);
-        document.querySelector(".invalid_password").textContent = "The password does not match the user.";
-      }
-    } else {
-      document.querySelector(".invalid_password").classList.add("hide");
-    } */
   }
   console.log("submitted");
   document.querySelector(".pay").classList.remove("disabled");
@@ -581,9 +565,10 @@ function checkPassWord() {
   const password1 = document.querySelector("#password").value;
   const password2 = document.querySelector("#secure_pass").value;
   const login = document.querySelector("#has_account").checked;
+  const noAccount = document.querySelector("#no_account").checked;
 
-  if (login) {
-    console.log("login (which means vilid)");
+  if (login || noAccount) {
+    console.log("login/noAccount (which means valid)");
     formIsValid = true;
     document.querySelector(".secure_pass .invalid_text").classList.add("hide");
     document.querySelector(".invalid_password2").classList.add("hide");
@@ -650,6 +635,7 @@ function createRestDbObject(ordered) {
   restDbObject.total_beer = amount;
   restDbObject.username = document.querySelector("#username").value;
   restDbObject.password = document.querySelector("#password").value;
+  restDbObject.email = document.querySelector("#mail").value;
   restDbObject.order_number = theId;
   restDbObject.date = todayDate;
   restDbObject.total_price = total_price;
@@ -658,10 +644,10 @@ function createRestDbObject(ordered) {
     document.querySelector(".pay").classList.add("disabled");
 
     setTimeout(() => {
-      if (formIsValid && isUserValid == true) {
+      if (formIsValid && isUserValid && isValid == true) {
         createRestDbArray(ordered);
       }
-    }, 3000);
+    }, 2000);
   });
 
   return restDbObject;
@@ -671,6 +657,7 @@ function createRestDbArray(ordered) {
   console.log("createRestDbArray");
   username_value = document.querySelector("#username").value;
   password_value = document.querySelector("#password").value;
+  email_value = document.querySelector("#mail").value;
   restDbObject = Object.create(Product);
   restDbObject.name = ordered.name;
   restDbObject.amount = ordered.amount;
