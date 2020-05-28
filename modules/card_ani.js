@@ -45,7 +45,7 @@ export function card() {
   var setCardTypeOrig = Card.prototype.handlers.setCardType;
 
   Card.prototype.handlers.setCardType = function ($el, e) {
-    var allowedCards = ["mastercard", "visa", "dankort", "discover", "jcb", "visaelectron", "elo"];
+    var allowedCards = ["mastercard", "visa", "dankort", "discover", "jcb", "visaelectron", "elo", "amex"];
     if (allowedCards.indexOf(e.data) < 0) e.data = "unknown";
     setCardTypeOrig.call(this, $el, e);
   };

@@ -368,6 +368,7 @@ function checkIfAllIsValid() {
   const forElements = form.querySelectorAll("input");
   const isValid = form.checkValidity();
   const creditNum = document.querySelector("#number");
+  const creditValue = document.querySelector("#number").value.toString();
   const month = document.querySelector("#month");
   const year = document.querySelector("#year");
   const cvc = document.querySelector("#secure");
@@ -396,8 +397,12 @@ function checkIfAllIsValid() {
         el.classList.add("invalid");
       }
     });
-    if (creditNum.classList[1] == "invalid" || creditNum.classList[2] == "invalid" || creditNum.classList[0] == "invalid") {
+    if (creditValue.startsWith("34") || creditValue.startsWith("37") || creditValue.startsWith("38") || creditValue.startsWith("36")) {
       document.querySelector(".invalid_creditcard").classList.remove("hide");
+      document.querySelector(".invalid_creditcard").textContent = "We do not accept American Express";
+    } else if (creditNum.classList[1] == "invalid" || creditNum.classList[2] == "invalid" || creditNum.classList[0] == "invalid" || creditNum.classList[3] == "invalid" || creditNum.classList[4] == "invalid") {
+      document.querySelector(".invalid_creditcard").classList.remove("hide");
+      document.querySelector(".invalid_creditcard").textContent = "You need to fill out 16 digits for the credit card";
     } else {
       document.querySelector(".invalid_creditcard").classList.add("hide");
     }
