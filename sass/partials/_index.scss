@@ -212,7 +212,7 @@ svg {
 }
 .box_icon .percent svg circle:nth-child(2) {
   transition: 1s;
-  stroke-dashoffset: calc(440 - (440 * var(--progress)) / 100);
+  stroke-dashoffset: calc(440px - (440px * var(--progress)) / 100);
   stroke: var(--yellow);
 }
 .box_icon .percent .number {

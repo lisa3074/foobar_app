@@ -4,7 +4,6 @@
   position: fixed;
   bottom: 0;
   z-index: 3;
-
   box-shadow: -1px -1px 10px -5px var(--dark);
   border-radius: var(--round-low);
 }
@@ -42,7 +41,6 @@ a {
     width: 13rem;
     border-radius: var(--round-rd);
     box-shadow: -1px -1px 15px -5px var(--dark);
-    z-index: 1;
   }
   .max_height {
     flex-direction: column;

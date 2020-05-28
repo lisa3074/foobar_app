@@ -3,7 +3,6 @@ const winUrl = "https://frontend-22d4.restdb.io/rest/winner";
 const apiKey = "5e9581a6436377171a0c234f";
 let beforeLastServed;
 let theWinner;
-let lastTime = 0;
 
 //let jsonData;
 const Win = {
@@ -34,8 +33,6 @@ function setData(winObject) {
   let servedToday = winObject.servedToday;
   let winsNow = Math.floor(servedToday / 100);
   let percentUntilWin;
-  let hasDelayBeenExecuted;
-  let now;
   if (servedToday == 0) {
     servedToday = beforeLastServed;
   }
@@ -52,69 +49,57 @@ function setData(winObject) {
     percentUntilWin = thePercentage.substring(2, 4);
   }
 
-  if (percentUntilWin == "00") {
+  if (percentUntilWin > "98" && percentUntilWin < "00") {
     const minus100 = servedToday - 99;
     let winner = setWinner(minus100, servedToday);
-    now = new Date().getTime(); // Time in milliseconds
-    if (now - lastTime > 40000) {
-      hasDelayBeenExecuted = true;
-      lastTime = now;
-    } else {
-      hasDelayBeenExecuted = false;
-    }
-    put(
-      { winner_number: winner },
-      //id is send to put, so it's the right object that is edited.
-      hasDelayBeenExecuted
-    );
-    // rest of function
+    put({ winner_number: winner });
   }
   const ordersLeft = 100 - percentUntilWin;
-  getWinner();
+  getWinner(percentUntilWin);
   displayProgress(percentUntilWin);
-  displayData(winsNow, ordersLeft, hasDelayBeenExecuted);
+  displayData(winsNow, ordersLeft);
 }
 function setWinner(min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
-async function put(payload, hasDelayBeenExecuted) {
-  console.log(hasDelayBeenExecuted);
-  if (hasDelayBeenExecuted) {
-    console.log("put");
-    const postData = JSON.stringify(payload);
-    //Sikrer det er det rigtige id der redigeres
-    let response = await fetch(`${winUrl}/${"5ece601e2313157900020042"}`, {
-      method: "put",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        "x-apikey": apiKey,
-        "cache-control": "no-cache",
-      },
-      body: postData,
-    });
-    //getWinner();
-    //objektet ændres i db
-    let data = await response.json();
-    console.log(data.winner_number);
-    /*  theWinner = data.winner_number; */
+  if (min < 0) {
+    min = 0;
+  } else {
+    return Math.floor(Math.random() * (max - min)) + min;
   }
 }
 
-async function getWinner() {
-  console.log("getWinner");
+async function put(payload) {
+  console.log("put");
+  const postData = JSON.stringify(payload);
+  //Sikrer det er det rigtige id der redigeres
   let response = await fetch(`${winUrl}/${"5ece601e2313157900020042"}`, {
-    method: "get",
+    method: "put",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
       "x-apikey": apiKey,
       "cache-control": "no-cache",
     },
+    body: postData,
   });
-  let jsonData = await response.json();
-  console.log(jsonData);
-  console.log(jsonData.winner_number);
-  theWinner = jsonData.winner_number;
+  let data = await response.json();
+  console.log(data.winner_number);
+}
+
+async function getWinner(percentUntilWin) {
+  console.log("getWinner");
+  if (percentUntilWin > "00" && percentUntilWin < "98") {
+    let response = await fetch(`${winUrl}/${"5ece601e2313157900020042"}`, {
+      method: "get",
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "x-apikey": apiKey,
+        "cache-control": "no-cache",
+      },
+    });
+    let jsonData = await response.json();
+    console.log(jsonData);
+    console.log(jsonData.winner_number);
+    theWinner = jsonData.winner_number;
+  }
 }
 
 function displayProgress(percentUntilWin) {
@@ -123,6 +108,13 @@ function displayProgress(percentUntilWin) {
   path.style.setProperty("--progress", percentUntilWin);
   document.querySelector(".win_number").textContent = percentUntilWin;
   //vis animation
+  if (percentUntilWin == "00" || (percentUntilWin > "00" && percentUntilWin < "75")) {
+    if (theWinner == undefined) {
+    } else {
+      document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = theWinner;
+      console.log(theWinner);
+    }
+  }
 }
 function displayData(winsNow, ordersLeft) {
   //const theWinner = getWinner();
@@ -130,10 +122,6 @@ function displayData(winsNow, ordersLeft) {
   console.log("displayData");
   document.querySelector(".wrap:nth-child(1)>.win_smallnumbers").textContent = winsNow;
   document.querySelector(".wrap:nth-child(2)>.win_smallnumbers").textContent = ordersLeft;
-  if (theWinner == undefined) {
-  } else {
-    document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = theWinner;
-  }
   console.log(theWinner);
 
   //vis info numre

@@ -101,14 +101,14 @@ details summary::-webkit-details-marker {
 }
 
 .arrow_down {
-  height: 28px;
+  height: 25px;
   cursor: pointer;
 }
 .down {
   cursor: pointer;
 
   .name {
-    padding-top: 0.2rem;
+    padding-top: 0.8rem;
   }
 }
 
@@ -231,14 +231,15 @@ summary {
 
 details[open] .arrow_down {
   transition: 1s;
-  transform: rotate3d(0, 0, 1, 270deg) translateX(-5px) translateY(-13px);
-  padding: 0rem 1.5rem;
+  transform: rotate3d(0, 0, 1, 180deg) translateX(0px) translateY(-8px);
+  padding: 0.2rem 0rem 0.5rem;
 }
 
 details:not([open]) .arrow_down {
   transition: 1s;
-  transform: rotate3d(0, 1, 5, 90deg) translateX(5px) translateY(13px);
-  padding: 0rem 1.2rem;
+
+  transform: rotate3d(0, 1, 5, 0deg) translateX(0px) translateY(13px);
+  padding: 0.2rem 0rem 0.5rem;
 }
 button.pay {
   padding: 0 2rem;
@@ -266,7 +267,7 @@ button.pay {
   }
 
   .summary_container {
-    padding: 0.5rem 0;
+    padding: 0rem 0 0.5rem;
     margin-bottom: 0;
   }
 

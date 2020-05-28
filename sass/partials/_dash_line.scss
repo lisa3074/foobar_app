@@ -87,7 +87,29 @@
     position: relative;
     min-height: auto;
   }
+}
+@media (min-width: 800px) and (orientation: portrait) {
+  @media (max-aspect-ratio: 3/4) {
+    .in_line {
+      padding: 2rem 1rem 1rem;
+    }
+  }
+}
+
+@media (min-width: 800px) and (max-width: 1200px) and (orientation: landscape) {
   .in_line {
-    padding: 2rem 1rem 1rem;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .dashBody .item_number {
+    font: var(--win-subhead);
+  }
+  .dashBody .in_line .item {
+    padding: 0.5rem;
+    height: auto;
+  }
+  .line .new_bg,
+  .pickup .new_bg {
+    padding: 0.5rem 1rem;
+    min-width: auto;
   }
 }
