@@ -105,16 +105,20 @@
     }
   }
 }
+@media (min-width: 550px) {
+  .dashBody {
+    .infobox {
+      height: 100%;
+      padding: 2rem 1rem 1rem 2rem;
+    }
+  }
+}
 @media (min-width: 800px) {
   .dashBody {
     --win-title: 1.7rem "proxima_novabold", sans-serif;
     --dash-big-numbers: 4rem "proxima_novabold", sans-serif;
     --title: 1.7rem "proxima_novabold", sans-serif;
     --head2: 0.95rem "proxima_novabold", sans-serif;
-    .infobox {
-      height: 100%;
-      padding: 2rem 1rem 1rem 2rem;
-    }
     .dash_subtitle {
       font: var(--head2);
     }
