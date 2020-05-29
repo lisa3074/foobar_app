@@ -144,7 +144,6 @@ function payDelegation() {
     displayOrderNumber();
   }, 2000);
   setTimeout(() => {
-    console.log(todayDate);
     postRestDb({
       order_number: theId,
       time: today.getTime(),
@@ -156,7 +155,7 @@ function payDelegation() {
       date: todayDate,
       restDbArray,
     });
-  }, 2500);
+  }, 4000);
 }
 
 /*
