@@ -1,7 +1,7 @@
 .dashBody {
   .winner_big {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: 1.2fr 2fr;
 
     .infobox {
       background-color: var(--yellow);
@@ -96,6 +96,14 @@
       width: 50%;
       height: 70%;
       padding-bottom: 0;
+    }
+  }
+}
+
+@media (min-width: 1400px) {
+  .dashBody {
+    .winner_big {
+      grid-template-columns: 0.8fr 2fr;
     }
   }
 }

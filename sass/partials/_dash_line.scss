@@ -8,26 +8,28 @@
   bottom: 1.2rem;
   right: 1.3rem;
 }
+.dashBody .item_number {
+  font: var(--win-subhead);
+}
 
 .line .new_bg {
   background-color: var(--soft-yellow);
-  padding: 1.5rem;
 }
 
 .pickup .new_bg {
   background-color: var(--soft-purple);
   color: var(--white);
-  padding: 1.5rem;
 }
 .line .new_bg,
 .pickup .new_bg {
   display: flex;
   /*  width: 10rem;
   height: 6rem; */
-  min-width: 10rem;
+  min-width: 8rem;
   align-items: center;
   justify-content: center;
   border-radius: var(--rounded);
+  padding: 0.5rem;
 }
 
 .in_line {
@@ -42,7 +44,7 @@
 }
 .item {
   width: 100%;
-  height: 3.5rem;
+  height: 2.5rem;
   border-radius: var(--rounded-light);
   display: flex;
   align-items: center;
@@ -60,13 +62,7 @@
 .heading_new {
   padding: 0 0 0.3rem 0.5rem;
 }
-/* .newest_num {
-  opacity: 1;
-  transition: all 0.5s;
-}
-.newest_num.hidden_num {
-  opacity: 0;
-} */
+
 .scale {
   animation: scaley 0.5s ease 1 forwards;
 }
@@ -111,5 +107,21 @@
   .pickup .new_bg {
     padding: 0.5rem 1rem;
     min-width: auto;
+  }
+}
+@media (min-width: 1400px) {
+  .line .new_bg,
+  .pickup .new_bg {
+    padding: 1.5rem;
+    min-width: 10rem;
+  }
+}
+
+@media (min-width: 1500px) {
+  .dashBody .item_number {
+    font: var(--title);
+  }
+  .item {
+    height: 3rem;
   }
 }

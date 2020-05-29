@@ -340,7 +340,7 @@ svg {
   }
 
   .fullHeight {
-    height: calc(var(--height) * 3vh);
+    height: calc(var(--height) * 2vh);
   }
   .progres_circle {
     justify-content: space-between;
@@ -355,14 +355,14 @@ svg {
     }
 
     100% {
-      height: calc(var(--height) * 3vh);
+      height: calc(var(--height) * 2vh);
     }
   }
   .wrap:nth-child(2) > .q_bar,
   .wrap:nth-child(3) > .q_bar,
   .wrap:nth-child(4) > .q_bar,
   .wrap:nth-child(5) > .q_bar {
-    height: calc(var(--height) * 3vh);
+    height: calc(var(--height) * 2vh);
   }
 }
 

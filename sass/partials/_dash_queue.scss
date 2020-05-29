@@ -1,6 +1,6 @@
 .queue_big {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1.2fr 2fr;
   .logo {
     position: absolute;
     width: 30vw;
@@ -66,6 +66,13 @@
     .logo {
       transform: translate(-50px, -20px);
     }
+  }
+}
+
+@media (min-width: 1400px) {
+  .queue_big {
+    display: grid;
+    grid-template-columns: 0.8fr 2fr;
   }
 }
 @media (min-width: 1500px) {
