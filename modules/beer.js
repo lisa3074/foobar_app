@@ -15,10 +15,12 @@ function displayBeers(data) {
   console.log("displayBeers");
 
   const clone = document.querySelector(".product_temp").content.cloneNode(true);
+  const dot = data.label.toString().indexOf(".");
+  const labelName = data.label.toString().substring(0, dot);
   clone.querySelector(".name").textContent = data.name;
   clone.querySelector(".beer_alc").textContent = data.alc + "%";
   clone.querySelector(".beer_cat").textContent = data.category;
-  clone.querySelector(".label").src = "images/labels/" + data.label;
+  clone.querySelector(".label").src = "images/labels/" + labelName + ".jpg";
   clone.querySelector(".label").alt = data.name;
   clone.querySelector(".aroma").textContent = data.description.aroma;
   clone.querySelector(".appearance").textContent = data.description.appearance;

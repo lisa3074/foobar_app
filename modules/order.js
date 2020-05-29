@@ -713,6 +713,8 @@ function displayReadMore() {
     document.querySelector(".order_container").classList.add("hide");
   }, 500);
   productArray.forEach((beer) => {
+    const dot = beer.label.toString().indexOf(".");
+    const labelName = beer.label.toString().substring(0, dot);
     if (beer.name == filter) {
       document.querySelector(".more_container .name").textContent = beer.name;
       document.querySelector(".more_container .cat").textContent = beer.category;
@@ -722,7 +724,7 @@ function displayReadMore() {
       document.querySelector(".more_container .mouth_feel").textContent = beer.mouthfeel;
       document.querySelector(".more_container .flavor").textContent = beer.flavor;
       document.querySelector(".more_container .overall").textContent = beer.overall;
-      document.querySelector(".more_container .label").src = "images/labels/" + beer.label;
+      document.querySelector(".more_container .label").src = "images/labels/" + labelName + ".jpg";
     }
   });
 }
@@ -747,6 +749,8 @@ function reset() {
 function displayProducts(beer) {
   console.log("displayProducts");
   amount = "0";
+  const dot = beer.label.toString().indexOf(".");
+  const labelName = beer.label.toString().substring(0, dot);
   //Put name as class on parent article to differentiate
   const className = beer.name;
   const noSpaces = className.toLowerCase().replace(" ", "");
@@ -756,7 +760,7 @@ function displayProducts(beer) {
   clone.querySelector(".name").textContent = beer.name;
   clone.querySelector(".beer_category").textContent = beer.category;
   clone.querySelector(".price").textContent = "40 DKK";
-  clone.querySelector(".product_details .label").src = "images/labels/" + beer.label;
+  clone.querySelector(".product_details .label").src = "images/labels/" + labelName + ".jpg";
   clone.querySelector(".product_details .label").alt = beer.name;
   clone.querySelector(".product_details .aroma").textContent = beer.aroma;
   clone.querySelector(".product_details .alc").textContent = beer.alcohol + "%";
