@@ -24,6 +24,7 @@ function appDelegation() {
   const indexBody = document.querySelector(".indexBody");
   const winBody = document.querySelector(".winBody");
   const dashBody = document.querySelector(".dashBody");
+  const dashBodyIndex = document.querySelector("section.dashBody");
 
   if (loginBody) {
     document.querySelector(".grid_item3 .log_into_account").addEventListener("click", getUser);
@@ -59,6 +60,9 @@ function appDelegation() {
     document.querySelector(".menu-beer .icon_wrapper").classList.add("chosen_img");
     toggleMenu();
     loadJsonBeer();
+    document.querySelector(".buy_beer").addEventListener("click", function () {
+      location.href = "order.html";
+    });
   }
   if (indexBody) {
     document.querySelector(".menu-home").classList.add("chosen");
@@ -75,7 +79,9 @@ function appDelegation() {
     getData();
     toggleMenu();
   }
-  if (dashBody) {
+  if (dashBodyIndex) {
+    clockDelegation();
+  } else if (dashBody) {
     dashDelegation();
   }
 }

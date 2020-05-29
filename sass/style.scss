@@ -82,7 +82,7 @@ form .explain {
   display: flex;
 }
 
-details {
+summary {
   cursor: pointer;
 }
 
@@ -197,9 +197,6 @@ button:hover:not(:disabled) {
 
 button.buy_beer:hover:not(:disabled) {
   transition: 0.2s;
-  transform: none;
-  width: 8.2rem;
-  height: 3.4rem;
 }
 
 button {

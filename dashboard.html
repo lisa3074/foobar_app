@@ -25,13 +25,13 @@
         </div>
         <div class="queue_right">
           <!--    <h2 class="dash_title">QUEUE</h2> -->
-          <img src="static/images/logos/dashboardLogo.svg" alt="Foorbar logo" class="logo" />
+          <img src="static/images/logos/dashboardLogo.svg" alt="Foorbar logo" class="logo logo_queue" />
           <div class="queue_box">
             <div class="wrap">
               <div class="q_bar"></div>
-              <p class="q_num dash_subtitle"></p>
+              <p class="q_num in_queue dash_subtitle"></p>
             </div>
-            <div class="wrap">
+            <!-- <div class="wrap">
               <div class="q_bar"></div>
               <p class="q_num dash_subtitle"></p>
             </div>
@@ -46,7 +46,7 @@
             <div class="wrap">
               <div class="q_bar"></div>
               <p class="q_num dash_subtitle"></p>
-            </div>
+            </div> -->
           </div>
         </div>
       </article>
@@ -74,8 +74,10 @@
                   <circle cy="70" cx="70" r="70"></circle>
                   <circle cy="70" cx="70" r="70"></circle>
                 </svg>
+
                 <div class="number">
-                  <p class="num dash_title"><span class="win_number dash_big_numbers">50</span>%</p>
+                  <p class="num percentage win_number dash_big_numbers"></p>
+                  <p class="head1">ORDERS<br />MADE</p>
                 </div>
               </div>
             </div>
@@ -115,6 +117,7 @@
             <p class="item_number line_number dash_queue_numbers"></p>
           </div>
         </template>
+        <img src="static/images/logos/dashboardLogo.svg" alt="Foorbar logo" class="logo logo_line" />
         <div class="newest">
           <p class="heading_new dash_subtitle">LATEST</p>
           <div class="new_bg">

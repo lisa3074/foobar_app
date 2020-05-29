@@ -64,7 +64,7 @@ function loops(foobarObject) {
   console.log("loops");
   const queue = foobarObject.queueLength;
   array.unshift(queue);
-  if (array.length <= 5) {
+  if (array.length <= 1) {
     console.log("under 10");
   } else {
     console.log("over 10");
@@ -96,6 +96,9 @@ function displayQueue(foobarObject) {
     //The other bars
     const bars = document.querySelectorAll(`.queue_box > .wrap:nth-child(${number + 1}) > .q_bar`);
     const barNum = document.querySelectorAll(`.queue_box > .wrap:nth-child(${number + 1}) > .q_num`);
+    if (array[number] == "0") {
+      array[number] = "0.5";
+    }
     bars.forEach((bar) => {
       bar.style.setProperty("--height", array[number]);
     });
@@ -112,7 +115,7 @@ function displayQueue(foobarObject) {
       queue.textContent = foobarObject.queueLength;
     });
     barNum.forEach((num) => {
-      num.textContent = array[number];
+      num.textContent = Math.floor(array[number]) + " IN QUEUE";
     });
     wins.forEach((win) => {
       win.textContent = winsNow;

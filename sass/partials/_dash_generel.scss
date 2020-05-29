@@ -8,15 +8,16 @@
   font: var(--head1);
 }
 
-.dash_big_numbers {
-  font: var(--dash-big-numbers);
-}
 .dash_queue_numbers {
   font: var(--title);
 }
 
 :root {
   --progress: 30;
+}
+
+.logo_line {
+  display: none;
 }
 .dashBody {
   --win-title: 1.7rem "proxima_novabold", sans-serif;
@@ -89,10 +90,10 @@
     width: 100%;
   }
 
-  .queue_box {
+  /*   .queue_box {
     grid-gap: 0.5rem;
     padding: 0.5rem;
-  }
+  } */
   .infobox {
     height: 100%;
     padding: 2rem 1rem 1rem 1rem;
@@ -135,9 +136,12 @@
       grid-gap: 1rem;
       padding-bottom: 0rem;
       grid-template-areas:
-        "queue queue queue queue time time"
+        "queue queue queue time time time"
         "win win win win win win"
         "line line line pickup pickup pickup";
+    }
+    .dash_big_numbers {
+      font: var(--dash-big-numbers);
     }
   }
 }
@@ -154,13 +158,50 @@
       "queue queue queue win win win"
       "time time line line pickup pickup";
   }
+  .queue_big {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
 }
+@media (min-width: 1100px) {
+  .dash_container {
+    display: grid;
+    max-width: 100%;
+    max-height: 100%;
+    grid-template-rows: 50% 50%;
+    padding-bottom: 0rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    grid-template-areas:
+      "line line line win win win"
+      "time time queue queue pickup pickup";
+  }
+  .logo_queue {
+    display: none;
+  }
+
+  .logo_line {
+    display: block;
+    position: absolute;
+    top: auto;
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+}
+
 @media (min-width: 1300px) {
   .dashBody .dash_subtitle {
     font-size: 1.1rem;
   }
   .dashBody .wrap p:nth-child(2) {
     font-size: 2rem;
+  }
+  .dashBody .wrap p:nth-child(2).in_queue {
+    font-size: 1.2rem;
+  }
+
+  .dash_big_numbers {
+    font: var(--dash-big-numbers);
   }
 }
 @media (min-width: 1900px) {

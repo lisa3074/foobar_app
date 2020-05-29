@@ -51,7 +51,7 @@
       <article class="queue">
         <div class="infobox">
           <div class="wrap">
-            <p class="head5">UPDATED</p>
+            <p class="head5">LAST UPDATED</p>
             <p class="title time">19:52</p>
           </div>
           <div class="wrap">
@@ -63,7 +63,7 @@
             <p class="title served_today">123</p>
           </div>
           <div class="wrap">
-            <p class="head5">WINNERS</p>
+            <p class="head5">WINNERS TODAY</p>
             <p class="title wins_today">2</p>
           </div>
         </div>
@@ -72,7 +72,8 @@
             <div class="q_bar"></div>
             <p class="q_num head4"></p>
           </div>
-          <div class="wrap">
+
+          <!--  <div class="wrap">
             <div class="q_bar"></div>
             <p class="q_num head4"></p>
           </div>
@@ -87,10 +88,11 @@
           <div class="wrap">
             <div class="q_bar"></div>
             <p class="q_num head4"></p>
-          </div>
-          <img src="/static/images/logos/appLogo.svg" alt="FooBar logo" class="logo" />
+          </div> -->
+          <img src="/static/images/logos/appLogo.svg" alt="FooBar logo" class="logo logo_index" />
         </article>
       </article>
+
       <section class="grid icons">
         <a href="/order.html">
           <article class="big_icon buy">
@@ -125,6 +127,33 @@
             <h3 class="head4">LOG IN</h3>
           </article>
         </a>
+      </section>
+      <section class="dashBody">
+        <article class="time_container">
+          <div class="infobox">
+            <h2 class="dash_title">LINE ESTIMATE</h2>
+          </div>
+          <article class="progres_circle">
+            <div class="box time_wrapper">
+              <div class="percent">
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 150 150" class="progress">
+                  <circle cy="70" cx="70" r="70"></circle>
+                  <circle cy="70" cx="70" r="35" stroke="url(#grad1)" stroke-width="70"></circle>
+                  <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="00%" style="stop-color: rgba(145, 117, 188, 1); stop-opacity: 1;" />
+                      <stop offset="100%" style="stop-color: rgba(231, 203, 121, 1); stop-opacity: 1;" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div class="number">
+                  <p class="minutes">30</p>
+                  <p class="dash_subtitle">MIN</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </article>
       </section>
     </main>
     <script src="script.js"></script>

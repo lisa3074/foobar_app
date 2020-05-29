@@ -28,9 +28,9 @@ function displayBeers(data) {
   clone.querySelector(".flavour").textContent = data.description.flavor;
   clone.querySelector(".overall").textContent = data.description.overallImpression;
 
-  clone.querySelector(".buy_beer").addEventListener("click", function () {
+  /*  clone.querySelector(".buy_beer").addEventListener("click", function () {
     location.href = "order.html";
-  });
+  }); */
 
   document.querySelector(".beer_container").appendChild(clone);
 }

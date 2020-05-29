@@ -4,7 +4,9 @@
   .logo {
     position: absolute;
     width: 30vw;
-    transform: translate(-10px, -20px);
+  }
+  .logo_queue {
+    transform: translate(-10px, 0px);
     max-width: 140px;
   }
   .queue_right {
@@ -15,19 +17,24 @@
     position: relative;
     .queue_box {
       width: 100%;
+
+      display: grid;
+      align-items: flex-end;
+      height: 100%;
+      grid-template-columns: 1fr;
     }
   }
 }
 @media (min-width: 800px) and (orientation: portrait) {
   .queue_big {
     display: grid;
-    grid-template-columns: 1fr 3fr;
-
-    .queue_box {
-      grid-gap: 1rem;
-      padding: 1rem 3rem 1rem 2rem;
+    grid-template-columns: 1fr 1fr;
+    .logo {
+      transform: translate(-60px, -20px);
     }
-
+    .win_number {
+      font-size: 1.5rem;
+    }
     .fullHeight {
       height: calc(var(--height) * 1vh);
     }
@@ -50,7 +57,7 @@
   }
 }
 @media (min-width: 800px) and (orientation: landscape) {
-  .queue_big .queue_right .queue_box {
+  .queue_big .queue_right {
     grid-gap: 1rem;
     padding: 1rem 2rem 0.5rem 2rem;
   }

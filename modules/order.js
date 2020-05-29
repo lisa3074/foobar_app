@@ -97,26 +97,26 @@ export function cartDelegation() {
 
   const forElements = form.querySelectorAll("input");
   forElements.forEach((el) => {
-    el.addEventListener("focusout", function () {
-      if (!el.checkValidity()) {
-        console.log("invalid");
-        //If not valid add class invalid
-        el.classList.add("invalid");
-        setInvalid();
-        // el > p.classList.remove("hide");
-        el.addEventListener("keyup", function () {
-          console.log("remove invalid");
-          el.classList.remove("invalid");
+    el.addEventListener("focus", function () {
+      this.classList.remove("invalid");
+      setInvalid();
+      el.addEventListener("focusout", function () {
+        if (!el.checkValidity()) {
+          console.log("invalid");
+          //If not valid add class invalid
+          el.classList.add("invalid");
           setInvalid();
-        });
-        el.addEventListener("focus", function () {
-          this.classList.remove("invalid");
-          setInvalid();
-        });
-        if (el.getAttribute("id") == "#username") {
-          console.log("username");
+          // el > p.classList.remove("hide");
+          if (el.getAttribute("id") == "#username") {
+            console.log("username");
+          }
+          el.addEventListener("keyup", function () {
+            console.log("remove invalid");
+            el.classList.remove("invalid");
+            setInvalid();
+          });
         }
-      }
+      });
     });
   });
   //document.querySelector(".thank_you_nav .home").addEventListener("click", checkValidity);

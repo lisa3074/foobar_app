@@ -2,6 +2,24 @@ body {
   position: relative;
 }
 
+section.dashBody {
+  padding: 0;
+  height: auto;
+  .time_container {
+    padding: 0;
+    .infobox {
+      display: flex;
+      height: 6rem;
+      justify-content: center;
+      background-color: var(--yellow);
+      color: var(--dark);
+    }
+    .progres_circle {
+      height: 85%;
+    }
+  }
+}
+
 .win_percent {
   font-size: 1rem;
   padding-left: 0.5rem;
@@ -13,12 +31,17 @@ body {
 .home_container {
   padding: 1rem 1rem calc(1rem + 70px) 1rem;
   width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto;
+  grid-row-gap: 1rem;
 }
-
 .logo {
   width: 40%;
   height: auto;
   position: absolute;
+}
+.logo_index {
   top: 2rem;
   left: 30%;
   z-index: 0;
@@ -57,10 +80,10 @@ body {
 
 .queue_box {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 1rem;
+  /*  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem; */
   align-items: flex-end;
-  padding: 2rem 2rem 1rem 2rem;
+  padding: 0rem 2rem;
   height: 40vh;
 }
 
@@ -93,6 +116,8 @@ body {
   background: var(--gradient);
   border-radius: var(--rounded);
   z-index: 1;
+  max-width: 6rem;
+  margin: 0 auto;
 }
 .q_num {
   text-align: center;
@@ -113,7 +138,7 @@ body {
 .big_icon {
   display: grid;
   width: 100%;
-  height: 95%;
+  height: 90%;
   background-color: var(--white);
   border-radius: var(--rounded);
   text-align: center;
@@ -238,6 +263,31 @@ svg {
   .win_number {
     font-size: 2rem;
   }
+  .queue_box {
+    padding: 0rem;
+    height: 100%;
+  }
+  .queue {
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-gap: 1rem;
+    height: 100%;
+    /*   height: 56vh;
+    min-height: 440px; */
+    .queue_box {
+      padding: 1rem 4rem;
+    }
+    .logo_index {
+      left: auto;
+      right: 2rem;
+      top: 1rem;
+      width: 20%;
+    }
+  }
+  .infobox .wrap {
+    text-align: left;
+    padding-left: 1rem;
+  }
 }
 @media (min-width: 570px) {
   .logo {
@@ -265,6 +315,7 @@ svg {
   .infobox .wrap {
     flex-basis: 100px;
   }
+
   ///////////////////
   //BIG ICONS
   ///////////////////
@@ -283,6 +334,36 @@ svg {
     height: 85%;
   }
 }
+@media (min-width: 650px) {
+  .home_container {
+    padding: 1rem 1rem calc(1rem + 70px) 1rem;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto 25vw auto;
+    grid-row-gap: 0rem;
+    grid-column-gap: 1rem;
+    grid-template-areas:
+      "queue time"
+      "icons icons";
+  }
+  .queue {
+    grid-gap: 0;
+  }
+  .queue .queue_box {
+    height: 100%;
+    padding: 1rem;
+  }
+  .queue {
+    grid-area: queue;
+  }
+  .icons {
+    grid-area: icons;
+  }
+  .time_constainer {
+    grid-area: time;
+  }
+}
 @media (min-width: 800px) {
   .logo {
     width: 20%;
@@ -291,20 +372,14 @@ svg {
   /////////////////
   //QUEUE
   ////////////////
-  .queue {
-    display: grid;
-    grid-template-columns: 1fr 3.1fr;
-    grid-gap: 1rem;
-    height: 100%;
-    /*   height: 56vh;
-    min-height: 440px; */
-  }
+
   .queue_box {
     height: 100%;
   }
   .home_container {
     width: 100%;
     padding-left: 100px;
+    grid-template-rows: 69% 25%;
   }
   .infobox {
     display: block;
@@ -370,12 +445,24 @@ svg {
   .win .head4 {
     font: var(--head2);
   }
+  .queue {
+    grid-template-columns: 1.5fr 2fr;
+    .q_bar {
+      max-width: 8rem;
+    }
+  }
 }
 
 @media (min-width: 1100px) {
   .logo {
     width: 15%;
     left: 46%;
+  }
+  .queue_box {
+    display: grid;
+    align-items: flex-end;
+    padding: 2rem 2rem 1rem 2rem;
+    height: 40vh;
   }
 }
 
@@ -390,5 +477,11 @@ svg {
   }
   .win_number {
     font-size: 2.5rem;
+  }
+  .queue {
+    grid-template-columns: 1fr 2fr;
+    .q_bar {
+      max-width: 10rem;
+    }
   }
 }
