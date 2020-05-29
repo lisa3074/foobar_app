@@ -103,8 +103,13 @@ input.invalid:not(:focus):not(:placeholder-shown) {
   font: var(--invalid);
   padding: 0.2rem 0 0 0;
 }
+.explain_pass.paragraph {
+  font-size: 0.75rem;
+  padding-left: 0.2rem;
+}
 
-.mail label .explain_mail {
+.mail label .explain_mail,
+.explain_pass.paragraph {
   color: var(--purple);
   font-size: 0.8rem;
 }

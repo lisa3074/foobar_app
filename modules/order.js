@@ -92,7 +92,6 @@ export function cartDelegation() {
     el.addEventListener("keyup", function () {
       console.log("remove invalid");
       this.classList.remove("invalid");
-      //checkIfAllIsValid();
     });
   });
 
@@ -157,7 +156,7 @@ function payDelegation() {
       date: todayDate,
       restDbArray,
     });
-  }, 2000);
+  }, 2500);
 }
 
 /*
@@ -220,6 +219,15 @@ function logInOrSignUp() {
       const login = document.querySelector("#has_account").checked;
       const noAccount = document.querySelector("#no_account").checked;
       const newAccount = document.querySelector("#new_account").checked;
+      document.querySelector("#username").classList.remove("invalid");
+      document.querySelector("#password").classList.remove("invalid");
+      document.querySelector("#mail").classList.remove("invalid");
+      document.querySelector("#secure_pass").classList.remove("invalid");
+      document.querySelector(".invalid_password").classList.add("hide");
+      document.querySelector(".invalid_password2").classList.add("hide");
+      document.querySelector(".invalid_user").classList.add("hide");
+      document.querySelector(".invalid_mail").classList.add("hide");
+
       if (login || newAccount) {
         document.querySelector("#username").setAttribute("required", "");
         document.querySelector(".username").classList.remove("hide");
@@ -228,11 +236,11 @@ function logInOrSignUp() {
       }
       if (login) {
         console.log("log in");
-        document.querySelector(".invalid_password2").classList.add("hide");
+        // document.querySelector(".invalid_password2").classList.add("hide");
         document.querySelector("#secure_pass").removeAttribute("required");
         document.querySelector(".secure_pass").classList.add("hide");
 
-        document.querySelector(".invalid_mail").classList.add("hide");
+        // document.querySelector(".invalid_mail").classList.add("hide");
         document.querySelector("#mail").removeAttribute("required");
         document.querySelector(".mail").classList.add("hide");
       }
@@ -247,19 +255,16 @@ function logInOrSignUp() {
       }
       if (noAccount) {
         console.log("no account");
-        document.querySelector(".invalid_password2").classList.add("hide");
+        //document.querySelector(".invalid_password2").classList.add("hide");
         document.querySelector(".secure_pass").classList.add("hide");
         document.querySelector("#secure_pass").removeAttribute("required");
-        document.querySelector("#secure_pass").value = "";
 
-        document.querySelector(".invalid_password").classList.add("hide");
+        //document.querySelector(".invalid_password").classList.add("hide");
         document.querySelector("#password").removeAttribute("required");
-        document.querySelector("#password").value = "";
         document.querySelector(".password").classList.add("hide");
 
-        document.querySelector(".invalid_user").classList.add("hide");
+        //document.querySelector(".invalid_user").classList.add("hide");
         document.querySelector("#username").removeAttribute("required");
-        document.querySelector("#username").value = "";
         document.querySelector(".username").classList.add("hide");
 
         document.querySelector("#mail").setAttribute("required", "");
@@ -390,18 +395,20 @@ async function checkUser() {
     //Check validity
 
     data.forEach((order) => {
-      if (user == true && pass == true) {
+      if ((user == true && pass == true) || isUserValid == true) {
         isUserValid = true;
         document.querySelector("#password").classList.remove("invalid");
         console.log("user and pass are true");
       } else if (user == true) {
+        user = true;
         console.log("Username correct");
         if (order.password == password) {
           console.log("username and password correct");
           document.querySelector("#password").classList.remove("invalid");
           pass = true;
+          user = true;
           isUserValid = true;
-        } else {
+        } else if (!pass) {
           console.log("password incorrect");
           document.querySelector("#password").classList.add("invalid");
           isUserValid = false;
@@ -446,9 +453,6 @@ function checkIfAllIsValid() {
     //post();
 
     console.log("all good");
-    setTimeout(() => {
-      form.reset();
-    }, 4000);
     payDelegation();
     displayThankYou();
   } else {
@@ -633,13 +637,13 @@ function createRestDbObject(ordered) {
   restDbObject.amount = ordered.amount;
   restDbObject.price = ordered.amount * 40;
   restDbObject.total_beer = amount;
-  restDbObject.username = document.querySelector("#username").value;
-  restDbObject.password = document.querySelector("#password").value;
-  restDbObject.email = document.querySelector("#mail").value;
   restDbObject.order_number = theId;
   restDbObject.date = todayDate;
   restDbObject.total_price = total_price;
   console.table(restDbObject);
+  console.log(email_value);
+  console.log(password_value);
+  console.log(username_value);
   document.querySelector(".pay").addEventListener("click", function () {
     document.querySelector(".pay").classList.add("disabled");
 
@@ -653,6 +657,13 @@ function createRestDbObject(ordered) {
   return restDbObject;
 }
 
+function fillRestDbObject() {
+  console.log("fillRestDbObject");
+  username_value = document.querySelector("#username").value;
+  password_value = document.querySelector("#password").value;
+  email_value = document.querySelector("#mail").value;
+}
+
 function createRestDbArray(ordered) {
   console.log("createRestDbArray");
   username_value = document.querySelector("#username").value;
@@ -663,8 +674,11 @@ function createRestDbArray(ordered) {
   restDbObject.amount = ordered.amount;
   restDbObject.price = ordered.amount * 40;
   restDbArray.push(restDbObject);
-  console.table(restDbObject);
-  console.table(restDbArray);
+  if (restDbArray.length > 0) {
+    //restDbArray.shift();
+    console.table(restDbObject);
+    console.table(restDbArray);
+  }
 }
 
 async function postHeroku() {
@@ -819,12 +833,22 @@ function displaySummary() {
       const clone = document.querySelector(".cart_sumup").content.cloneNode(true);
       clone.querySelector(".article").textContent = ordered.name;
       clone.querySelector(".amount").textContent = ordered.amount + " pcs.";
-      clone.querySelector(".final_amount").textContent = total_price + " DKK";
+      clone.querySelector(".final_amount").textContent = ordered.amount * 40 + " DKK";
       document.querySelector(".result_list").appendChild(clone);
 
       order = createHerokuObject(ordered);
       console.log(order);
-      orderDetails = createRestDbObject(ordered, total_price);
+      setTimeout(() => {
+        orderDetails = createRestDbObject(ordered, total_price);
+      }, 100);
+      document.querySelectorAll(".pin input").forEach((el) => {
+        el.addEventListener("keyup", function () {
+          restDbObject = {};
+          console.log(order[0]);
+          fillRestDbObject(ordered);
+          //checkIfAllIsValid();
+        });
+      });
     }
   });
 
@@ -880,14 +904,11 @@ function displayThankYou(orderDetails) {
     document.querySelector(".thank_you_nav").classList.remove("fadeIn");
     document.querySelector(".thank_you").classList.remove("fadeIn");
   }, 1600);
-  setTimeout(() => {
-    reset();
-  }, 8000);
-  setTimeout(() => {
+  /*   setTimeout(() => {
     restDbArray = [];
     restDbObject = {};
     herokuArray = [];
-  }, 3000);
+  }, 3000); */
 }
 
 function displayOrderNumber() {
