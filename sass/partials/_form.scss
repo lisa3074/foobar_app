@@ -145,7 +145,7 @@ input.invalid:not(:focus):not(:placeholder-shown) {
   }
   .pin > div.user > div:nth-child(2) > .star {
     transform: translateY(-77px) translateX(82px);
-    -webkit-transform: translateY(-77px) translateX(82px);
+    -webkit-transform: translateY(-77px) translateX(232px);
     -ms-transform: translateY(-77px) translateX(82px);
   }
   .pin > div.user > div:nth-child(1) > .star {
@@ -158,10 +158,17 @@ input.invalid:not(:focus):not(:placeholder-shown) {
     -ms-transform: translateY(-75px) translateX(138px);
     -webkit-transform: translateY(-75px) translateX(138px);
   }
-  .pin > div.user > div.mail > .star {
-    transform: translateY(-75px) translateX(138px);
-    -ms-transform: translateY(-75px) translateX(138px);
-    -webkit-transform: translateY(-77px) translateX(50px);
+
+  .on_no_account {
+    transform: translateY(-75px) translateX(150px);
+    -ms-transform: translateY(-75px) translateX(150px);
+    -webkit-transform: translateY(-75px) translateX(150px);
+  }
+
+  .on_new_account {
+    transform: translateY(-77px) translateX(185px);
+    -ms-transform: translateY(-77px) translateX(185px);
+    -webkit-transform: translateY(-77px) translateX(185px);
   }
 }
 //FOCUS
