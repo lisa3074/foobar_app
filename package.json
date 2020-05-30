@@ -29,6 +29,7 @@
     "animate.css": "^4.1.0",
     "card": "^2.4.0",
     "jquery": "^3.5.1",
+    "modules": "^0.4.0",
     "parcel-plugin-static-files-copy": "^2.3.1"
   }
 }

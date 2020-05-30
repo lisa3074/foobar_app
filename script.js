@@ -7,7 +7,6 @@ import { toggleMenu } from "./modules/navigation";
 import { indexDelegation } from "./modules/queue";
 import { loadJsonBeer } from "./modules/beer";
 import { clockDelegation } from "./modules/bigClock";
-
 import { getData } from "./modules/win";
 import { card } from "./modules/card_ani";
 import { loadJson as bigQueue } from "./modules/bigQueue";
@@ -50,6 +49,7 @@ function appDelegation() {
 
     document.querySelector(".menu-buy").classList.add("chosen");
     document.querySelector(".menu-buy .icon_wrapper").classList.add("chosen_img");
+
     cartDelegation();
     toggleMenu();
     card();
