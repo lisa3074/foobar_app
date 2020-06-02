@@ -2,7 +2,8 @@ const url = "https://foobar3exam.herokuapp.com/";
 const winUrl = "https://frontend-22d4.restdb.io/rest/winner";
 const apiKey = "5e9581a6436377171a0c234f";
 let beforeLastServed;
-let theWinner;
+let winner;
+let percentUntilWin;
 
 //let jsonData;
 const Win = {
@@ -32,7 +33,7 @@ function setData(winObject) {
   console.log("setData");
   let servedToday = winObject.servedToday;
   let winsNow = Math.floor(servedToday / 100);
-  let percentUntilWin;
+  //let percentUntilWin;
   if (servedToday == 0) {
     servedToday = beforeLastServed;
   }
@@ -51,20 +52,18 @@ function setData(winObject) {
     console.log(servedToday);
     percentUntilWin = thePercentage.substring(2, 4);
   }
+  console.log(percentUntilWin);
 
-  if (percentUntilWin > "84" && percentUntilWin < "100") {
+  if (percentUntilWin > "00" && percentUntilWin < "99") {
     const minus100 = servedToday - 99;
-    let winner = setWinner(minus100, servedToday);
+    winner = setWinner(minus100, servedToday);
     console.log(winner);
-    setTimeout(() => {
-      put({ winner_number: winner });
-    }, 500);
   }
   const ordersLeft = 100 - percentUntilWin;
-  getWinner(percentUntilWin);
   displayProgress(percentUntilWin);
   displayData(winsNow, ordersLeft);
 }
+
 function setWinner(min, max) {
   if (min < 0) {
     min = 0;
@@ -75,7 +74,7 @@ function setWinner(min, max) {
   }
 }
 
-async function put(payload) {
+/* async function put(payload) {
   console.log("put");
   const postData = JSON.stringify(payload);
   //Sikrer det er det rigtige id der redigeres
@@ -90,8 +89,8 @@ async function put(payload) {
   });
   let data = await response.json();
   console.log(data.winner_number);
-}
-
+} */
+/* 
 async function getWinner(percentUntilWin) {
   console.log("getWinner");
   if (percentUntilWin > "80" && percentUntilWin < "85") {
@@ -108,7 +107,7 @@ async function getWinner(percentUntilWin) {
     console.log(jsonData.winner_number);
     theWinner = jsonData.winner_number;
   }
-}
+} */
 
 function displayProgress(percentUntilWin) {
   console.log("displayProgress");
@@ -116,11 +115,11 @@ function displayProgress(percentUntilWin) {
   path.style.setProperty("--progress", percentUntilWin);
   document.querySelector(".win_number").textContent = percentUntilWin;
   //vis animation
-  if (percentUntilWin >= "86" && percentUntilWin < "90") {
-    if (theWinner == undefined) {
+  if (percentUntilWin >= "20" && percentUntilWin < "90") {
+    if (winner == undefined) {
     } else {
-      document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = theWinner;
-      console.log(theWinner);
+      document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = winner;
+      console.log(winner);
     }
   }
 }
@@ -130,10 +129,18 @@ function displayData(winsNow, ordersLeft) {
   console.log("displayData");
   document.querySelector(".wrap:nth-child(1)>.win_smallnumbers").textContent = winsNow;
   document.querySelector(".wrap:nth-child(2)>.win_smallnumbers").textContent = ordersLeft;
-  console.log(theWinner);
+  console.log(winner);
 
   //vis info numre
   setTimeout(() => {
     getData();
   }, 1000);
+}
+export function displayDashData() {
+  const winBody = document.querySelector(".winBody");
+  if (!winBody) {
+    console.log("displayDashData");
+    console.log(winner);
+    document.querySelector(".last_win").textContent = winner;
+  }
 }

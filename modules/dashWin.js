@@ -1,10 +1,18 @@
+import { displayDashData } from "/modules/win";
+/* 
 const winUrl = "https://frontend-22d4.restdb.io/rest/winner";
 const apiKey = "5e9581a6436377171a0c234f";
-let theWinner;
+let theWinner; */
 export function dashWinDelegation() {
-  getData();
+  //getData();
+  console.log("dashWinDelegation");
+  displayDashData();
+
+  setTimeout(() => {
+    dashWinDelegation();
+  }, 1000);
 }
-async function getData() {
+/* async function getData() {
   console.log("getData");
 
   let response = await fetch(`${winUrl}/${"5ece601e2313157900020042"}`, {
@@ -18,12 +26,12 @@ async function getData() {
   let jsonData = await response.json();
   theWinner = jsonData.winner_number;
   displayData();
-}
-function displayData() {
+} */
+/* function displayData() {
   console.log("displayData");
-  document.querySelector(".last_win").textContent = theWinner;
+  document.querySelector(".last_win").textContent = winner;
   //vis info numre
   setTimeout(() => {
     getData();
   }, 1000);
-}
+} */
