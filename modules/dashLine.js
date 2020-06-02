@@ -1,8 +1,9 @@
 const url = "https://foobar3exam.herokuapp.com/";
-/* let latestQueue; */
-let oldlatestQueue;
+export function lineDelegation() {
+  loadJson();
+}
 
-export async function loadJson() {
+async function loadJson() {
   console.log("loadJson");
   let response = await fetch(url);
   let jsonData = await response.json();
@@ -33,24 +34,7 @@ function displayQueue(queue) {
 }
 function displayLatestQueue(latestQueue) {
   console.log("displayLatestQueue");
-
   document.querySelector(".newest_num").textContent = latestQueue;
-  //document.querySelector(".line .newest_num").textContent = latestQueue;
-
-  /*   if (latestQueue == oldlatestQueue) {
-    console.log("same");
-  } else {
-    console.log("not same");
-    // console.log(oldlatestQueue);
-    document.querySelector(".newest_num").classList.add("hidden_num");
-    setTimeout(function () {
-      document.querySelector(".newest_num").textContent = latestQueue;
-    }, 1000);
-    setTimeout(function () {
-      document.querySelector(".newest_num").classList.remove("hidden_num");
-    }, 1000);
-  } */
-  oldlatestQueue = latestQueue;
 }
 function displayServed(serving) {
   console.log("displayServed");

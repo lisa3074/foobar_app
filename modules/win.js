@@ -36,7 +36,6 @@ function setData(winObject) {
   if (servedToday == 0) {
     servedToday = beforeLastServed;
   }
-  console.log(beforeLastServed);
   if (servedToday < 100) {
     percentUntilWin = servedToday;
   } else if (servedToday < 1000) {
@@ -49,21 +48,26 @@ function setData(winObject) {
     percentUntilWin = thePercentage.substring(2, 4);
   }
 
-  if (percentUntilWin > "98" && percentUntilWin < "00") {
+  if (percentUntilWin > "95" && percentUntilWin < "99") {
     const minus100 = servedToday - 99;
     let winner = setWinner(minus100, servedToday);
-    put({ winner_number: winner });
+    console.log(winner);
+    setTimeout(() => {
+      put({ winner_number: winner });
+    }, 500);
   }
   const ordersLeft = 100 - percentUntilWin;
   getWinner(percentUntilWin);
   displayProgress(percentUntilWin);
-  displayData(winsNow, ordersLeft);
+  displayData(winsNow, ordersLeft), percentUntilWin;
 }
 function setWinner(min, max) {
   if (min < 0) {
     min = 0;
   } else {
-    return Math.floor(Math.random() * (max - min)) + min;
+    let random = Math.floor(Math.random() * (max - min)) + min;
+    console.log(random);
+    return random;
   }
 }
 
@@ -81,24 +85,25 @@ async function put(payload) {
     body: postData,
   });
   let data = await response.json();
-  console.log(data.winner_number);
+  // console.log(data.winner_number);
 }
 
 async function getWinner(percentUntilWin) {
   console.log("getWinner");
-  if (percentUntilWin > "00" && percentUntilWin < "98") {
-    let response = await fetch(`${winUrl}/${"5ece601e2313157900020042"}`, {
-      method: "get",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        "x-apikey": apiKey,
-        "cache-control": "no-cache",
-      },
-    });
-    let jsonData = await response.json();
-    console.log(jsonData);
-    console.log(jsonData.winner_number);
-    theWinner = jsonData.winner_number;
+  let response = await fetch(`${winUrl}/${"5ece601e2313157900020042"}`, {
+    method: "get",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apikey": apiKey,
+      "cache-control": "no-cache",
+    },
+  });
+  let jsonData = await response.json();
+  /*  console.log(jsonData);
+  console.log(jsonData.winner_number); */
+  theWinner = jsonData.winner_number;
+  if (percentUntilWin > "00" && percentUntilWin < "95") {
+    displayWinner();
   }
 }
 
@@ -107,25 +112,19 @@ function displayProgress(percentUntilWin) {
   const path = document.querySelector(".box .percent svg circle:nth-child(2)");
   path.style.setProperty("--progress", percentUntilWin);
   document.querySelector(".win_number").textContent = percentUntilWin;
-  //vis animation
-  if (percentUntilWin == "00" || (percentUntilWin > "00" && percentUntilWin < "75")) {
-    if (theWinner == undefined) {
-    } else {
-      document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = theWinner;
-      console.log(theWinner);
-    }
-  }
 }
 function displayData(winsNow, ordersLeft) {
-  //const theWinner = getWinner();
-  const winnerText = document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent;
   console.log("displayData");
   document.querySelector(".wrap:nth-child(1)>.win_smallnumbers").textContent = winsNow;
   document.querySelector(".wrap:nth-child(2)>.win_smallnumbers").textContent = ordersLeft;
   console.log(theWinner);
-
-  //vis info numre
   setTimeout(() => {
     getData();
   }, 1000);
+}
+
+function displayWinner() {
+  console.log(displayWinner);
+  document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = theWinner;
+  console.log(theWinner);
 }
