@@ -1,18 +1,18 @@
-const url = "https://foobar3exam.herokuapp.com/";
-const winUrl = "https://frontend-22d4.restdb.io/rest/winner";
-const apiKey = "5e9581a6436377171a0c234f";
-let beforeLastServed;
-let theWinner;
+const HTML = {};
 
-//let jsonData;
 const Win = {
   servedToday: "",
 };
 
 export async function getData() {
+  HTML.url = "https://foobar3exam.herokuapp.com/";
+  HTML.winUrl = "https://frontend-22d4.restdb.io/rest/winner";
+  HTML.apiKey = "5e9581a6436377171a0c234f";
+  HTML.beforeLastServed;
+  HTML.theWinner;
   console.log("getData");
   console.log("loadJson");
-  let response = await fetch(url);
+  let response = await fetch(HTML.url);
   let jsonData = await response.json();
   makeObjects(jsonData);
 }
@@ -34,7 +34,7 @@ function setData(winObject) {
   let winsNow = Math.floor(servedToday / 100);
   let percentUntilWin;
   if (servedToday == 0) {
-    servedToday = beforeLastServed;
+    servedToday = HTML.beforeLastServed;
   }
   if (servedToday < 100) {
     percentUntilWin = servedToday;
@@ -75,11 +75,11 @@ async function put(payload) {
   console.log("put");
   const postData = JSON.stringify(payload);
   //Sikrer det er det rigtige id der redigeres
-  let response = await fetch(`${winUrl}/${"5ece601e2313157900020042"}`, {
+  let response = await fetch(`${HTML.winUrl}/${"5ece601e2313157900020042"}`, {
     method: "put",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": apiKey,
+      "x-apikey": HTML.apiKey,
       "cache-control": "no-cache",
     },
     body: postData,
@@ -90,18 +90,18 @@ async function put(payload) {
 
 async function getWinner(percentUntilWin) {
   console.log("getWinner");
-  let response = await fetch(`${winUrl}/${"5ece601e2313157900020042"}`, {
+  let response = await fetch(`${HTML.winUrl}/${"5ece601e2313157900020042"}`, {
     method: "get",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": apiKey,
+      "x-apikey": HTML.apiKey,
       "cache-control": "no-cache",
     },
   });
   let jsonData = await response.json();
   /*  console.log(jsonData);
   console.log(jsonData.winner_number); */
-  theWinner = jsonData.winner_number;
+  HTML.theWinner = jsonData.winner_number;
   if (percentUntilWin > "00" && percentUntilWin < "95") {
     displayWinner();
   }
@@ -117,7 +117,7 @@ function displayData(winsNow, ordersLeft) {
   console.log("displayData");
   document.querySelector(".wrap:nth-child(1)>.win_smallnumbers").textContent = winsNow;
   document.querySelector(".wrap:nth-child(2)>.win_smallnumbers").textContent = ordersLeft;
-  console.log(theWinner);
+  console.log(HTML.theWinner);
   setTimeout(() => {
     getData();
   }, 1000);
@@ -125,6 +125,6 @@ function displayData(winsNow, ordersLeft) {
 
 function displayWinner() {
   console.log(displayWinner);
-  document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = theWinner;
-  console.log(theWinner);
+  document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = HTML.theWinner;
+  console.log(HTML.theWinner);
 }

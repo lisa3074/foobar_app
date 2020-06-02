@@ -1,7 +1,6 @@
-const url = "https://foobar3exam.herokuapp.com/beertypes";
 export async function loadJsonBeer() {
   console.log("loadJson - beer.js");
-  let response = await fetch(url);
+  let response = await fetch("https://foobar3exam.herokuapp.com/beertypes");
   let jsonData = await response.json();
   fetchList(jsonData);
 }
@@ -27,10 +26,6 @@ function displayBeers(data) {
   clone.querySelector(".mouth_feel").textContent = data.description.mouthfeel;
   clone.querySelector(".flavour").textContent = data.description.flavor;
   clone.querySelector(".overall").textContent = data.description.overallImpression;
-
-  /*  clone.querySelector(".buy_beer").addEventListener("click", function () {
-    location.href = "order.html";
-  }); */
 
   document.querySelector(".beer_container").appendChild(clone);
 }

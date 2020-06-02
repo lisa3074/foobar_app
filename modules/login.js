@@ -1,25 +1,24 @@
-//import { loadJson } from "./bigQueue";
-const endpoint = "https://foobar3exam.herokuapp.com/";
-const restDb = "https://frontend-22d4.restdb.io/rest/foobar";
-const apiKey = "5e9581a6436377171a0c234f";
-let form = document.querySelector(".login_form");
-let data;
-let today = new Date();
+const HTML = {};
 
 export async function getUser() {
+  HTML.endpoint = "https://foobar3exam.herokuapp.com/";
+  HTML.restDb = "https://frontend-22d4.restdb.io/rest/foobar";
+  HTML.apiKey = "5e9581a6436377171a0c234f";
+  HTML.form = document.querySelector(".login_form");
+  HTML.data;
   console.log("getUser");
   //GET
-  let response = await fetch(restDb, {
+  let response = await fetch(HTML.restDb, {
     method: "get",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": apiKey,
+      "x-apikey": HTML.apiKey,
       "cache-control": "no-cache",
     },
   });
-  data = await response.json();
-  console.log(data);
-  checkIfValid(data);
+  HTML.data = await response.json();
+  console.log(HTML.data);
+  checkIfValid(HTML.data);
   document.querySelector(".log_in_done").classList.remove("disabled");
 }
 export function displayDisabledButton() {
@@ -100,7 +99,7 @@ function logout() {
     document.querySelector(".invalid_user").classList.add("hide");
     document.querySelector("#password_login").classList.remove("invalid");
     document.querySelector("#username_login").classList.remove("invalid");
-    form.reset();
+    HTML.form.reset();
     document.querySelector(".main_content .login_heading").textContent = "LOG IN";
   });
 }
@@ -144,17 +143,17 @@ async function deleteIt(id) {
   console.log("delete");
   //elementet med det pågældende id (der er sendt med videre fra klik) slettes med det samme i DOM'en
   document.querySelector(`article[data-id="${id}"]`).remove();
-  let response = await fetch(`${restDb}/${id}`, {
+  let response = await fetch(`${HTML.restDb}/${id}`, {
     method: "delete",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": apiKey,
+      "x-apikey": HTML.apiKey,
       "cache-control": "no-cache",
     },
   });
   //Herefter slettes elementet i db
-  data = await response.json();
-  console.log(data);
+  HTML.data = await response.json();
+  console.log(HTML.data);
 }
 
 async function getStatus(e) {
@@ -165,7 +164,7 @@ async function getStatus(e) {
   let tenderStatus;
   console.log("getStatus");
   //GET
-  let response = await fetch(endpoint, {
+  let response = await fetch(HTML.endpoint, {
     method: "get",
   });
   let herokuData = await response.json();
