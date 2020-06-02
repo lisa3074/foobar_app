@@ -36,9 +36,12 @@ function setData(winObject) {
   if (servedToday == 0) {
     servedToday = beforeLastServed;
   }
-  console.log(beforeLastServed);
   if (servedToday < 100) {
     percentUntilWin = servedToday;
+  } else if (servedToday == 100) {
+    const thePercentage = servedToday.toString();
+    console.log(servedToday);
+    percentUntilWin = thePercentage.substring(0, 3);
   } else if (servedToday < 1000) {
     const thePercentage = servedToday.toString();
     console.log(servedToday);
@@ -49,10 +52,13 @@ function setData(winObject) {
     percentUntilWin = thePercentage.substring(2, 4);
   }
 
-  if (percentUntilWin > "98" && percentUntilWin < "00") {
+  if (percentUntilWin > "84" && percentUntilWin < "100") {
     const minus100 = servedToday - 99;
     let winner = setWinner(minus100, servedToday);
-    put({ winner_number: winner });
+    console.log(winner);
+    setTimeout(() => {
+      put({ winner_number: winner });
+    }, 500);
   }
   const ordersLeft = 100 - percentUntilWin;
   getWinner(percentUntilWin);
@@ -63,7 +69,9 @@ function setWinner(min, max) {
   if (min < 0) {
     min = 0;
   } else {
-    return Math.floor(Math.random() * (max - min)) + min;
+    let random = Math.floor(Math.random() * (max - min)) + min;
+    console.log(random);
+    return random;
   }
 }
 
@@ -86,7 +94,7 @@ async function put(payload) {
 
 async function getWinner(percentUntilWin) {
   console.log("getWinner");
-  if (percentUntilWin > "00" && percentUntilWin < "98") {
+  if (percentUntilWin > "80" && percentUntilWin < "85") {
     let response = await fetch(`${winUrl}/${"5ece601e2313157900020042"}`, {
       method: "get",
       headers: {
@@ -108,7 +116,7 @@ function displayProgress(percentUntilWin) {
   path.style.setProperty("--progress", percentUntilWin);
   document.querySelector(".win_number").textContent = percentUntilWin;
   //vis animation
-  if (percentUntilWin == "00" || (percentUntilWin > "00" && percentUntilWin < "75")) {
+  if (percentUntilWin >= "86" && percentUntilWin < "90") {
     if (theWinner == undefined) {
     } else {
       document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = theWinner;

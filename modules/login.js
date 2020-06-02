@@ -121,8 +121,8 @@ function displayReceipts(username, data) {
       order.restDbArray.forEach((beer) => {
         const clone_details = document.querySelector(".details_temp").content.cloneNode(true);
         clone_details.querySelector(".article").textContent = beer.name;
-        clone_details.querySelector(".amount").textContent = beer.amount;
-        clone_details.querySelector(".final_amount").textContent = beer.price;
+        clone_details.querySelector(".amount").textContent = beer.amount + " pcs.";
+        clone_details.querySelector(".final_amount").textContent = beer.price + " DKK";
         clone.querySelector(".details").appendChild(clone_details);
       });
       clone.querySelector(".delete").addEventListener("click", function () {
