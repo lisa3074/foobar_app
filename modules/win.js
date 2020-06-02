@@ -124,7 +124,7 @@ function displayData(winsNow, ordersLeft) {
 }
 
 function displayWinner() {
-  console.log(displayWinner);
+  console.log("displayWinner");
   document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = HTML.theWinner;
   console.log(HTML.theWinner);
 }
