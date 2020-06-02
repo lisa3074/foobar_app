@@ -79,7 +79,6 @@ export function cartDelegation() {
 
 function payDelegation() {
   console.log("payDelegation");
-  console.table(orderDetails);
 
   postHeroku();
   setTimeout(() => {
@@ -411,14 +410,10 @@ function setSummary() {
       document.querySelector(".result_list").appendChild(clone);
 
       order = createHerokuObject(ordered);
-      setTimeout(() => {
-        orderDetails = createRestDbObject(ordered, total_price);
-      }, 100);
-      /*      document.querySelectorAll(".pin input").forEach((el) => {
-        el.addEventListener("keyup", function () {
-          updateUserAndPass(ordered);
-        });
-      }); */
+      //  setTimeout(() => {
+      // orderDetails =
+      createRestDbObject(ordered, total_price);
+      // }, 100);
     }
   });
   displaySummary();
@@ -463,13 +458,13 @@ function createRestDbObject(ordered) {
   document.querySelector(".pay").addEventListener("click", function () {
     document.querySelector(".pay").classList.add("disabled");
     //timeout so that restDB can check user if needed.
-    setTimeout(() => {
-      if (formIsValid && isUserValid && isValid == true) {
-        createRestDbArray(ordered);
-      }
-    }, 2000);
+    /*   setTimeout(() => {
+      if (formIsValid && isUserValid && isValid == true) { */
+    createRestDbArray(ordered);
+    /*   }
+    }, 1000); */
   });
-  return restDbObject;
+  //return restDbObject;
 }
 
 /*//////////////////////////////////
@@ -753,9 +748,6 @@ function updateUserAndPass() {
 
 function createRestDbArray(ordered) {
   console.log("createRestDbArray");
-  username_value = document.querySelector("#username").value;
-  password_value = document.querySelector("#password").value;
-  email_value = document.querySelector("#mail").value;
   restDbObject = Object.create(Product);
   restDbObject.name = ordered.name;
   restDbObject.amount = ordered.amount;
@@ -764,6 +756,7 @@ function createRestDbArray(ordered) {
   console.table(restDbObject);
   console.table(restDbArray);
 }
+
 async function postHeroku() {
   console.log("postHeroku");
   //POST object to heroku DB
@@ -778,8 +771,8 @@ async function postHeroku() {
   data = await response.json();
   theId = data.id;
   console.log(data.id);
-  //displayThankYou();
 }
+
 async function postRestDb(payload) {
   console.log("postRestDb");
   //POST object to restDB
@@ -850,7 +843,7 @@ function displayPayment() {
 ////////////////////////////////////
 ////////////////////////////////////
 
-function displayThankYou(orderDetails) {
+function displayThankYou() {
   console.log("displayThankYou");
   document.querySelector(".card").classList.add("fadeOutQuick");
   setTimeout(() => {
