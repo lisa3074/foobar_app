@@ -1,15 +1,17 @@
-const url = "https://foobar3exam.herokuapp.com/";
-let count = 0;
-let amount;
+const HTML = {};
+
 export function clockDelegation() {
   console.log("clockDelegation");
+  HTML.count = 0;
+  HTML.amount;
+
   getData();
 }
 async function getData() {
-  amount = 0;
-  count = 0;
+  HTML.amount = 0;
+  HTML.count = 0;
   console.log("getData");
-  let response = await fetch(url);
+  let response = await fetch("https://foobar3exam.herokuapp.com/");
   let jsonData = await response.json();
   countBeers(jsonData);
 }
@@ -17,12 +19,12 @@ async function getData() {
 function countBeers(jsonData) {
   console.log("countBeers");
   jsonData.queue.forEach((order) => {
-    amount = order.order.length;
-    count += amount;
+    HTML.amount = order.order.length;
+    HTML.count += HTML.amount;
   });
   jsonData.serving.forEach((order) => {
-    amount = order.order.length;
-    count += amount;
+    HTML.amount = order.order.length;
+    HTML.count += HTML.amount;
   });
   displayMinutes();
   setTimeout(() => {
@@ -32,6 +34,6 @@ function countBeers(jsonData) {
 function displayMinutes() {
   console.log("displayMinutes");
   const path = document.querySelector(".time_wrapper .percent svg circle:nth-child(2)");
-  path.style.setProperty("--time-estimate", Math.round(count * 0.5));
-  document.querySelector(".minutes").textContent = Math.round(count * 0.5);
+  path.style.setProperty("--time-estimate", Math.round(HTML.count * 0.5));
+  document.querySelector(".minutes").textContent = Math.round(HTML.count * 0.5);
 }

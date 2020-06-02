@@ -1,27 +1,3 @@
-let locationSite;
-const url = "https://foobar3exam.herokuapp.com/beertypes";
-const endpoint = "https://foobar3exam.herokuapp.com/";
-const restDb = "https://frontend-22d4.restdb.io/rest/foobar";
-const apiKey = "5e9581a6436377171a0c234f";
-let filter;
-let amount = 0;
-let productArray = [];
-let amountArray = [];
-let herokuArray = [];
-let total_amount = 0;
-let total_price = 0;
-let data;
-let order;
-let theId;
-let formIsValid;
-let isValid;
-let isUserValid;
-let username_value;
-let password_value;
-let email_value;
-const today = new Date();
-let todayDate = today.getDate() + "/" + (today.getMonth() + 1) + "/" + today.getFullYear();
-
 const Product = {
   name: "",
   amount: "", //antal øl
@@ -45,12 +21,37 @@ const Product = {
   time: "",
   email: "",
 };
+
+const HTML = {};
 /*//////////////////////////////////
 ////// DELEGATING FUNCTIONS ///////
 //////////////////////////////////*/
 
 export function cartDelegation() {
   console.log("cartDelegation");
+  HTML.url = "https://foobar3exam.herokuapp.com/beertypes";
+  HTML.endpoint = "https://foobar3exam.herokuapp.com/";
+  HTML.restDb = "https://frontend-22d4.restdb.io/rest/foobar";
+  HTML.apiKey = "5e9581a6436377171a0c234f";
+  HTML.locationSite;
+  HTML.filter;
+  HTML.productArray = [];
+  HTML.amountArray = [];
+  HTML.herokuArray = [];
+  HTML.total_amount = 0;
+  HTML.total_price = 0;
+  HTML.data;
+  HTML.order;
+  HTML.amount = 0;
+  HTML.theId;
+  HTML.formIsValid;
+  HTML.isValid;
+  HTML.isUserValid;
+  HTML.username_value;
+  HTML.password_value;
+  HTML.email_value;
+  HTML.today = new Date();
+  HTML.todayDate = HTML.today.getDate() + "/" + (HTML.today.getMonth() + 1) + "/" + HTML.today.getFullYear();
   loadJson();
   closePopUp();
   logInOrSignUp();
@@ -64,12 +65,12 @@ export function cartDelegation() {
   });
 
   document.querySelector(".thank_you_nav .log_in_done").addEventListener("click", function () {
-    locationSite = "login.html";
-    goToPage(locationSite);
+    HTML.locationSite = "login.html";
+    goToPage(HTML.locationSite);
   });
   document.querySelector(".thank_you_nav .home").addEventListener("click", function () {
-    locationSite = "index.html";
-    goToPage(locationSite);
+    HTML.locationSite = "index.html";
+    goToPage(HTML.locationSite);
   });
 }
 
@@ -85,15 +86,15 @@ function payDelegation() {
   }, 2000);
   setTimeout(() => {
     postRestDb({
-      order_number: theId,
-      time: today.getTime(),
-      total_beer: amount,
-      total_price: total_price,
-      username: username_value,
-      password: password_value,
-      email: email_value,
-      date: todayDate,
-      restDbArray: herokuArray,
+      order_number: HTML.theId,
+      time: HTML.today.getTime(),
+      total_beer: HTML.amount,
+      total_price: HTML.total_price,
+      username: HTML.username_value,
+      password: HTML.password_value,
+      email: HTML.email_value,
+      date: HTML.todayDate,
+      restDbArray: HTML.herokuArray,
     });
   }, 1000);
 }
@@ -186,18 +187,18 @@ async function checkAvailability() {
   let beerName = {};
 
   //if some tabs are empty
-  let response = await fetch(endpoint, {
+  let response = await fetch(HTML.endpoint, {
     method: "get",
   });
-  data = await response.json();
-  data.storage.forEach((beer) => {
+  HTML.data = await response.json();
+  HTML.data.storage.forEach((beer) => {
     beerName = beer.name;
     beerArray.push(beerName);
   });
   beerArray.forEach((e) => {
-    for (let i = 0; i < data.taps.length; i++) {
-      if (data.taps[i]["beer"] == e) {
-        let availableBeer = data.taps[i]["beer"];
+    for (let i = 0; i < HTML.data.taps.length; i++) {
+      if (HTML.data.taps[i]["beer"] == e) {
+        let availableBeer = HTML.data.taps[i]["beer"];
         displayAvailableBeer(availableBeer);
       }
     }
@@ -206,9 +207,9 @@ async function checkAvailability() {
 
 async function loadJson() {
   console.log("loadJson - order.js");
-  let response = await fetch(url);
+  let response = await fetch(HTML.url);
   const jsonData = await response.json();
-  makeBeerObject(productArray, jsonData);
+  makeBeerObject(HTML.productArray, jsonData);
   setTimeout(() => {
     checkAvailability();
   }, 200);
@@ -238,10 +239,10 @@ function makeAmountObject(jsonData) {
   jsonData.forEach((beer) => {
     const amountObject = Object.create(Product);
     amountObject.name = beer.name;
-    amountObject.amount = amount;
-    amountArray.push(amountObject);
+    amountObject.amount = HTML.amount;
+    HTML.amountArray.push(amountObject);
   });
-  return amountArray;
+  return HTML.amountArray;
 }
 
 function fetchProducts(product) {
@@ -252,18 +253,18 @@ function fetchProducts(product) {
 
 function setAmount(clicked, modifier) {
   console.log("setAmount");
-  amountArray.forEach((el) => {
-    if (filter == el.name) {
-      if ((clicked.classList[0] === "remove" && amount == 0) || amount < 0) {
-        amount = 0;
-        el.amount = amount;
+  HTML.amountArray.forEach((el) => {
+    if (HTML.filter == el.name) {
+      if ((clicked.classList[0] === "remove" && HTML.amount == 0) || HTML.amount < 0) {
+        HTML.amount = 0;
+        el.amount = HTML.amount;
         displayAmount(0, clicked, el);
-        console.table(amountArray);
+        console.table(HTML.amountArray);
       } else {
         el.amount = el.amount + modifier;
         displayAmount(1, clicked, el);
         console.log("amountArray:");
-        console.table(amountArray);
+        console.table(HTML.amountArray);
       }
     }
   });
@@ -302,7 +303,7 @@ function displayAvailableBeer(beer) {
 
 function displayProducts(beer) {
   console.log("displayProducts");
-  amount = "0";
+  HTML.amount = "0";
   const dot = beer.label.toString().indexOf(".");
   const labelName = beer.label.toString().substring(0, dot);
   //Put name as class on parent article to differentiate
@@ -320,13 +321,13 @@ function displayProducts(beer) {
   clone.querySelector(".product_details .alc").textContent = beer.alcohol + "%";
   clone.querySelector(".products .amount_chosen").textContent = "";
   clone.querySelector(".add").addEventListener("click", function () {
-    filter = beer.name;
-    amount++;
+    HTML.filter = beer.name;
+    HTML.amount++;
     setAmount(this, 1);
   });
   clone.querySelector(".remove").addEventListener("click", function () {
-    filter = beer.name;
-    amount--;
+    HTML.filter = beer.name;
+    HTML.amount--;
     setAmount(this, -1);
   });
   clone.querySelector(".more").addEventListener("click", function () {
@@ -335,7 +336,7 @@ function displayProducts(beer) {
       document.querySelector(".more_container").classList.remove("hidden_left");
       document.querySelector(".more_container").classList.add("show");
     }, 300);
-    filter = beer.name;
+    HTML.filter = beer.name;
     displayReadMore(beer);
   });
   document.querySelector(".order_container").appendChild(clone);
@@ -349,7 +350,7 @@ function displayReadMore(beer) {
   }, 500);
   const dot = beer.label.toString().indexOf(".");
   const labelName = beer.label.toString().substring(0, dot);
-  if (beer.name == filter) {
+  if (beer.name == HTML.filter) {
     document.querySelector(".more_container .name").textContent = beer.name;
     document.querySelector(".more_container .cat").textContent = beer.category;
     document.querySelector(".more_container .alc").textContent = beer.alcohol + "%";
@@ -396,17 +397,17 @@ function setSummary() {
   document.querySelector(".cart").classList.add("fadeInRight");
   document.querySelector(".result_list").innerHTML = "";
 
-  amountArray.forEach((ordered) => {
+  HTML.amountArray.forEach((ordered) => {
     if (ordered.amount > 0) {
-      total_price += ordered.amount * 40;
-      total_amount += ordered.amount;
+      HTML.total_price += ordered.amount * 40;
+      HTML.total_amount += ordered.amount;
       const clone = document.querySelector(".cart_sumup").content.cloneNode(true);
       clone.querySelector(".article").textContent = ordered.name;
       clone.querySelector(".amount").textContent = ordered.amount + " pcs.";
       clone.querySelector(".final_amount").textContent = ordered.amount * 40 + " DKK";
       document.querySelector(".result_list").appendChild(clone);
 
-      order = createHerokuObject(ordered);
+      HTML.order = createHerokuObject(ordered);
     }
   });
   displaySummary();
@@ -415,17 +416,17 @@ function setSummary() {
 function displaySummary() {
   //if there is nothing in the cart else...
   console.log("displaySummary");
-  if (total_amount == 0) {
+  if (HTML.total_amount == 0) {
     document.querySelector(".checkout").setAttribute("disabled", "");
     document.querySelector(".zero_beer").textContent = "You need to put some beer in the cart to buy some!";
   } else {
     document.querySelector(".checkout").removeAttribute("disabled");
     document.querySelector(".zero_beer").textContent = "";
   }
-  document.querySelector(".total_amount").textContent = total_price;
-  document.querySelector(".total_amount_right").textContent = total_price;
-  document.querySelector(".total_amount_bottom").textContent = total_price;
-  document.querySelector(".wrap .your_number").textContent = total_amount;
+  document.querySelector(".total_amount").textContent = HTML.total_price;
+  document.querySelector(".total_amount_right").textContent = HTML.total_price;
+  document.querySelector(".total_amount_bottom").textContent = HTML.total_price;
+  document.querySelector(".wrap .your_number").textContent = HTML.total_amount;
 }
 
 function createHerokuObject(ordered) {
@@ -434,8 +435,8 @@ function createHerokuObject(ordered) {
   herokuObject.name = ordered.name;
   herokuObject.amount = ordered.amount;
   herokuObject.price = ordered.amount * 40;
-  herokuArray.push(herokuObject);
-  return herokuArray;
+  HTML.herokuArray.push(herokuObject);
+  return HTML.herokuArray;
 }
 
 /*//////////////////////////////////
@@ -521,7 +522,7 @@ function checkIfValid(e) {
       document.querySelector("#year").classList.add("invalid");
     }
   });
-  formIsValid = matchPassWord();
+  HTML.formIsValid = matchPassWord();
   checkUser();
 }
 
@@ -534,17 +535,17 @@ function matchPassWord() {
 
   if (login || noAccount || password2 === password1) {
     console.log("login/noAccount (which means valid)");
-    formIsValid = true;
+    HTML.formIsValid = true;
     document.querySelector(".invalid_password2").classList.add("hide");
     document.querySelector(".secure_pass .invalid_text").classList.add("hide");
     document.querySelector(".secure_pass").classList.remove("invalid");
   } else {
-    formIsValid = false;
+    HTML.formIsValid = false;
     document.querySelector(".invalid_password2").classList.remove("hide");
     document.querySelector(".secure_pass .invalid_text").classList.remove("hide");
     document.querySelector(".secure_pass").classList.add("invalid");
   }
-  return formIsValid;
+  return HTML.formIsValid;
 }
 
 async function checkUser() {
@@ -554,11 +555,11 @@ async function checkUser() {
   const newAccount = document.querySelector("#new_account").checked;
   const username = document.querySelector("#username").value;
   const password = document.querySelector("#password").value;
-  let response = await fetch(restDb, {
+  let response = await fetch(HTML.restDb, {
     method: "get",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": apiKey,
+      "x-apikey": HTML.apiKey,
       "cache-control": "no-cache",
     },
   });
@@ -570,7 +571,7 @@ async function checkUser() {
     console.log("login");
     data.forEach((order) => {
       if (user == true && pass == true) {
-        isUserValid = true;
+        HTML.isUserValid = true;
         document.querySelector("#password").classList.remove("invalid");
         console.log("user and pass are true");
       } else if (order.username == username) {
@@ -582,23 +583,23 @@ async function checkUser() {
           document.querySelector("#password").classList.remove("invalid");
           pass = true;
           user = true;
-          isUserValid = true;
+          HTML.isUserValid = true;
         } else {
           console.log("password incorrect");
           document.querySelector("#password").classList.add("invalid");
-          isUserValid = false;
+          HTML.isUserValid = false;
         }
       } else {
         console.log("username incorrect");
         document.querySelector("#username").classList.add("invalid");
-        isUserValid = false;
+        HTML.isUserValid = false;
       }
     });
   } else if (noAccount || newAccount) {
     console.log("create login/no login");
-    isUserValid = true;
+    HTML.isUserValid = true;
   }
-  console.log(isUserValid);
+  console.log(HTML.isUserValid);
   checkIfAllIsValid();
 }
 
@@ -613,11 +614,11 @@ function checkIfAllIsValid() {
     let requirement = "^(?=.*[0-9])(?=.*[A-Z]).{6,}";
     document.querySelector("#password").setAttribute("pattern", requirement);
   }
-  isValid = form.checkValidity();
-  console.log(isValid);
-  console.log(formIsValid);
-  console.log(isUserValid);
-  if (isValid && formIsValid && isUserValid == true) {
+  HTML.isValid = form.checkValidity();
+  console.log(HTML.isValid);
+  console.log(HTML.formIsValid);
+  console.log(HTML.isUserValid);
+  if (HTML.isValid && HTML.formIsValid && HTML.isUserValid == true) {
     payDelegation();
     displayThankYou();
   } else {
@@ -712,25 +713,25 @@ function setInvalid() {
 }
 function updateUserAndPass() {
   console.log("updateUserAndPass");
-  username_value = document.querySelector("#username").value;
-  password_value = document.querySelector("#password").value;
-  email_value = document.querySelector("#mail").value;
+  HTML.username_value = document.querySelector("#username").value;
+  HTML.password_value = document.querySelector("#password").value;
+  HTML.email_value = document.querySelector("#mail").value;
 }
 
 async function postHeroku() {
   console.log("postHeroku");
   //POST object to heroku DB
-  const postData = JSON.stringify(order);
-  let response = await fetch(endpoint + "order", {
+  const postData = JSON.stringify(HTML.order);
+  let response = await fetch(HTML.endpoint + "order", {
     method: "post",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
     },
     body: postData,
   });
-  data = await response.json();
-  theId = data.id;
-  console.log(data.id);
+  HTML.data = await response.json();
+  HTML.theId = HTML.data.id;
+  console.log(HTML.data.id);
 }
 
 async function postRestDb(payload) {
@@ -738,17 +739,17 @@ async function postRestDb(payload) {
   console.log(payload);
   //POST object to restDB
   const postData = JSON.stringify(payload);
-  let response = await fetch(restDb, {
+  let response = await fetch(HTML.restDb, {
     method: "post",
     headers: {
       "Content-Type": "application/json; charset=utf-8",
-      "x-apikey": apiKey,
+      "x-apikey": HTML.apiKey,
       "cache-control": "no-cache",
     },
     body: postData,
   });
-  data = await response.json();
-  console.log(data);
+  HTML.data = await response.json();
+  console.log(HTML.data);
 }
 
 /*//////////////////////////////////
@@ -827,5 +828,5 @@ function displayThankYou() {
 
 function displayOrderNumber() {
   console.log("displayOrderNumber");
-  document.querySelector(".your_number").textContent = theId;
+  document.querySelector(".your_number").textContent = HTML.theId;
 }

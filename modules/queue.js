@@ -1,10 +1,4 @@
-const url = "https://foobar3exam.herokuapp.com/";
-const array = [];
-let jsonData;
-let beforeLastServed;
-let oldBeerCount = 0;
-let lastTime = 0;
-//let beerCount;
+const HTML = {};
 
 const Queue = {
   queueLength: "",
@@ -14,61 +8,67 @@ const Queue = {
 
 export function indexDelegation() {
   console.log("indexDelegation");
+  HTML.url = "https://foobar3exam.herokuapp.com/";
+  HTML.array = [];
+  HTML.jsonData;
+  HTML.beforeLastServed;
+  HTML.oldBeerCount = 0;
+  HTML.lastTime = 0;
   //SET EVENTLISTNERE TIL DE STORE IKONER
   loadJson();
 }
 
 async function loadJson() {
   console.log("loadJson");
-  let response = await fetch(url);
-  jsonData = await response.json();
+  let response = await fetch(HTML.url);
+  HTML.jsonData = await response.json();
   makeObjects();
 }
 function makeObjects() {
   let now;
   console.log("makeObjects");
   const foobarObject = Object.create(Queue);
-  console.log(jsonData);
-  foobarObject.queueLength = jsonData.queue.length;
-  foobarObject.serving1 = JSON.parse(jsonData.bartenders[0]["servingCustomer"]);
-  foobarObject.serving2 = JSON.parse(jsonData.bartenders[1]["servingCustomer"]);
-  foobarObject.serving3 = JSON.parse(jsonData.bartenders[2]["servingCustomer"]);
+  console.log(HTML.jsonData);
+  foobarObject.queueLength = HTML.jsonData.queue.length;
+  foobarObject.serving1 = JSON.parse(HTML.jsonData.bartenders[0]["servingCustomer"]);
+  foobarObject.serving2 = JSON.parse(HTML.jsonData.bartenders[1]["servingCustomer"]);
+  foobarObject.serving3 = JSON.parse(HTML.jsonData.bartenders[2]["servingCustomer"]);
   foobarObject.servedToday = Math.max(foobarObject.serving1, foobarObject.serving2, foobarObject.serving3);
   now = new Date().getTime();
-  console.log(now - lastTime);
-  if (now - lastTime > 1000) {
+  console.log(now - HTML.lastTime);
+  if (now - HTML.lastTime > 1000) {
     setData(foobarObject);
   }
-  if (now - lastTime > 10000) {
+  if (now - HTML.lastTime > 10000) {
     if (foobarObject.queueLength > 0) {
-      foobarObject.orderNumber = JSON.parse(jsonData.queue[0]["id"]);
-      foobarObject.loggedAt = JSON.parse(jsonData.queue[0]["startTime"]);
+      foobarObject.orderNumber = JSON.parse(HTML.jsonData.queue[0]["id"]);
+      foobarObject.loggedAt = JSON.parse(HTML.jsonData.queue[0]["startTime"]);
 
       //checks how many beer were ordered in each order to get the full number of ordered beers (only works until reload)
       for (let i = 0; i < foobarObject.queueLength; i++) {
-        foobarObject.order = jsonData.queue[i].order.length;
-        oldBeerCount += foobarObject.order;
-        console.log(oldBeerCount);
+        foobarObject.order = HTML.jsonData.queue[i].order.length;
+        HTML.oldBeerCount += foobarObject.order;
+        console.log(HTML.oldBeerCount);
       }
     }
-    foobarObject.beerCount = oldBeerCount;
+    foobarObject.beerCount = HTML.oldBeerCount;
 
     //foobarObject.beingPoured = jsonData.bartenders.servingCustomer;
     console.log(foobarObject);
 
     loops(foobarObject);
-    lastTime = now;
+    HTML.lastTime = now;
   }
 }
 function loops(foobarObject) {
   console.log("loops");
   const queue = foobarObject.queueLength;
-  array.unshift(queue);
-  if (array.length <= 1) {
+  HTML.array.unshift(queue);
+  if (HTML.array.length <= 1) {
     console.log("under 10");
   } else {
     console.log("over 10");
-    array.pop();
+    HTML.array.pop();
   }
   //console.log(array);
   displayQueue(foobarObject);
@@ -96,17 +96,17 @@ function displayQueue(foobarObject) {
     //The other bars
     const bars = document.querySelectorAll(`.queue_box > .wrap:nth-child(${number + 1}) > .q_bar`);
     const barNum = document.querySelectorAll(`.queue_box > .wrap:nth-child(${number + 1}) > .q_num`);
-    if (array[number] == "0") {
-      array[number] = "0.5";
+    if (HTML.array[number] == "0") {
+      HTML.array[number] = "0.5";
     }
     bars.forEach((bar) => {
-      bar.style.setProperty("--height", array[number]);
+      bar.style.setProperty("--height", HTML.array[number]);
     });
 
     //console.log(array[number]);
     let winsNow = Math.floor(foobarObject.servedToday / 100);
     if (foobarObject.servedToday == 0) {
-      foobarObject.servedToday = beforeLastServed;
+      foobarObject.servedToday = HTML.beforeLastServed;
     }
     timeStamp.forEach((time) => {
       time.textContent = theRightIime;
@@ -115,7 +115,7 @@ function displayQueue(foobarObject) {
       queue.textContent = foobarObject.queueLength;
     });
     barNum.forEach((num) => {
-      num.textContent = Math.floor(array[number]) + " IN QUEUE";
+      num.textContent = Math.floor(HTML.array[number]) + " IN QUEUE";
     });
     wins.forEach((win) => {
       win.textContent = winsNow;
@@ -123,7 +123,7 @@ function displayQueue(foobarObject) {
     served.forEach((served) => {
       served.textContent = foobarObject.servedToday;
     });
-    beforeLastServed = foobarObject.servedToday;
+    HTML.beforeLastServed = foobarObject.servedToday;
   }
   setTimeout(() => {
     loadJson();
@@ -141,9 +141,9 @@ function setData(winObject) {
   let percentUntilWin;
 
   if (servedToday == 0) {
-    servedToday = beforeLastServed;
+    servedToday = HTML.beforeLastServed;
   }
-  console.log(beforeLastServed);
+  console.log(HTML.beforeLastServed);
   if (servedToday < 100) {
     percentUntilWin = servedToday;
   } else if (servedToday < 1000) {
