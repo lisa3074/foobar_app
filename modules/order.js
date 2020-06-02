@@ -414,11 +414,11 @@ function setSummary() {
       setTimeout(() => {
         orderDetails = createRestDbObject(ordered, total_price);
       }, 100);
-      document.querySelectorAll(".pin input").forEach((el) => {
+      /*      document.querySelectorAll(".pin input").forEach((el) => {
         el.addEventListener("keyup", function () {
           updateUserAndPass(ordered);
         });
-      });
+      }); */
     }
   });
   displaySummary();
@@ -813,6 +813,11 @@ async function postRestDb(payload) {
 
 function displayPayment() {
   console.log("displayPayment");
+  document.querySelectorAll(".pin input").forEach((el) => {
+    el.addEventListener("keyup", function () {
+      updateUserAndPass();
+    });
+  });
   document.querySelector(".result").classList.add("fadeOutQuick");
   setTimeout(() => {
     document.querySelector(".result").classList.add("hide");

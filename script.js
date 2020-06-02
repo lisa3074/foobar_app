@@ -6,13 +6,12 @@ import { cartDelegation } from "./modules/order";
 import { toggleMenu } from "./modules/navigation";
 import { indexDelegation } from "./modules/queue";
 import { loadJsonBeer } from "./modules/beer";
-import { clockDelegation } from "./modules/bigClock";
+import { clockDelegation } from "./modules/dashClock";
 
 import { getData } from "./modules/win";
-import { card } from "./modules/card_ani";
-import { loadJson as bigQueue } from "./modules/bigQueue";
-import { getData as bigWin } from "./modules/bigWin";
-import { loadJson as bigLine } from "./modules/bigLine";
+import { card } from "./modules/card";
+import { dashWinDelegation } from "./modules/dashWin";
+import { lineDelegation } from "./modules/dashLine";
 
 window.addEventListener("DOMContentLoaded", appDelegation);
 
@@ -90,9 +89,8 @@ function dashDelegation() {
   console.log("dashDelegation");
   indexDelegation();
   clockDelegation();
-  bigQueue();
-  bigWin();
+  dashWinDelegation();
   setInterval(() => {
-    bigLine();
+    lineDelegation();
   }, 1000);
 }

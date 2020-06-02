@@ -1,7 +1,10 @@
 const winUrl = "https://frontend-22d4.restdb.io/rest/winner";
 const apiKey = "5e9581a6436377171a0c234f";
 let theWinner;
-export async function getData() {
+export function dashWinDelegation() {
+  getData();
+}
+async function getData() {
   console.log("getData");
 
   let response = await fetch(`${winUrl}/${"5ece601e2313157900020042"}`, {

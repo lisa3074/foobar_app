@@ -40,7 +40,6 @@ function checkIfValid(data) {
       if (order.username == username && order.password == password) {
         console.log("username and password correct");
         loginDelegation(username, data);
-        displayAccount();
       } else {
         console.log("password incorrect");
         displayError(userValid);
@@ -73,7 +72,8 @@ function displayError(userValid) {
 function loginDelegation(username, data) {
   console.log("loginDelegation");
   displayAccount();
-  document.querySelector(".account_container .grid_item3").addEventListener("click", logout);
+  logout();
+  //  document.querySelector(".account_container .grid_item3").addEventListener("click", logout);
   document.querySelector(".account_container .grid_item2").addEventListener("click", function () {
     displayReceipts(username, data);
   });
@@ -92,15 +92,17 @@ function displayAccount() {
 
 function logout() {
   console.log("logout");
-  document.querySelector(".log_in_container").classList.remove("hide");
-  document.querySelector(".account_container").classList.add("hide");
-  document.querySelector(".receipts_wrapper").classList.add("hide");
-  document.querySelector(".invalid_password").classList.add("hide");
-  document.querySelector(".invalid_user").classList.add("hide");
-  document.querySelector("#password_login").classList.remove("invalid");
-  document.querySelector("#username_login").classList.remove("invalid");
-  form.reset();
-  document.querySelector(".main_content .login_heading").textContent = "LOG IN";
+  document.querySelector(".account_container .grid_item3").addEventListener("click", function () {
+    document.querySelector(".log_in_container").classList.remove("hide");
+    document.querySelector(".account_container").classList.add("hide");
+    document.querySelector(".receipts_wrapper").classList.add("hide");
+    document.querySelector(".invalid_password").classList.add("hide");
+    document.querySelector(".invalid_user").classList.add("hide");
+    document.querySelector("#password_login").classList.remove("invalid");
+    document.querySelector("#username_login").classList.remove("invalid");
+    form.reset();
+    document.querySelector(".main_content .login_heading").textContent = "LOG IN";
+  });
 }
 
 function displayReceipts(username, data) {
