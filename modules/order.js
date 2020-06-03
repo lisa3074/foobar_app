@@ -153,7 +153,6 @@ function invalidListners() {
           //If not valid add class invalid
           el.classList.add("invalid");
           setInvalid();
-          // el > p.classList.remove("hide");
           if (el.getAttribute("id") == "#username") {
             console.log("username");
           }
@@ -198,7 +197,7 @@ async function checkAvailability() {
   beerArray.forEach((e) => {
     for (let i = 0; i < HTML.data.taps.length; i++) {
       if (HTML.data.taps[i]["beer"] == e) {
-        let availableBeer = HTML.data.taps[i]["beer"];
+        const availableBeer = HTML.data.taps[i]["beer"];
         displayAvailableBeer(availableBeer);
       }
     }
@@ -563,7 +562,7 @@ async function checkUser() {
       "cache-control": "no-cache",
     },
   });
-  let data = await response.json();
+  const data = await response.json();
   let user;
   let pass;
 
@@ -611,7 +610,7 @@ function checkIfAllIsValid() {
     console.log("noAccount");
     document.querySelector("#password").removeAttribute("pattern");
   } else if (!noAccount) {
-    let requirement = "^(?=.*[0-9])(?=.*[A-Z]).{6,}";
+    const requirement = "^(?=.*[0-9])(?=.*[A-Z]).{6,}";
     document.querySelector("#password").setAttribute("pattern", requirement);
   }
   HTML.isValid = form.checkValidity();
@@ -699,7 +698,7 @@ function setInvalid() {
   }
   if (password.classList[0] == "invalid") {
     document.querySelector(".invalid_password").classList.remove("hide");
-    let requirement = "^(?=.*[0-9])(?=.*[A-Z]).{6,}";
+    const requirement = "^(?=.*[0-9])(?=.*[A-Z]).{6,}";
     if (!password.value.match(requirement)) {
       console.log("does NOT meets requirement");
       document.querySelector(".invalid_password").textContent = "The password has to contain 6 charachters, one uppercase letter and one number";

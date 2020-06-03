@@ -38,7 +38,7 @@ function checkIfValid(data) {
       userValid = true;
       if (order.username == username && order.password == password) {
         console.log("username and password correct");
-        loginDelegation(username, data);
+        loginDelegation(username, data, password);
       } else {
         console.log("password incorrect");
         displayError(userValid);
@@ -68,13 +68,12 @@ function displayError(userValid) {
   }
 }
 
-function loginDelegation(username, data) {
+function loginDelegation(username, data, password) {
   console.log("loginDelegation");
   displayAccount();
   logout();
-  //  document.querySelector(".account_container .grid_item3").addEventListener("click", logout);
   document.querySelector(".account_container .grid_item2").addEventListener("click", function () {
-    displayReceipts(username, data);
+    displayReceipts(username, data, password);
   });
   document.querySelector(".check_status .check").addEventListener("click", function (e) {
     e.preventDefault;
@@ -104,12 +103,12 @@ function logout() {
   });
 }
 
-function displayReceipts(username, data) {
+function displayReceipts(username, data, password) {
   console.log("displayReceipts");
   document.querySelector(".receipts_container").innerHTML = "";
   data.sort((a, b) => b.time - a.time);
   data.forEach((order) => {
-    if (username == order.username) {
+    if (username == order.username && password == order.password) {
       console.table(order);
       const clone = document.querySelector(".receipt_temp").content.cloneNode(true);
       clone.querySelector(".wrapper").dataset.id = order._id;
@@ -167,7 +166,7 @@ async function getStatus(e) {
   let response = await fetch(HTML.endpoint, {
     method: "get",
   });
-  let herokuData = await response.json();
+  const herokuData = await response.json();
   console.log(herokuData);
 
   //gem resultatet in en const status

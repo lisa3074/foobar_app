@@ -15,7 +15,6 @@ summary::-webkit-details-marker {
 
 .order_container {
   padding: 1rem 0 0rem;
-  //max-width: 1000px;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
@@ -216,21 +215,6 @@ summary {
     margin-top: -200px;
   }
 }
-//Selve details lukker så hurtigt at man ikke kan nå at se animationen, måske det kan fikses i js?
-/* details:not([open]) summary ~ * {
-  animation: swoop_up 1.5s ease-in-out;
-}
-
-@keyframes swoop_up {
-  0% {
-    opacity: 1;
-    margin-top: 0px;
-  }
-  100% {
-    opacity: 0;
-    margin-top: -200px;
-  }
-} */
 
 details[open] .arrow_down {
   transition: 1s;

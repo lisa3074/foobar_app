@@ -13,7 +13,7 @@ export async function getData() {
   console.log("getData");
   console.log("loadJson");
   let response = await fetch(HTML.url);
-  let jsonData = await response.json();
+  const jsonData = await response.json();
   makeObjects(jsonData);
 }
 
@@ -21,17 +21,28 @@ function makeObjects(jsonData) {
   console.log("makeObjects");
   const winObject = Object.create(Win);
   console.log(jsonData);
+  HTML.last;
+  let servedToday;
+  winObject.serveLength = jsonData.serving.length;
   winObject.serving1 = JSON.parse(jsonData.bartenders[0]["servingCustomer"]);
   winObject.serving2 = JSON.parse(jsonData.bartenders[1]["servingCustomer"]);
   winObject.serving3 = JSON.parse(jsonData.bartenders[2]["servingCustomer"]);
-  winObject.servedToday = Math.max(winObject.serving1, winObject.serving2, winObject.serving3);
-  setData(winObject);
+  console.log(HTML.last);
+
+  if (winObject.serveLength == 0) {
+    servedToday = HTML.last;
+    console.log(servedToday);
+  } else {
+    servedToday = Math.max(winObject.serving1, winObject.serving2, winObject.serving3);
+    HTML.last = servedToday;
+    console.log(servedToday);
+  }
+  setData(servedToday);
 }
 
-function setData(winObject) {
+function setData(servedToday) {
   console.log("setData");
-  let servedToday = winObject.servedToday;
-  let winsNow = Math.floor(servedToday / 100);
+  const winsNow = Math.floor(servedToday / 100);
   let percentUntilWin;
   if (servedToday == 0) {
     servedToday = HTML.beforeLastServed;
@@ -65,7 +76,7 @@ function setWinner(min, max) {
   if (min < 0) {
     min = 0;
   } else {
-    let random = Math.floor(Math.random() * (max - min)) + min;
+    const random = Math.floor(Math.random() * (max - min)) + min;
     console.log(random);
     return random;
   }
@@ -84,8 +95,7 @@ async function put(payload) {
     },
     body: postData,
   });
-  let data = await response.json();
-  // console.log(data.winner_number);
+  const data = await response.json();
 }
 
 async function getWinner(percentUntilWin) {
@@ -98,9 +108,7 @@ async function getWinner(percentUntilWin) {
       "cache-control": "no-cache",
     },
   });
-  let jsonData = await response.json();
-  /*  console.log(jsonData);
-  console.log(jsonData.winner_number); */
+  const jsonData = await response.json();
   HTML.theWinner = jsonData.winner_number;
   if (percentUntilWin > "00" && percentUntilWin < "95") {
     displayWinner();
