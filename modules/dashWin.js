@@ -17,7 +17,7 @@ async function getData() {
       "cache-control": "no-cache",
     },
   });
-  let jsonData = await response.json();
+  const jsonData = await response.json();
   HTML.theWinner = jsonData.winner_number;
   displayData();
 }

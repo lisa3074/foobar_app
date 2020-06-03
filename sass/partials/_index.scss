@@ -80,8 +80,6 @@ section.dashBody {
 
 .queue_box {
   display: grid;
-  /*  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 1rem; */
   align-items: flex-end;
   padding: 0rem 2rem;
   height: 40vh;
@@ -109,7 +107,6 @@ section.dashBody {
 .wrap:nth-child(3) > .q_bar,
 .wrap:nth-child(4) > .q_bar,
 .wrap:nth-child(5) > .q_bar {
-  /* transition: 0.5s; */
   height: calc(var(--height) * 2vh);
 }
 .q_bar {
@@ -121,7 +118,7 @@ section.dashBody {
 }
 .q_num {
   text-align: center;
-  padding-top: 1rem;
+  padding: 1rem;
 }
 
 ///////////////////
@@ -193,7 +190,6 @@ section.dashBody {
   position: relative;
   width: 100%;
   height: 100%;
-  // padding-bottom: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -272,8 +268,7 @@ svg {
     grid-template-columns: 2fr 2fr;
     grid-gap: 1rem;
     height: 100%;
-    /*   height: 56vh;
-    min-height: 440px; */
+
     .queue_box {
       padding: 1rem 4rem;
     }
@@ -375,6 +370,9 @@ svg {
 
   .queue_box {
     height: 100%;
+  }
+  .q_num {
+    padding-bottom: 0.5rem;
   }
   .home_container {
     width: 100%;

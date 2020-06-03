@@ -14,7 +14,6 @@ export function indexDelegation() {
   HTML.beforeLastServed;
   HTML.oldBeerCount = 0;
   HTML.lastTime = 0;
-  //SET EVENTLISTNERE TIL DE STORE IKONER
   loadJson();
 }
 
@@ -28,14 +27,12 @@ function makeObjects() {
   let now;
   console.log("makeObjects");
   const foobarObject = Object.create(Queue);
-  console.log(HTML.jsonData);
   foobarObject.queueLength = HTML.jsonData.queue.length;
   foobarObject.serving1 = JSON.parse(HTML.jsonData.bartenders[0]["servingCustomer"]);
   foobarObject.serving2 = JSON.parse(HTML.jsonData.bartenders[1]["servingCustomer"]);
   foobarObject.serving3 = JSON.parse(HTML.jsonData.bartenders[2]["servingCustomer"]);
   foobarObject.servedToday = Math.max(foobarObject.serving1, foobarObject.serving2, foobarObject.serving3);
   now = new Date().getTime();
-  console.log(now - HTML.lastTime);
   if (now - HTML.lastTime > 1000) {
     setData(foobarObject);
   }
@@ -43,19 +40,13 @@ function makeObjects() {
     if (foobarObject.queueLength > 0) {
       foobarObject.orderNumber = JSON.parse(HTML.jsonData.queue[0]["id"]);
       foobarObject.loggedAt = JSON.parse(HTML.jsonData.queue[0]["startTime"]);
-
       //checks how many beer were ordered in each order to get the full number of ordered beers (only works until reload)
       for (let i = 0; i < foobarObject.queueLength; i++) {
         foobarObject.order = HTML.jsonData.queue[i].order.length;
         HTML.oldBeerCount += foobarObject.order;
-        console.log(HTML.oldBeerCount);
       }
     }
     foobarObject.beerCount = HTML.oldBeerCount;
-
-    //foobarObject.beingPoured = jsonData.bartenders.servingCustomer;
-    console.log(foobarObject);
-
     loops(foobarObject);
     HTML.lastTime = now;
   }
@@ -70,7 +61,6 @@ function loops(foobarObject) {
     console.log("over 10");
     HTML.array.pop();
   }
-  //console.log(array);
   displayQueue(foobarObject);
 }
 function displayQueue(foobarObject) {
@@ -85,7 +75,7 @@ function displayQueue(foobarObject) {
     //Convert time from milliseconds
     const time = new Date().getTime();
     const date = new Date(time);
-    let rightTime = date.toString();
+    const rightTime = date.toString();
     //Make sure I only get the time
     const theRightIime = rightTime.substring(15, 21);
 
@@ -103,8 +93,7 @@ function displayQueue(foobarObject) {
       bar.style.setProperty("--height", HTML.array[number]);
     });
 
-    //console.log(array[number]);
-    let winsNow = Math.floor(foobarObject.servedToday / 100);
+    const winsNow = Math.floor(foobarObject.servedToday / 100);
     if (foobarObject.servedToday == 0) {
       foobarObject.servedToday = HTML.beforeLastServed;
     }
@@ -115,7 +104,7 @@ function displayQueue(foobarObject) {
       queue.textContent = foobarObject.queueLength;
     });
     barNum.forEach((num) => {
-      num.textContent = Math.floor(HTML.array[number]) + " IN QUEUE";
+      num.textContent = Math.floor(HTML.array[number]) + " IN LINE";
     });
     wins.forEach((win) => {
       win.textContent = winsNow;
@@ -137,22 +126,19 @@ function displayQueue(foobarObject) {
 }
 function setData(winObject) {
   console.log("setData");
-  let servedToday = winObject.servedToday;
+  const servedToday = winObject.servedToday;
   let percentUntilWin;
 
   if (servedToday == 0) {
     servedToday = HTML.beforeLastServed;
   }
-  console.log(HTML.beforeLastServed);
   if (servedToday < 100) {
     percentUntilWin = servedToday;
   } else if (servedToday < 1000) {
     const thePercentage = servedToday.toString();
-    console.log(servedToday);
     percentUntilWin = thePercentage.substring(1, 3);
   } else {
     const thePercentage = servedToday.toString();
-    console.log(servedToday);
     percentUntilWin = thePercentage.substring(2, 4);
   }
 

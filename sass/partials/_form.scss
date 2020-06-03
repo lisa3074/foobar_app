@@ -75,13 +75,11 @@ input:checked {
 
 button:disabled {
   filter: opacity(0.5) grayscale(0.5);
-  //background-color: rgb(255, 234, 251);
 }
 
 //VALID
 input.valid:not(:focus):not(:placeholder-shown):not(input[type="radio"]),
 input:valid:not(:focus):not(:placeholder-shown):not(input[type="radio"]) {
-  //background: url(icons/thumbsup.png) no-repeat scroll 7px 7px;
   background-size: contain;
   background-size: 15px;
   background-position: 98% 50%;
@@ -91,7 +89,6 @@ input:valid:not(:focus):not(:placeholder-shown):not(input[type="radio"]) {
 //INVALID
 input:invalid:not(:focus):not(:placeholder-shown),
 input.invalid:not(:focus):not(:placeholder-shown) {
-  //background: url(icons/thumbsdown.png) no-repeat scroll 7px 7px;
   background-size: contain;
   background-size: 15px;
   background-position: 98% 50%;
