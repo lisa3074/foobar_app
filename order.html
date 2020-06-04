@@ -3,7 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Order your beer</title>
+    <meta name="description" content="Buy beer online at Foobar" />
+    <meta name="keywords" content="beer, brewing, bar, drink, foobar, competition, win a beer, student friendly prices, cheap" />
+    <meta name="author" content="Lisa Søndergaard | Kea - mmd 3. semester" />
+    <title>Order your beer || Foobar</title>
     <link rel="stylesheet" href="sass/style.scss" />
   </head>
   <body class="orderBody">
@@ -58,7 +61,7 @@
                   <h1 class="head12 name">EL HEFE</h1>
                 </div>
                 <p class="beer_category head3">Ale</p>
-                <p class="head2 price_container"><span class="price">40 DKK </span><span class="times hide"> x</span><span class="amount_chosen"> </span></p>
+                <p class="head2 price_container"><span class="price">30 DKK </span><span class="times hide"> x</span><span class="amount_chosen"> </span></p>
               </div>
               <div class="button_wrap">
                 <button class="remove primary" onclick="return false"><img src="/static/images/svg_icons/remove.svg" alt="Remove one" class="remove_icon" /></button>
@@ -88,7 +91,7 @@
 
     <main class="order_wrapper">
       <h1 class="title order_heading">CHOOSE YOUR POISON</h1>
-      <p class="paragraph">The beers you see are the beers we have on tap right now.</p>
+      <p class="paragraph">The beers you see are the beers we have on tap right now. All beers are 0.5L</p>
       <section class="order_container">
         <!-- APPEND LIST -->
       </section>
@@ -228,7 +231,7 @@
                       <p class="invalid_text star">*</p>
                     </div>
                     <div class="password">
-                      <label for="password" class="labels">PASSWORD<span class="explain_pass paragraph">|| 6 chars: 1 capital & 1 digit</span></label>
+                      <label for="password" class="labels">PASSWORD<span class="explain_pass paragraph">|| 6 chars: 1 CAP & 1 digit</span></label>
                       <input type="password" id="password" placeholder="••••••••" name="login" pattern="(?=.*\d)(?=.*[A-Z]).{6,}" required />
                       <p class="invalid_text star">*</p>
                     </div>

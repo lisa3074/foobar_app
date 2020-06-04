@@ -4,15 +4,20 @@ const Queue = {
   queueLength: "",
   loggedAt: "",
   servedToday: "",
+  orderNumber: "",
+  order: "",
+  beerCount: "",
+  serving1: "",
+  serving2: "",
+  serving3: "",
 };
 
 export function indexDelegation() {
   console.log("indexDelegation");
-  HTML.url = "https://foobar3exam.herokuapp.com/";
+  HTML.url = "https://foobar3exam2.herokuapp.com/";
   HTML.array = [];
   HTML.jsonData;
   HTML.beforeLastServed;
-  HTML.oldBeerCount = 0;
   HTML.lastTime = 0;
   loadJson();
 }
@@ -34,19 +39,9 @@ function makeObjects() {
   foobarObject.servedToday = Math.max(foobarObject.serving1, foobarObject.serving2, foobarObject.serving3);
   now = new Date().getTime();
   if (now - HTML.lastTime > 1000) {
-    setData(foobarObject);
+    setData(foobarObject.servedToday);
   }
-  if (now - HTML.lastTime > 10000) {
-    if (foobarObject.queueLength > 0) {
-      foobarObject.orderNumber = JSON.parse(HTML.jsonData.queue[0]["id"]);
-      foobarObject.loggedAt = JSON.parse(HTML.jsonData.queue[0]["startTime"]);
-      //checks how many beer were ordered in each order to get the full number of ordered beers (only works until reload)
-      for (let i = 0; i < foobarObject.queueLength; i++) {
-        foobarObject.order = HTML.jsonData.queue[i].order.length;
-        HTML.oldBeerCount += foobarObject.order;
-      }
-    }
-    foobarObject.beerCount = HTML.oldBeerCount;
+  if (now - HTML.lastTime > 5000) {
     loops(foobarObject);
     HTML.lastTime = now;
   }
@@ -124,9 +119,8 @@ function displayQueue(foobarObject) {
     });
   }, 10000);
 }
-function setData(winObject) {
+function setData(servedToday) {
   console.log("setData");
-  const servedToday = winObject.servedToday;
   let percentUntilWin;
 
   if (servedToday == 0) {

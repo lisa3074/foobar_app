@@ -1,11 +1,15 @@
 const HTML = {};
 
 const Win = {
+  serveLength: "",
+  serving1: "",
+  serving3: "",
+  serving3: "",
   servedToday: "",
 };
 
 export async function getData() {
-  HTML.url = "https://foobar3exam.herokuapp.com/";
+  HTML.url = "https://foobar3exam2.herokuapp.com/";
   HTML.winUrl = "https://frontend-22d4.restdb.io/rest/winner";
   HTML.apiKey = "5e9581a6436377171a0c234f";
   HTML.beforeLastServed;
@@ -20,9 +24,8 @@ export async function getData() {
 function makeObjects(jsonData) {
   console.log("makeObjects");
   const winObject = Object.create(Win);
-  console.log(jsonData);
+  // console.log(jsonData);
   HTML.last;
-  let servedToday;
   winObject.serveLength = jsonData.serving.length;
   winObject.serving1 = JSON.parse(jsonData.bartenders[0]["servingCustomer"]);
   winObject.serving2 = JSON.parse(jsonData.bartenders[1]["servingCustomer"]);
@@ -30,14 +33,14 @@ function makeObjects(jsonData) {
   console.log(HTML.last);
 
   if (winObject.serveLength == 0) {
-    servedToday = HTML.last;
-    console.log(servedToday);
+    winObject.servedToday = HTML.last;
+    console.log(winObject.servedToday);
   } else {
-    servedToday = Math.max(winObject.serving1, winObject.serving2, winObject.serving3);
-    HTML.last = servedToday;
-    console.log(servedToday);
+    winObject.servedToday = Math.max(winObject.serving1, winObject.serving2, winObject.serving3);
+    HTML.last = winObject.servedToday;
+    console.log(winObject.servedToday);
   }
-  setData(servedToday);
+  setData(winObject.servedToday);
 }
 
 function setData(servedToday) {
@@ -59,13 +62,13 @@ function setData(servedToday) {
     percentUntilWin = thePercentage.substring(2, 4);
   }
 
-  if (percentUntilWin > "95" && percentUntilWin < "99") {
+  if (percentUntilWin > "94" && percentUntilWin < "99") {
     const minus100 = servedToday - 99;
     let winner = setWinner(minus100, servedToday);
     console.log(winner);
     setTimeout(() => {
       put({ winner_number: winner });
-    }, 500);
+    }, 1500);
   }
   const ordersLeft = 100 - percentUntilWin;
   getWinner(percentUntilWin);
@@ -110,8 +113,11 @@ async function getWinner(percentUntilWin) {
   });
   const jsonData = await response.json();
   HTML.theWinner = jsonData.winner_number;
-  if (percentUntilWin > "00" && percentUntilWin < "95") {
+  console.log(HTML.theWinner);
+  if (percentUntilWin >= "00" && percentUntilWin < "90") {
     displayWinner();
+  } else {
+    document.querySelector(".wrap:nth-child(3)>.win_smallnumbers").textContent = "???";
   }
 }
 
@@ -128,7 +134,7 @@ function displayData(winsNow, ordersLeft) {
   console.log(HTML.theWinner);
   setTimeout(() => {
     getData();
-  }, 1000);
+  }, 2000);
 }
 
 function displayWinner() {

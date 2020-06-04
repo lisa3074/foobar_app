@@ -173,6 +173,7 @@ section.dashBody {
 ///////////////////
 .progres_circle {
   display: grid;
+  grid-template-columns: 100%;
   height: 100%;
   width: 100%;
 }
