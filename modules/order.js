@@ -220,7 +220,7 @@ function makeBeerObject(productArray, jsonData) {
     const productObject = Object.create(Product);
     productObject.name = product.name;
     productObject.category = product.category;
-    productObject.price = "40 DKK";
+    productObject.price = "30 DKK";
     productObject.aroma = product.description.aroma;
     productObject.alcohol = product.alc;
     productObject.label = product.label;
@@ -313,7 +313,7 @@ function displayProducts(beer) {
   clone.querySelector(".wrapper").classList.add(noSpacesAtAll);
   clone.querySelector(".name").textContent = beer.name;
   clone.querySelector(".beer_category").textContent = beer.category;
-  clone.querySelector(".price").textContent = "40 DKK";
+  clone.querySelector(".price").textContent = "30 DKK";
   clone.querySelector(".product_details .label").src = "images/labels/" + labelName + ".jpg";
   clone.querySelector(".product_details .label").alt = beer.name;
   clone.querySelector(".product_details .aroma").textContent = beer.aroma;
@@ -398,12 +398,12 @@ function setSummary() {
 
   HTML.amountArray.forEach((ordered) => {
     if (ordered.amount > 0) {
-      HTML.total_price += ordered.amount * 40;
+      HTML.total_price += ordered.amount * 30;
       HTML.total_amount += ordered.amount;
       const clone = document.querySelector(".cart_sumup").content.cloneNode(true);
       clone.querySelector(".article").textContent = ordered.name;
       clone.querySelector(".amount").textContent = ordered.amount + " pcs.";
-      clone.querySelector(".final_amount").textContent = ordered.amount * 40 + " DKK";
+      clone.querySelector(".final_amount").textContent = ordered.amount * 30 + " DKK";
       document.querySelector(".result_list").appendChild(clone);
 
       HTML.order = createHerokuObject(ordered);
@@ -433,7 +433,7 @@ function createHerokuObject(ordered) {
   const herokuObject = Object.create(Product);
   herokuObject.name = ordered.name;
   herokuObject.amount = ordered.amount;
-  herokuObject.price = ordered.amount * 40;
+  herokuObject.price = ordered.amount * 30;
   HTML.herokuArray.push(herokuObject);
   return HTML.herokuArray;
 }

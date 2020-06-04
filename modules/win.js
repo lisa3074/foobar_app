@@ -68,7 +68,7 @@ function setData(servedToday) {
     console.log(winner);
     setTimeout(() => {
       put({ winner_number: winner });
-    }, 500);
+    }, 1500);
   }
   const ordersLeft = 100 - percentUntilWin;
   getWinner(percentUntilWin);
