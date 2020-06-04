@@ -2,7 +2,7 @@ const HTML = {};
 
 export async function getUser() {
   console.log("getUser");
-  HTML.endpoint = "https://foobar3exam.herokuapp.com/";
+  HTML.endpoint = "https://foobar3exam2.app.com/";
   HTML.restDb = "https://frontend-22d4.restdb.io/rest/foobar";
   HTML.apiKey = "5e9581a6436377171a0c234f";
   HTML.form = document.querySelector(".login_form");
@@ -17,13 +17,14 @@ export async function getUser() {
     },
   });
   HTML.data = await response.json();
-  console.log(HTML.data);
   checkIfValid(HTML.data);
   document.querySelector(".log_in_done").classList.remove("disabled");
+  document.querySelector(".check").classList.remove("disabled");
 }
 export function displayDisabledButton() {
   console.log("displayDisabledButton");
   document.querySelector(".log_in_done").classList.add("disabled");
+  document.querySelector(".check").classList.add("disabled");
 }
 function checkIfValid(data) {
   console.log("checkIfValid");
@@ -42,7 +43,7 @@ function checkIfValid(data) {
       } else {
         console.log("password incorrect");
         displayError(userValid);
-        userValid = true;
+        // userValid = true;
       }
     } else {
       console.log("username incorrect");
@@ -64,7 +65,9 @@ function displayError(userValid) {
   } else {
     console.log("invalid username");
     username.classList.add("invalid");
+    password.classList.add("invalid");
     document.querySelector(".invalid_user").classList.remove("hide");
+    document.querySelector(".invalid_password").classList.remove("hide");
   }
 }
 
@@ -77,6 +80,8 @@ function loginDelegation(username, data, password) {
   });
   document.querySelector(".check_status .check").addEventListener("click", function (e) {
     e.preventDefault;
+    document.querySelector(".status_write").textContent = "";
+    displayDisabledButton();
     getStatus(e);
   });
 }
@@ -152,7 +157,6 @@ async function deleteIt(id) {
   });
   //Herefter slettes elementet i db
   HTML.data = await response.json();
-  console.log(HTML.data);
 }
 
 async function getStatus(e) {
@@ -192,6 +196,7 @@ async function getStatus(e) {
       });
     }
   });
+  document.querySelector(".check").classList.remove("disabled");
   displayStatus(status, workingTender, tenderStatus);
 }
 function displayStatus(status, workingTender, tenderStatus) {

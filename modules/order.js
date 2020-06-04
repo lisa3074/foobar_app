@@ -29,8 +29,8 @@ const HTML = {};
 
 export function cartDelegation() {
   console.log("cartDelegation");
-  HTML.url = "https://foobar3exam.herokuapp.com/beertypes";
-  HTML.endpoint = "https://foobar3exam.herokuapp.com/";
+  HTML.url = "https://foobar3exam2.herokuapp.com/beertypes";
+  HTML.endpoint = "https://foobar3exam2.herokuapp.com/";
   HTML.restDb = "https://frontend-22d4.restdb.io/rest/foobar";
   HTML.apiKey = "5e9581a6436377171a0c234f";
   HTML.locationSite;
@@ -51,7 +51,7 @@ export function cartDelegation() {
   HTML.password_value;
   HTML.email_value;
   HTML.today = new Date();
-  HTML.todayDate = HTML.today.getDate() + "/" + (HTML.today.getMonth() + 1) + "/" + HTML.today.getFullYear();
+  HTML.todayDate = HTML.today.getDate() + " / " + (HTML.today.getMonth() + 1) + " / " + HTML.today.getFullYear();
   loadJson();
   closePopUp();
   logInOrSignUp();

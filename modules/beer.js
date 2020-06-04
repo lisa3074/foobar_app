@@ -1,6 +1,6 @@
 export async function loadJsonBeer() {
   console.log("loadJson - beer.js");
-  let response = await fetch("https://foobar3exam.herokuapp.com/beertypes");
+  let response = await fetch("https://foobar3exam2.herokuapp.com/beertypes");
   let jsonData = await response.json();
   fetchList(jsonData);
 }
